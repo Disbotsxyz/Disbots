@@ -1,0 +1,387 @@
+<%- include('parts/head', {bot, user, path}) %>
+<%- include('parts/section') %>
+
+<div class="container">
+<br><br>
+<div class="column">
+<center>
+    <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black;"><i class="fas fa-stars has-text-warning"></i>&nbsp;Promoted Bots</p>
+</center>
+  </div>
+  <div class="columns is-multiline is-desktop is-variable is-7 pt-5">
+    <%
+        let promrandomBots = botdata.filter(a => a.promoted == "Promoted")
+        promrandomBots.forEach((val, key) => {
+          randomIndex = Math.ceil(Math.random()*(key + 1));
+          promrandomBots[key] = promrandomBots[randomIndex];
+          promrandomBots[randomIndex] = val;
+        });
+    %>
+    <% 
+        for(let i = 0; i < promrandomBots.length; i++) {
+        if (i === 3) break;
+        let labBots = promrandomBots[i];
+      if(labBots) {
+    %>
+    <% let a = labBots; %>
+      <div class="col-md-6 col-lg-4 pb-3">
+        <div data-aos="fade-left">
+        <div class="card vcodes-card-custom bg-vcodes border-white border-0">
+          <div class="vcodes-card-custom-img" style="background-image: url(<%= a.backURL || `https://i.hizliresim.com/2sdunq.png` %>);"></div>
+          <div class="vcodes-card-custom-avatar">
+            <img class="img-fluid" onerror="imgError(this);" src="<%=a.avatar%>" alt="Avatar" />
+          </div>
+          <div class="card-body">
+           <div class="is-pulled-right mt-vcodes mt-1">
+                <span data-tooltip="Total Votes" data-tooltip-location="left" class="badge badge-stats mb-vcodes mt-1 w-100"><i class="fad fa-chevron-up"></i>&nbsp;<%= a.votes || "0" %></span>
+                <span data-tooltip="Server Count" data-tooltip-location="left" class="badge badge-stats mt-1 w-100"><i class="fad fa-server"></i>&nbsp;<%= a.serverCount || "N/A" %></span>
+              </div>
+            <h4 translate="no" class="card-title"><%= a.username %>
+            <% if(a.botID === "852406969876742145") {%>
+                <a data-tooltip="Official Bot"
+                    data-tooltip-location="top"><i class="fad fa-server has-text-primary"></i></a>
+            <% } %>
+            <% if(a.promoted === "Promoted") { %>
+              <span data-tooltip="Promoted Bot" data-tooltip-location="top"><i class="fas fa-stars has-text-warning"></i></span>
+            <% } %>
+            <% if(a.boosted === "Boosted") { %>
+              <span data-tooltip="Boosted Bot" data-tooltip-location="top"><img draggable="false" src="https://discordapp.com/assets/9ba64f1fa91ccde0eba506c1c33f3d1a.svg" width="32px"></span>
+            <% } %>
+            <% if(a.certificate === "Certified") { %>
+              <span data-tooltip="Verified Bot" data-tooltip-location="top"><i class="fad fa-badge-check bodyIcon"></i></span>
+            <% } %>
+            </h4>
+            <p translate="no" class="card-text vCodesbotDesc"><%= a.shortDesc %></p>
+          </div>
+          <div class="card-footer">
+            <a title="disbots" href="/bot/<%=a.botID%>" class="btn  btn-bot">View</a>
+            <a title="disbots" href="/bot/<%=a.botID%>/invite" class="btn  btn-bot">Invite</a>
+          </div>
+        </div>
+      </div>
+      </div>
+    <% }} %>
+</div>
+<div class="column">
+    <center>
+    <p class="has-text-white title is-large"  style="text-shadow: 2px 2px 5px black;"><img draggable="false" src="https://discordapp.com/assets/9ba64f1fa91ccde0eba506c1c33f3d1a.svg" width="32px"></span>&nbsp;Boosted Bots</p>
+    </center>
+  </div>
+  <div class="columns is-multiline is-desktop is-variable is-7 pt-5">
+    <%
+        let prorandomBots = botdata.filter(a => a.boosted == "Boosted")
+        prorandomBots.forEach((val, key) => {
+          randomIndex = Math.ceil(Math.random()*(key + 1));
+          prorandomBots[key] = prorandomBots[randomIndex];
+          prorandomBots[randomIndex] = val;
+        });
+    %>
+    <% 
+        for(let i = 0; i < prorandomBots.length; i++) {
+        if (i === 3) break;
+        let labBots = prorandomBots[i];
+      if(labBots) {
+    %>
+    <% let a = labBots; %>
+      <div class="col-md-6 col-lg-4 pb-3">
+        <div data-aos="fade-left">
+        <div class="card vcodes-card-custom bg-vcodes border-white border-0">
+          <div class="vcodes-card-custom-img" style="background-image: url(<%= a.backURL || "https://i.hizliresim.com/2sdunq.png" %>);"></div>
+          <div class="vcodes-card-custom-avatar">
+            <img class="img-fluid" onerror="imgError(this);" src="<%=a.avatar%>" alt="Avatar" />
+          </div>
+          <div class="card-body">
+           <div class="is-pulled-right mt-vcodes mt-1">
+                <span data-tooltip="Total Votes" data-tooltip-location="left" class="badge badge-stats mb-vcodes mt-1 w-100"><i class="fad fa-chevron-up"></i>&nbsp;<%= a.votes || "0" %></span>
+                <span data-tooltip="Server Count" data-tooltip-location="left" class="badge badge-stats mt-1 w-100"><i class="fad fa-server"></i>&nbsp;<%= a.serverCount || "N/A" %></span>
+              </div>
+            <h4 translate="no" class="card-title"><%= a.username %>
+            <% if(a.botID === "852406969876742145") {%>
+                <a data-tooltip="Official Bot"
+                    data-tooltip-location="top"><i class="fad fa-server has-text-primary"></i></a>
+            <% } %>
+            <% if(a.promoted === "Promoted") { %>
+              <span data-tooltip="Promoted Bot" data-tooltip-location="top"><i class="fas fa-stars has-text-warning"></i></span>
+            <% } %>
+            <% if(a.boosted === "Boosted") { %>
+              <span data-tooltip="Boosted Bot" data-tooltip-location="top"><img draggable="false" src="https://discordapp.com/assets/9ba64f1fa91ccde0eba506c1c33f3d1a.svg" width="32px"></span>
+            <% } %>
+            <% if(a.certificate === "Certified") { %>
+              <span data-tooltip="Verified Bot" data-tooltip-location="top"><i class="fad fa-badge-check bodyIcon"></i></span>
+            <% } %>
+            </h4>
+            <p translate="no" class="card-text vCodesbotDesc"><%= a.shortDesc %></p>
+          </div>
+          <div class="card-footer">
+            <a title="disbots" href="/bot/<%=a.botID%>" class="btn  btn-bot">View</a>
+            <a title="disbots" href="/bot/<%=a.botID%>/invite" class="btn  btn-bot">Invite</a>
+          </div>
+        </div>
+      </div>
+      </div>
+    <% }} %>
+</div>
+  <% if(botdata.filter(a => a.boosted == "Boosted").length > 6) { %>
+  <center>
+    <a title="disbots" href="/bots/boosted" class="btn btn-more has-text-white">Show more boosted bots</a>
+  </center>
+  <% } %>
+<br><br><br><br>
+<div class="column">
+    <center>
+    <p class="has-text-white title is-large"><i class="fad fa-badge-check bodyIcon"></i>&nbsp;Certified Bots</p>
+    <p class="content has-text-white" style="margin-top: -20px;">They are ranked according to the votes they received.</p>
+    </center>
+    <div class="columns is-multiline is-desktop is-variable is-7 pt-5">
+        <% botdata.filter(a => a.certificate == "Certified").sort((a, b) => b.votes - a.votes).slice(0, 6).map(a => {%>
+      <div class="col-md-6 col-lg-4 pb-3">
+        <div data-aos="fade-left">
+        <div class="card vcodes-card-custom bg-vcodes border-white border-0">
+          <div class="vcodes-card-custom-img" onerror="backImgError(this);" style="background-image: url(<%= a.backURL || '../img/undefined_back.png' %>);" title="Disbots.xyz" ></div>
+          <div class="vcodes-card-custom-avatar">
+            <img class="img-fluid" onerror="imgError(this);" src="<%=a.avatar%>" alt="Avatar" />
+          </div>
+          <div class="card-body">
+           <div class="is-pulled-right mt-vcodes mt-1">
+            <span data-tooltip="Votes this Month" data-tooltip-location="left" class="badge badge-stats mb-vcodes mt-1 w-100"><i class="fad fa-chevron-up"></i>&nbsp;<%= a.votes || "0" %></span>
+            <span data-tooltip="Server Count" data-tooltip-location="left" class="badge badge-stats mt-1 w-100"><i class="fad fa-server"></i>&nbsp;<%= a.serverCount || "N/A" %></span>
+              </div>
+            <p translate="no" class="card-title is-size-4"><%= a.username %>
+            <% if(a.botID === "852406969876742145") {%>
+                <a data-tooltip="Official Bot"
+                    data-tooltip-location="top"><i class="fad fa-server has-text-primary"></i></a>
+            <% } %>
+            <% if(a.promoted === "Promoted") { %>
+              <span data-tooltip="Promoted Bot" data-tooltip-location="top"><i class="fas fa-stars has-text-warning"></i></span>
+            <% } %>
+            <% if(a.boosted === "Boosted") { %>
+              <span data-tooltip="Boosted Bot" data-tooltip-location="top"><img draggable="false" src="https://discordapp.com/assets/9ba64f1fa91ccde0eba506c1c33f3d1a.svg" width="32px"></span>
+            <% } %>
+            <% if(a.certificate === "Certified") { %>
+              <span data-tooltip="Verified Bot" data-tooltip-location="top"><i class="fad fa-badge-check bodyIcon"></i></span>
+            <% } %>
+            </p>
+            <p translate="no" class="card-text vCodesbotDesc"><%= a.shortDesc %></p>
+          </div>
+          <div class="card-footer">
+            <a title="disbots" href="/bot/<%=a.botID%>" class="btn  btn-bot">View</a>
+            <a title="disbots" href="/bot/<%=a.botID%>/invite" class="btn  btn-bot">Invite</a>
+          </div>
+        </div>
+      </div>
+      </div>
+            <% }) %>
+             </div>
+</div>
+  <% if(botdata.filter(a => a.certificate == "Certified").length > 6) { %>
+  <center>
+    <a title="disbots" href="/bots/certified" class="btn btn-more has-text-white">Show more certified bots</a>
+  </center>
+  <% } %>
+<br><br><br><br>
+<div class="column">
+    <center>
+    <p class="has-text-white title is-large"><i class="fad fa-fire bodyIcon"></i>&nbsp;Most Popular Bots</p>
+    <p class="content has-text-white" style="margin-top: -20px;">They are ranked according to the votes they received.</p>
+    </center>
+  </div>
+  <div class="columns is-multiline is-desktop is-variable is-7 pt-5">
+    <% botdata.sort((a, b) => b.votes - a.votes).slice(0, 6).filter(a => a.status == "Approved").map(a => {%>
+      <div class="col-md-6 col-lg-4 pb-3">
+        <div data-aos="fade-left">
+        <div class="card vcodes-card-custom bg-vcodes border-white border-0">
+          <div class="vcodes-card-custom-img" style="background-image: url(<%= a.backURL || '../img/undefined_back.png' %>);" title="Disbots.xyz" ></div>
+          <div class="vcodes-card-custom-avatar">
+            <img class="img-fluid" onerror="imgError(this);" src="<%=a.avatar%>" alt="Avatar" />
+          </div>
+          <div class="card-body">
+           <div class="is-pulled-right mt-vcodes mt-1">
+                <span data-tooltip="Votes this Month" data-tooltip-location="left" class="badge badge-stats mb-vcodes mt-1 w-100"><i class="fad fa-chevron-up"></i>&nbsp;<%= a.votes || "0" %></span>
+                <span data-tooltip="Server Count" data-tooltip-location="left" class="badge badge-stats mt-1 w-100"><i class="fad fa-server"></i>&nbsp;<%= a.serverCount || "N/A" %></span>
+              </div>
+             <p translate="no" class="card-title is-size-4"><%= a.username %>
+             <% if(a.botID === "852406969876742145") {%>
+                <a data-tooltip="Official Bot"
+                    data-tooltip-location="top"><i class="fad fa-server has-text-primary"></i></a>
+            <% } %>
+            <% if(a.promoted === "Promoted") { %>
+              <span data-tooltip="Promoted Bot" data-tooltip-location="top"><i class="fas fa-stars has-text-warning"></i></span>
+            <% } %>
+            <% if(a.boosted === "Boosted") { %>
+              <span data-tooltip="Boosted Bot" data-tooltip-location="top"><img draggable="false" src="https://discordapp.com/assets/9ba64f1fa91ccde0eba506c1c33f3d1a.svg" width="32px"></span>
+            <% } %>
+            <% if(a.certificate === "Certified") { %>
+              <span data-tooltip="Verified Bot" data-tooltip-location="top"><i class="fad fa-badge-check bodyIcon"></i></span>
+            <% } %>
+            </p>
+            <p translate="no" class="card-text vCodesbotDesc"><%= a.shortDesc %></p>
+          </div>
+          <div class="card-footer">
+            <a title="disbots" href="/bot/<%=a.botID%>" class="btn  btn-bot">View</a>
+            <a title="disbots" href="/bot/<%=a.botID%>/invite" class="btn  btn-bot">Invite</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    <% }) %>
+
+         </div>
+  <br><br><br><br>
+<div class="column">
+    <center>
+    <p class="has-text-white title is-large"><i class="fa fa-clock bodyIcon"></i>&nbsp;Last Added Bots</p>
+    <p class="content has-text-white" style="margin-top: -20px;">They are listed according to the date they were added.</p>
+    </center>
+  </div>
+  <div class="columns is-multiline is-desktop is-variable is-7 pt-5">
+    <% botdata.filter(a => a.status === "Approved").sort((a, b) => b.Date - a.Date).slice(0, 6).map(a => {%>
+      <div class="col-md-6 col-lg-4 pb-3">
+        <div data-aos="fade-left">
+        <div class="card vcodes-card-custom bg-vcodes border-white border-0">
+          <div class="vcodes-card-custom-img" style="background-image: url(<%= a.backURL || '../img/undefined_back.png' %>);" title="Disbots.xyz" ></div>
+          <div class="vcodes-card-custom-avatar">
+            <img class="img-fluid" onerror="imgError(this);" src="<%=a.avatar%>" alt="Avatar" />
+          </div>
+          <div class="card-body">
+           <div class="is-pulled-right mt-vcodes mt-1">
+                <span data-tooltip="Votes this Month" data-tooltip-location="left" class="badge badge-stats mb-vcodes mt-1 w-100"><i class="fad fa-chevron-up"></i>&nbsp;<%= a.votes || "0" %></span>
+                <span data-tooltip="Server Count" data-tooltip-location="left" class="badge badge-stats mt-1 w-100"><i class="fad fa-server"></i>&nbsp;<%= a.serverCount || "N/A" %></span>
+              </div>
+            <p translate="no" class="card-title is-size-4"><%= a.username %>
+            <% if(a.botID === "852406969876742145") {%>
+                <a data-tooltip="Official Bot"
+                    data-tooltip-location="top"><i class="fad fa-server has-text-primary"></i></a>
+            <% } %>
+            <% if(a.promoted === "Promoted") { %>
+              <span data-tooltip="Promoted Bot" data-tooltip-location="top"><i class="fas fa-stars has-text-warning"></i></span>
+            <% } %>
+            <% if(a.boosted === "Boosted") { %>
+              <span data-tooltip="Boosted Bot" data-tooltip-location="top"><img draggable="false" src="https://discordapp.com/assets/9ba64f1fa91ccde0eba506c1c33f3d1a.svg" width="32px"></span>
+            <% } %>
+            <% if(a.certificate === "Certified") { %>
+              <span data-tooltip="Verified Bot" data-tooltip-location="top"><i class="fad fa-badge-check bodyIcon"></i></span>
+            <% } %>
+            </p>
+            <p translate="no" class="card-text vCodesbotDesc"><%= a.shortDesc %></p>
+          </div>
+          <div class="card-footer">
+            <a title="disbots" href="/bot/<%=a.botID%>" class="btn  btn-bot">View</a>
+            <a title="disbots" href="/bot/<%=a.botID%>/invite" class="btn  btn-bot">Invite</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    <% }) %>
+</div>
+  
+  
+<br><br><br><br>
+<div class="column">
+    <center>
+    <p class="has-text-white title is-large"><i class="fa fa-random bodyIcon"></i>&nbsp;Random Bots</p>
+    <p class="content has-text-white" style="margin-top: -20px;">They are listed according to random.</p>
+    </center>
+  </div>
+  <div class="columns is-multiline is-desktop is-variable is-7 pt-5">
+    <%
+        let randomBots = botdata.filter(a => a.status === "Approved")
+        randomBots.forEach((val, key) => {
+          randomIndex = Math.ceil(Math.random()*(key + 1));
+          randomBots[key] = randomBots[randomIndex];
+          randomBots[randomIndex] = val;
+        });
+    %>
+    <% 
+        for(let i = 0; i < randomBots.length; i++) {
+        if (i === 6) break;
+        let labBots = randomBots[i];
+      if(labBots) {
+    %>
+    <% let a = labBots; %>
+      <div class="col-md-6 col-lg-4 pb-3">
+        <div data-aos="fade-left">
+        <div class="card vcodes-card-custom bg-vcodes border-white border-0">
+          <div class="vcodes-card-custom-img" style="background-image: url(<%= a.backURL || '../img/undefined_back.png' %>);" title="Disbots.xyz" ></div>
+          <div class="vcodes-card-custom-avatar">
+            <img class="img-fluid" onerror="imgError(this);" src="<%=a.avatar%>" alt="Avatar" />
+          </div>
+          <div class="card-body">
+           <div class="is-pulled-right mt-vcodes mt-1">
+                <span data-tooltip="Votes this Month" data-tooltip-location="left" class="badge badge-stats mb-vcodes mt-1 w-100"><i class="fad fa-chevron-up"></i>&nbsp;<%= a.votes || "0" %></span>
+                <span data-tooltip="Server Count" data-tooltip-location="left" class="badge badge-stats mt-1 w-100"><i class="fad fa-server"></i>&nbsp;<%= a.serverCount || "N/A" %></span>
+              </div>
+            <p translate="no" class="card-title is-size-4"><%= a.username %>
+            <% if(a.botID === "852406969876742145") {%>
+                <a data-tooltip="Official Bot"
+                    data-tooltip-location="top"><i class="fad fa-server has-text-primary"></i></a>
+            <% } %>
+            <% if(a.promoted === "Promoted") { %>
+              <span data-tooltip="Promoted Bot" data-tooltip-location="top"><i class="fas fa-stars has-text-warning"></i></span>
+            <% } %>
+            <% if(a.boosted === "Boosted") { %>
+              <span data-tooltip="Boosted Bot" data-tooltip-location="top"><img draggable="false" src="https://discordapp.com/assets/9ba64f1fa91ccde0eba506c1c33f3d1a.svg" width="32px"></span>
+            <% } %>
+            <% if(a.certificate === "Certified") { %>
+              <span data-tooltip="Verified Bot" data-tooltip-location="top"><i class="fad fa-badge-check bodyIcon"></i></span>
+            <% } %>
+            </p>
+            <p translate="no" class="card-text vCodesbotDesc"><%= a.shortDesc %></p>
+          </div>
+          <div class="card-footer">
+            <a title="disbots" href="/bot/<%=a.botID%>" class="btn  btn-bot">View</a>
+            <a title="disbots" href="/bot/<%=a.botID%>/invite" class="btn  btn-bot">Invite</a>
+          </div>
+        </div>
+      </div>
+      </div>
+    <% }} %>
+</div>
+<div class="mt-5 column">
+    <center>
+    <p class="has-text-white title is-large"><i class="fad fa-bomb bodyIcon"></i>&nbsp;Last Bumped Servers</p>
+    <p class="content has-text-white" style="margin-top: -20px;">They are ranked according to the bump date they received.</p>
+    </center>
+    <div class="columns is-multiline is-desktop is-variable is-7 pt-5">
+     <% data.filter(a => bots.guilds.cache.get(a.id)).sort((a, b) => b.bump - a.bump).slice(0, 6).map(a => {%>
+     <% let guildCache = bots.guilds.cache.get(a.id) %>
+      <div class="col-md-6 col-lg-4 pb-3">
+        <div data-aos="fade-left">
+        <div class="card vcodes-card-custom bg-vcodes border-white border-0">
+          <div class="vcodes-card-custom-img" onerror="backImgError(this);" style="background-image: url(<%= guildCache.banner ? 'https://cdn.discordapp.com/banners/'+a.id+'/'+guildCache.banner+'?size=1024' : '../img/undefined_back.png' %>);" title="Disbots.xyz" ></div>
+          <div class="vcodes-card-custom-avatar">
+            <img class="img-fluid" title="Discord Bot Avatar" onerror="imgError(this);" src="<%=a.icon%>" alt="Avatar" />
+          </div>
+          <div class="card-body">
+           <div class="is-pulled-right mt-vcodes mt-1" style="max-width: 28.5%!important;">
+            <span data-tooltip="Votes this Month" data-tooltip-location="left" class="badge badge-stats mb-vcodes mt-1 w-100"><i class="fad fa-chevron-up"></i>&nbsp;<%= a.votes %></span>             <span data-tooltip="Bumps this Month" data-tooltip-location="left" class="badge badge-stats mb-vcodes mt-1 w-100"><i class="fad fa-bomb"></i>&nbsp;<%= a.bumps %></span>
+            <span data-tooltip="Members" data-tooltip-location="left" class="badge badge-stats mt-1 w-100"><i class="fad fa-users"></i>&nbsp;<%= guildCache.memberCount > 999 ? guildCache.memberCount.toLocaleString().split(',')[0]+'k' : guildCache.memberCount %></span>
+              </div>
+            <p translate="no" class="card-title is-size-4"><%= a.name %>
+            <% if(guildCache.partnered === true) { %>
+              <span data-tooltip="Partnered Discord" data-tooltip-location="top">
+              <i class="fad fa-handshake bodyIcon"></i></span>
+            <% } %>
+            <% if(a.id == 852825880271257611) { %>
+              <span data-tooltip="Official Server" data-tooltip-location="top">
+              <i class="fal fa-server mr-1"></i></span>
+            <% } %>
+            <% if(a.premium === "Premium") { %>
+              <span data-tooltip="Premium Server" data-tooltip-location="top"><i class="fad fa-bahai has-text-success"></i></span>
+            <% } %>
+            </p>
+            <p translate="no" class="card-text vCodesbotDesc"><%= a.shortDesc %></p>
+          </div>
+          <div class="card-footer">
+            <a title="vcodes" href="/server/<%=a.id%>" class="btn  btn-bot">View</a>
+            <a title="vcodes" href="/server/<%=a.id%>/join" class="btn  btn-bot">Join</a>
+          </div>
+        </div>
+      </div>
+      </div>
+      <% }) %>
+    </div>
+</div>
+
+</div>
+
+<%- include('parts/foot') %>

@@ -1,0 +1,376 @@
+<%- include('parts/head', {bot, user, path}) %>
+<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3E3GK0QXX4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3E3GK0QXX4');
+</script>
+</head>
+<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
+<style>
+   h1 {
+   color: #fFf;
+   }
+   .background {
+   position: relative;
+   }
+   .layer {
+   background-color: rgba(248, 247, 216, 0.7);
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   }
+</style>
+<style>
+   @-webkit-keyframes rainbow {
+   0% {border-color: hsl(0, 100%, 50%);}
+   14% {border-color: hsl(30,100%,50%);}
+   28% {border-color: hsl(60,100%,50%);}
+   42% {border-color: hsl(120,100%,50%);}
+   56% {border-color:  hsl(240,100%,50%);}
+   70% {border-color: hsl(280,100%,50%);}
+   84% {border-color: hsl(320,100%,50%);}
+   100% {border-color: hsl(255, 100%, 50%);}
+   }
+   @-webkit-keyframes rainbow-text {
+   0% {color: hsl(0, 100%, 50%);}
+   14% {color: hsl(30,100%,50%);}
+   28% {color: hsl(60,100%,50%);}
+   42% {color: hsl(120,100%,50%);}
+   56% {color:  hsl(240,100%,50%);}
+   70% {color: hsl(280,100%,50%);}
+   84% {color: hsl(320,100%,50%);}
+   100% {color: hsl(255, 100%, 50%);}
+   }
+   .text-animation {
+   -webkit-animation: rainbow-text 5s infinite alternate; 
+   }
+   .border-animation {
+   -webkit-animation: rainbow 5s infinite alternate; 
+   }
+</style>
+<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
+<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
+<style>
+   .partner-ownerName {
+   color: #fff;
+   padding: 5px;
+   }
+   .partner-ownerName:hover {
+   color: #ccc;
+   }
+</style>
+
+<div class="container">
+<br><br><br><br>  
+<p class="has-text-white title is-large"><i class="fad fa-crown has-text-warning"></i>&nbsp;Founders</p>
+<div class="vcodes_divider"></div>
+<div class="columns is-multiline is-desktop is-variable is-7 mt-3 pt-5">
+<% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.yonetici)).map(a => {%>
+<div class="vcodes_column">
+<div class="vcodes_teamcard border-animation" onclick="location.href='/user/<%=a.id%>'">
+<div class="user">
+<h1><%=a.user.username%></h1>
+<h2 class="text-animation" ><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.yonetici).name%></h2>
+</div>
+<div class="avatar">
+                     <img draggable="false" onerror="imgError(this);" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
+                  </div>
+</div>
+</div>
+<% }) %>
+<br><br>
+<div class="container">
+   <h3 style="color: #fff;">
+   <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black; color:blue;"><i class="fas fa-user-shield has-text-warning" style="color: #00cfff;bottom: -5px; font-size: 26px;"></i>&nbsp;Community Managers [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.manager).members.size%>]</p>
+   </h3>
+   <div class="vcodes_divider"></div>
+   <br>
+   <div class="row">
+      <div class="container-fluid">
+         <div class="row row-cols-1 row-cols-md-3">
+            <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.manager)).map(a => {%>
+            <div class="vcodes_column">
+               <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.manager).hexColor%>;" class="vcodes_teamcard" onclick="location.href='/user/<%=a.id%>'">
+                  <div class="user">
+                     <h1><%=a.user.username%></h1>
+                     <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.manager).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.manager).name%></h2>
+                  </div>
+                  <div class="avatar">
+                     <img draggable="false" onerror="imgError(this);" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
+                  </div>
+               </div>
+            </div>
+            <% }) %>
+         </div>
+      </div>
+   </div>
+</div>
+<br><br>
+<div class="container">
+   <h3 style="color: #fff;">
+   <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black; color:blue;"><i class="fad fa-gavel" style="color: #00d5ff;bottom: -5px; font-size: 26px;"></i></i>&nbsp;Bot Testers [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.moderator).members.size%>]</p>
+   </h3>
+   <div class="vcodes_divider"></div>
+   <br>
+   <div class="row">
+      <div class="container-fluid">
+         <div class="row row-cols-1 row-cols-md-3">
+            <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.moderator)).map(a => {%>
+            <div class="vcodes_column">
+               <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.moderator).hexColor%>;" class="vcodes_teamcard" onclick="location.href='/user/<%=a.id%>'">
+                  <div class="user">
+                     <h1><%=a.user.username%></h1>
+                     <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.moderator).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.moderator).name%></h2>
+                  </div>
+                  <div class="avatar">
+                     <img draggable="false" onerror="imgError(this);" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
+                  </div>
+               </div>
+            </div>
+            <% }) %>
+         </div>
+      </div>
+   </div>
+</div>
+<br><br>
+<div class="container">
+   <h3 style="color: #fff;">
+   <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black; color:blue;"><i class="fas fa-dollar-sign has-text-primary" style="color: #00cfff;bottom: -5px; font-size: 26px;"></i> Sponsors [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.sponsor).members.size%>]</p>
+   </h3>
+   <div class="vcodes_divider"></div>
+   <br>
+   <div class="row">
+      <div class="container-fluid">
+         <div class="row row-cols-1 row-cols-md-3">
+            <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.sponsor)).map(a => {%>
+            <div class="vcodes_column">
+               <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.manager).hexColor%>;" class="vcodes_teamcard" onclick="location.href='/user/<%=a.id%>'">
+                  <div class="user">
+                     <h1><%=a.user.username%></h1>
+                     <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.sponsor).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.sponsor).name%></h2>
+                  </div>
+                  <div class="avatar">
+                     <img draggable="false" onerror="imgError(this);" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
+                  </div>
+               </div>
+            </div>
+            <% }) %>
+         </div>
+      </div>
+   </div>
+</div>
+<br><br>
+<div class="container">
+   <h3 style="color: #fff;">
+   <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black; color:blue;"><i class="fas fa-hands-helping has-text-primary" style="color: #00cfff;bottom: -5px; font-size: 26px;"></i> Supporters [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.supporter).members.size%>]</p>
+   </h3>
+   <div class="vcodes_divider"></div>
+   <br>
+   <div class="row">
+      <div class="container-fluid">
+         <div class="row row-cols-1 row-cols-md-3">
+            <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.supporter)).map(a => {%>
+            <div class="vcodes_column">
+               <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.manager).hexColor%>;" class="vcodes_teamcard" onclick="location.href='/user/<%=a.id%>'">
+                  <div class="user">
+                     <h1><%=a.user.username%></h1>
+                     <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.supporter).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.supporter).name%></h2>
+                  </div>
+                  <div class="avatar">
+                     <img draggable="false" onerror="imgError(this);" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
+                  </div>
+               </div>
+            </div>
+            <% }) %>
+         </div>
+      </div>
+   </div>
+</div>
+<br><br>
+<div class="container">
+   <h3 style="color: #fff;">
+   <p class="has-text-white title is-large"><img draggable="false" src="https://i2.wp.com/erisly.com/assets/img/premium/boost.def36ba.png" width="32px">Server Boosters [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.booster).members.size%>]</p>
+   </h3>
+   <div class="vcodes_divider"></div>
+   <br>
+   <div class="row">
+      <div class="container-fluid">
+         <div class="row row-cols-1 row-cols-md-3">
+            <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.booster)).map(a => {%>
+            <div class="vcodes_column">
+               <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.manager).hexColor%>;" class="vcodes_teamcard" onclick="location.href='/user/<%=a.id%>'">
+                  <div class="user">
+                     <h1><%=a.user.username%></h1>
+                     <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.booster).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.booster).name%></h2>
+                  </div>
+                  <div class="avatar">
+                     <img draggable="false" onerror="imgError(this);" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
+                  </div>
+               </div>
+            </div>
+            <% }) %>
+         </div>
+      </div>
+   </div>
+</div>
+<br><br>
+<div class="container">
+   <h3 style="color: #fff;">
+   <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black; color:blue;"><i class="fad fa-bahai has-text-success" style="color: #00cfff;bottom: -5px; font-size: 26px;"></i>&nbsp;Premium Server Owner [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.premium_developer).members.size%>]</p>
+   </h3>
+   <div class="vcodes_divider"></div>
+   <br>
+   <div class="row">
+      <div class="container-fluid">
+         <div class="row row-cols-1 row-cols-md-3">
+            <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.botlist.premium_developer)).map(a => {%>
+            <div class="vcodes_column">
+               <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.premium_developer).hexColor%>;" class="vcodes_teamcard" onclick="location.href='/user/<%=a.id%>'">
+                  <div class="user">
+                     <h1><%=a.user.username%></h1>
+                     <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.premium_developer).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.premium_developer).name%></h2>
+                  </div>
+                  <div class="avatar">
+                     <img draggable="false" onerror="imgError(this);" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
+                  </div>
+               </div>
+            </div>
+            <% }) %>
+         </div>
+      </div>
+   </div>
+</div>
+<br><br>
+<div class="container">
+   <h3 style="color: #fff;">
+   <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black; color:blue;"><i class="fas fa-stars has-text-warning" style="color: #00cfff;bottom: -5px; font-size: 26px;"></i>&nbsp;Promoted Developers [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.promoted_developer).members.size%>]</p>
+   </h3>
+   <div class="vcodes_divider"></div>
+   <br>
+   <div class="row">
+      <div class="container-fluid">
+         <div class="row row-cols-1 row-cols-md-3">
+            <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.botlist.promoted_developer)).map(a => {%>
+            <div class="vcodes_column">
+               <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.promoted_developer).hexColor%>;" class="vcodes_teamcard" onclick="location.href='/user/<%=a.id%>'">
+                  <div class="user">
+                     <h1><%=a.user.username%></h1>
+                     <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.promoted_developer).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.promoted_developer).name%></h2>
+                  </div>
+                  <div class="avatar">
+                     <img draggable="false" onerror="imgError(this);" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
+                  </div>
+               </div>
+            </div>
+            <% }) %>
+         </div>
+      </div>
+   </div>
+</div>
+<br><br>
+<div class="container">
+   <h3 style="color: #fff;">
+   <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black; color:blue;"><img draggable="false" src="https://discordapp.com/assets/9ba64f1fa91ccde0eba506c1c33f3d1a.svg" width="32px"></i>&nbsp;Boosters [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.boosted_developer).members.size%>]</p>
+   </h3>
+   <div class="vcodes_divider"></div>
+   <br>
+   <div class="row">
+      <div class="container-fluid">
+         <div class="row row-cols-1 row-cols-md-3">
+            <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.botlist.boosted_developer)).map(a => {%>
+            <div class="vcodes_column">
+               <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.boosted_developer).hexColor%>;" class="vcodes_teamcard" onclick="location.href='/user/<%=a.id%>'">
+                  <div class="user">
+                     <h1><%=a.user.username%></h1>
+                     <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.boosted_developer).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.boosted_developer).name%></h2>
+                  </div>
+                  <div class="avatar">
+                     <img draggable="false" onerror="imgError(this);" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
+                  </div>
+               </div>
+            </div>
+            <% }) %>
+         </div>
+      </div>
+   </div>
+</div>
+<br><br>
+
+<div class="container">
+    <h3 style="color: #fff;">
+        <i class="fad fa-users has-text-warning"></i> Bot Developers [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.community).members.size%>]
+         </h3>
+   <div class="vcodes_divider"></div>
+   <br>
+   <div class="row">
+      <div class="container-fluid">
+         <div class="row row-cols-1 row-cols-md-3">
+            <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.community)).map(a => {%>
+            <div class="vcodes_column">
+               <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.community).hexColor%>;" class="vcodes_teamcard" onclick="location.href='/user/<%=a.id%>'">
+                  <div class="user">
+                     <h1><%=a.user.username%></h1>
+                     <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.community).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.community).name%></h2>
+                  </div>
+                  <div class="avatar">
+                     <img draggable="false" onerror="imgError(this);" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
+                  </div>
+               </div>
+            </div>
+            <% }) %>
+         </div>
+      </div>
+   </div>
+</div>
+<br><br>
+
+<div class="container">
+    <h3 style="color: #fff;">
+        <i class="fad fa-robot mr-1"></i> Bots [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.bot).members.size%>]
+         </h3>
+   <div class="vcodes_divider"></div>
+   <br>
+   <div class="row">
+      <div class="container-fluid">
+         <div class="row row-cols-1 row-cols-md-3">
+            <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.botlist.bot)).map(a => {%>
+            <div class="vcodes_column">
+               <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.bot).hexColor%>;" class="vcodes_teamcard" onclick="location.href='/bot/<%=a.id%>'">
+                  <div class="user">
+                     <h1><%=a.user.username%></h1>
+                     <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.bot).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.bot).name%></h2>
+                  </div>
+                  <div class="avatar">
+                     <img draggable="false" onerror="imgError(this);" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
+                  </div>
+               </div>
+            </div>
+            <% }) %>
+         </div>
+      </div>
+   </div>
+</div>
+<br><br>
+
+</div>
+</div>
+</div>
+</div>
+ <script src="https://www.google.com/recaptcha/api.js"></script>
+  <script>
+   function onSubmit(token) {
+     document.getElementById("demo-form").submit();
+   }
+ </script>
+ <button class="g-recaptcha" 
+        data-sitekey="6LeKwn0bAAAAAC8ERPF287E5aDcEjwF5EowN-4W8" 
+        data-callback='onSubmit' 
+        data-action='submit' style="display: none;">Submit</button>
+<%- include('parts/foot') %>
