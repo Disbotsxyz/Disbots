@@ -1,7 +1,7 @@
 {
-  "name": "vcodes",
+  "name": "disbots",
   "version": "1.3.1",
-  "description": "vcodes.xyz",
+  "description": "disbots.xyz",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -62,7 +62,7 @@
   },
   "license": "MIT",
   "keywords": [
-    "vcodes.xyz"
+    "disbots.xyz"
   ],
-  "author": "claudette.xyz & voiddevs.org"
+  "author": "G∙MAX & RoyalDj9730322"
 }
