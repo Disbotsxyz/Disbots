@@ -24,7 +24,6 @@ const voteSchema = require("./database/models/botlist/vote.js");
 const codesSchema = require("./database/models/codes.js");
 const uptimeSchema = require("./database/models/uptime.js");
 // MODELS
-const vanitysdata = require("./database/models/vanity/vanity.js");
 const db = require("./database/models/servers/server.js");
 const banSchema = require("./database/models/site-ban.js");
 const maintenceSchema = require('./database/models/maintence.js');
