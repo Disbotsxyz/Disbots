@@ -7,9 +7,95 @@ global.config = config;
 const fs = require("fs");
 client.htmll = require('cheerio');
 const request = require("request");
+let botsdata = require("./src/database/models/botlist/bots.js");
+let profiledata = require("./src/database/models/profile.js");
+const db = require("quick.db");
+const ms = require("parse-ms");
 
 /*=======================================================================================*/
 
+client.on('presenceUpdate', async(oldPresence, newPresence) => 
+{
+  
+   var botdata = await botsdata.findOne({ botID: newPresence.userID });
+      if(!botdata)
+      {
+        return
+      }
+
+    if(newPresence.guild.id == "852825880271257611")
+    {
+     if(botdata.status == "UnApproved")
+
+     {
+       return;
+     }
+
+  if (newPresence.status === 'offline') {
+   
+    var uptimerate = db.fetch(`rate_${newPresence.userID}`);
+  
+if(!uptimerate)
+      {
+             var uptimerate = "99";
+             db.set(`rate_${newPresence.userID}`, 99)
+      }
+      
+      var timetest = db.fetch(`timefr_${newPresence.userID}`)
+      var timetest = Date.now() - timetest;
+      let breh = db.fetch(`lastoffline`)
+     
+      if(timetest > 60000)
+      {
+      
+         db.set(`presence_${newPresence.userID}`, "offline")
+          db.set(`timefr_${newPresence.userID}`, Date.now())
+       db.add(`offlinechecks_${newPresence.userID}`, 1)
+        if(breh === newPresence.userID)
+      {
+        return;
+      }
+         
+       client.channels.cache.get("859637439576014888").send(`<@${newPresence.userID}> is Offline And Uptime Rate - ${uptimerate}%`) 
+
+      }
+      
+      
+    
+    
+      
+      
+  }
+  if (newPresence.status === 'online') {
+    let check = db.fetch(`presence_${newPresence.userID}`);
+    if(check === "offline")
+    {
+
+      var uptimerate = db.fetch(`rate_${newPresence.userID}`);
+   
+   if(!uptimerate)
+      {
+             var uptimerate = "99";
+      }
+        
+        db.delete(`presence_${newPresence.userID}`, "online")
+        
+        let to2 = db.fetch(`timefr_${newPresence.userID}`);
+        var timeleft = await ms(Date.now() - to2);
+        var hour = timeleft.hours;
+       var minutes = timeleft.minutes;
+       var seconds = timeleft.seconds;
+    
+       db.set(`lastoffline`, newPresence.userID);
+       client.channels.cache.get("859637439576014888").send(`<@${newPresence.userID}> is Online And Uptime Rate - ${uptimerate}% And was Offline for ${hour}h ${minutes}m ${seconds}s`) 
+       db.set(`timefr_${newPresence.userID}`, Date.now())
+    }
+    }
+    
+    }
+    
+
+})
 /*=======================================================================================*/
 require('events').EventEmitter.prototype._maxListeners = 100;
 client.komutlar = new Discord.Collection();
@@ -124,11 +210,11 @@ client.on('guildMemberRemove', async member => {
     });
     if(!serverdata) return
     let serverfind = await serverdata.find({ ownerID: member.id })
-    await serverfind.forEach(async b => {
-        await serverfind.deleteOne({ id: b.id })
-    });
     client.guilds.fetch(config.server.id).then(bota => {
       client.channels.cache.get(config.server.channels.botlog).send(`<:Decline:853262344876851211> <@${serverfind.ownerID}>'s server **${serverfind.name}** has been deleted from website \nReason: Owner left server`)
+    });
+    await serverfind.forEach(async b => {
+        await serverfind.deleteOne({ id: b.id })
     });
 })
 client.on("guildMemberAdd", async (member) => {
@@ -164,6 +250,69 @@ client.on('ready',async () => {
     const bots = await botsSchema.find();
     client.user.setPresence({ activity: { type: 'WATCHING', name: 'disbots.xyz | '+bots.length+' bots' }, status: "online" });
 });
+
+
+let voiceStates = {}
+
+client.on('voiceStateUpdate', async(oldState, newState) => {
+  var { id } = oldState // This is the user's ID
+  if (!oldState.channel) {
+    console.log("user connected.");
+    // The user has joined a voice channel
+    voiceStates[id] = new Date()
+  } else if (!newState.channel) {
+    console.log("user disconnected.");
+    var now = new Date()
+    var joined = voiceStates[id] || new Date()
+    var rewards = Math.floor(Math.random() * 10) + 1;
+    // This will be the difference in milliseconds
+    var dateDiff = now.getTime() - joined.getTime()
+    if (dateDiff >= 600000) {
+      console.log("Gave 1 coin to user as he is in more that 1 min in vc")
+      var randomNumber = Math.floor(Math.random() * 10) + 1;
+      var find = await profiledata.findOne({ userID: newState.member.id })
+      if (!find.userID){
+        await new profiledata({
+           userID: newState.member.id, 
+           coins: '0'
+      })
+      }
+      let mycoins = find.coins
+      if (find.coins) {
+      await profiledata.findOneAndUpdate({
+        userID: newState.member.id
+    }, {
+        $set: {
+            coins: parseInt(mycoins)+1
+        }
+    }, function(err, docs) {})}
+    if (!find.coins) {
+      await profiledata.findOneAndUpdate({
+        userID: newState.member.id
+    }, {
+        $set: {
+            coins: '0'
+        }
+    }, function(err, docs) {})}
+    client.channels.cache.get('859637418528735253').send(`Hey <@${newState.member.id}>, Thankyou for being active! You have got some **Disbots Coins** for being active!`)
+    }
+    if (dateDiff > 30000000) {
+      console.log("Gave 1 coin to user as he is in more that 1 min in vc")
+      var randomNumber = Math.floor(Math.random() * 15) + 1;
+      var find = await profiledata.findOne({ userID: newState.member.id })
+      let mycoins = find.coins
+      await profiledata.findOneAndUpdate({
+        userID: newState.member.id
+    }, {
+        $set: {
+            coins: parseInt(mycoins)+1
+        }
+    }, function(err, docs) {})
+    client.channels.cache.get('859637418528735253').send(`Hey <@${newState.member.id}>, Thankyou for being active! You have got some **Disbots Coins** for being active!`)
+    }
+  }
+})
+
 /*=======================================================================================*/
 
 /* RESET DATA'S EVERY MONTHS */

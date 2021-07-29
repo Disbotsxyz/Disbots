@@ -9,15 +9,15 @@
   <meta property="title" content="Official News OF disbots.xyz">
   <meta name="robots" content="noindex,nofollow">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:creator" content="Claudette">
+  <meta name="twitter:creator" content="Disbots">
   <meta name="twitter:title" content="Official News OF disbots.xyz">
-  <meta name="twitter:description" content="read here the latest news from the Astro Development team.">
+  <meta name="twitter:description" content="read here the latest news from the Disbots Team">
   <meta name="twitter:image" content="../img/logo.png">
   <meta property="og:url" content="/">
   <meta property="og:image:type" content="image/png">
   <meta property="og:title" content="Official News OF disbots.xyz">
   <meta name="theme-color" content="#7289da">
-  <meta property="og:description" content="read here the latest news from the Astro Development team.">
+  <meta property="og:description" content="read here the latest news from the Disbots Team">
   <meta property="og:type" content="website">
   <meta property="og:image" content="../img/logo.png">
 </head>
@@ -42,23 +42,23 @@
   <% db.get(`news`).map(a => { %>
         <div class="col-md-6 col-lg-4 pb-3">
           <div data-aos="fade-down">
-        <div class="card vcodes-card-custom bg-vcodes">
-          <div class="vcodes-card-custom-img" style="background-image: url(<%=a.banner%>);"></div>
-          <div class="vcodes-card-custom-avatar">
+        <div class="card disbots-card-custom bg-disbots">
+          <div class="disbots-card-custom-img" style="background-image: url(<%=a.banner%>);"></div>
+          <div class="disbots-card-custom-avatar">
             <img class="img-fluid" onerror="imgError(this);" src="<%=a.icon%>" alt="Avatar" />
           </div>
           <div class="card-body">
-           <div class="is-pulled-right mt-vcodes mt-1">
+           <div class="is-pulled-right mt-disbots mt-1">
                 written by: <span class="card-title"><%= bot.users.cache.get(a.ownerID) ? bot.users.cache.get(a.ownerID).username : "undefined" %>#<%= bot.users.cache.get(a.ownerID) ? bot.users.cache.get(a.ownerID).discriminator : "0000" %></span>
               </div>
               <br>
-              <div class="is-pulled-right mt-vcodes mt-1">
+              <div class="is-pulled-right mt-disbots mt-1">
                 publish date: <span class="card-title"><%= a.date %></span>
                 </div>
             <br><h4 translate="no" class="card-title"><%= a.serverName %>
               <span data-tooltip="Verified News" data-tooltip-location="top"><i class="fad fa-badge-check has-text-success"></i></span>
             </h4>
-            <p translate="no" class="card-text vCodesbotDesc"><%= a.description %></p>
+            <p translate="no" class="card-text disbotsbotDesc"><%= a.description %></p>
           </div>
         </div>
           </div>

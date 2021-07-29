@@ -31,6 +31,7 @@ rates: Object,
 boosted: String,
 promoted: String,
 rawld: String,
+vanity: String,
 });
 
 module.exports = mongoose.model("bots", hm);

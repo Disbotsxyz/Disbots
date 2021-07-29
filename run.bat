@@ -1,4 +1,4 @@
 @echo off
 color c
-title vCodes.xyz
+title Disbots.xyz
 node index.js

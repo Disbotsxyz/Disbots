@@ -11,29 +11,18 @@
      <div class="row">
           <div class="col-md-6">
               <div class="form-group">
-                <label><i class="fad fa-database"></i> Is the bot over 100+ servers?
-		<br><small class="text-muted">Since you are applying, your bot should already have 100+ servers.</small></label>
+                <label><i class="fad fa-database"></i> Are you sure want to report the bot?
+		<br></label>
                 <br>
-                <select name="onehundred" id="onehundred" required disabled>
+                <select name="confirm" id="confirm" required>
                     <option value="Yes" selected>Yes</option>
                     <option value="No">No</option>
                 </select>    
               </div>
               <br>
               <div class="form-group">
-                  <label>What distinguishes your boat from other bots?</label>
-                  <textarea type="text" id="future" name="future" style="width: 100%;"></textarea>
-            </div>
-            <br>
-              <div class="form-group">
-                <label><i class="fad fa-robot"></i> Choose your bot
-                </label>
-                <br>
-                <select name="bot" id="bot" required>
-                  <% userbots.filter(a => a.status == "Approved" && a.certificate == "None").map(a => {%>
-                    <option value="<%= a.botID %>"><%= a.username %></option>
-                 <% }); %>
-              </select>
+                  <label>Reason :</label>
+                  <textarea type="text" id="reason" name="reason" style="width: 100%;"></textarea>
             </div>
           </div>
       </div>
@@ -66,7 +55,7 @@
      footer: 'Copyright 2021 &copy disbots.xyz - All right reserved.'
     }).then((result) => {
   if (result.isConfirmed) {
-    window.location.href = '/addbot';
+    window.location.href = `/${urlParams.get('botID')}/report`;
   }    
 })
     }

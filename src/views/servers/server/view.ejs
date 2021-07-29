@@ -50,7 +50,7 @@
             </div>
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
-                <a href="/server/<%= sdb.id %>/join" class="btn btn-vcodes float-right"><i class="fad fa-link"></i> Join</a>
+                <a href="/server/<%= sdb.id %>/join" class="btn btn-disbots float-right"><i class="fad fa-link"></i> Join</a>
               </div>
             </div>
             <div class="card-body pt-0 pt-md-4">
@@ -109,6 +109,14 @@
               <div class="is-flex mt-1">
                 <div class="box-2-p"><i class="mt-1 fal fa-icons"></i></div>
                 <p class="box-2">Emoji:&nbsp;<%= guildGet.emojis.cache.size || "0" %> </p>
+              </div>
+              <div class="is-flex mt-1">
+                <div class="box-2-p"><i class="mt-1 fal fa-user"></i></div>
+                <p class="box-2">Role Count:&nbsp;<%= guildGet.roles.cache.size || "0" %> </p>
+              </div>
+              <div class="is-flex mt-1">
+                <div class="box-2-p"><i class="mt-1 fal fa-diamond"></i></div>
+                <p class="box-2">Boost Level:&nbsp;<%= guildGet.premiumTier  || "0" %> </p>
               </div>
              <div class="h6 mt-4">
                 <i class="fal fa-user-crown"></i> Owners
@@ -194,7 +202,7 @@
                 <div class="row">
                     <div class="rating-cards col-md-12">
                         <div class="ml-4 media p-2" style="border-radius: 5px;">
-                          <img class="mr-3 rounded-circle" alt="vcodes-xyz | Rating System" src="https://cdn.discordapp.com/avatars/<%= req.user.id %>/<%=req.user.avatar%>" />
+                          <img class="mr-3 rounded-circle" alt="disbots-xyz | Rating System" src="https://cdn.discordapp.com/avatars/<%= req.user.id %>/<%=req.user.avatar%>" />
                             <div class="media-body">
                                 <div class="row">
                                     <div class="col-8 d-flex">
@@ -275,7 +283,7 @@
                 <div class="row">
                     <div class="rating-cards col-md-12">
                         <div class="ml-4 media p-2" style="border-radius: 5px;">
-                          <img class="mr-3 rounded-circle" alt="vcodes-xyz | Rating System" src="https://cdn.discordapp.com/avatars/<%= req.user.id %>/<%=req.user.avatar%>" />
+                          <img class="mr-3 rounded-circle" alt="disbots-xyz | Rating System" src="https://cdn.discordapp.com/avatars/<%= req.user.id %>/<%=req.user.avatar%>" />
                             <div class="media-body">
                                 <div class="row">
                                     <div class="col-8 d-flex">
@@ -343,14 +351,14 @@
                              if(!c.reply) {
                              if(req.user.id === sdb.ownerID) { 
                              %>
-                              &nbsp;<button data-toggle="modal" data-target="#reply<%= userRate.id %>" id="replyButton" class="btn btn-vcodes"><i class="fal fa-reply"></i>&nbsp;Reply</button>
-                              &nbsp;<button onclick="clickOnDeletReview('<%= userRate.id %>')" id="reviewDeleteButton<%= userRate.id %>" class="btn btn-vcodes"><i class="fal fa-trash"></i>&nbsp;Delete</button>
+                              &nbsp;<button data-toggle="modal" data-target="#reply<%= userRate.id %>" id="replyButton" class="btn btn-disbots"><i class="fal fa-reply"></i>&nbsp;Reply</button>
+                              &nbsp;<button onclick="clickOnDeletReview('<%= userRate.id %>')" id="reviewDeleteButton<%= userRate.id %>" class="btn btn-disbots"><i class="fal fa-trash"></i>&nbsp;Delete</button>
                                 <div class="modal fade" id="reply<%= userRate.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content" style="background-color: var(--bg-card)">
                                       <div class="modal-header">
                                         <h5 class="modal-title" style="color: var(--body-text)!important;" id="exampleModalLongTitle">Replying to <%= userRate ? userRate.tag : 'undefined#0000' %></h5>
-                                        <button type="button" class="btn btn-vcodes" data-dismiss="modal" aria-label="Close">
+                                        <button type="button" class="btn btn-disbots" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true"><i class="fal fa-times fa-lg"></i></span>
                                         </button>
                                       </div>
@@ -362,7 +370,7 @@
                                         </div>
                                       </div>
                                       <div class="modal-footer">
-                                        <button type="button" onclick="clickOnReply('<%= userRate.id %>')" id="myReplyButton<%= userRate.id %>" class="btn btn-vcodes">
+                                        <button type="button" onclick="clickOnReply('<%= userRate.id %>')" id="myReplyButton<%= userRate.id %>" class="btn btn-disbots">
                                         <i class="fad fa-reply"></i>&nbsp;Reply</button>
                                       </form>
                                       </div>
@@ -372,16 +380,16 @@
                              <% }} %>
 
                              <% if(userRate.id == req.user.id) { %>
-                              &nbsp;<button class="btn btn-vcodes" data-toggle="modal" data-target="#edit<%= userRate.id %>" id="editButton"><i class="fal fa-pencil"></i>&nbsp;Edit</button>
+                              &nbsp;<button class="btn btn-disbots" data-toggle="modal" data-target="#edit<%= userRate.id %>" id="editButton"><i class="fal fa-pencil"></i>&nbsp;Edit</button>
                               <% if(req.user.id != sdb.ownerID) { %>
-                              &nbsp;<button onclick="clickOnDeletReview('<%= userRate.id %>')" id="reviewDeleteButton<%= userRate.id %>" class="btn btn-vcodes"><i class="fal fa-trash"></i>&nbsp;Delete</button>
+                              &nbsp;<button onclick="clickOnDeletReview('<%= userRate.id %>')" id="reviewDeleteButton<%= userRate.id %>" class="btn btn-disbots"><i class="fal fa-trash"></i>&nbsp;Delete</button>
                               <% } %>
                                 <div class="modal fade" id="edit<%= userRate.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content" style="background-color: var(--bg-card)">
                                       <div class="modal-header">
                                         <h5 class="modal-title" style="color: var(--body-text)!important;" id="exampleModalLongTitle">Editing review to <%= userRate ? userRate.tag : 'undefined#0000' %></h5>
-                                        <button type="button" class="btn btn-vcodes" data-dismiss="modal" aria-label="Close">
+                                        <button type="button" class="btn btn-disbots" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true"><i class="fal fa-times fa-lg"></i></span>
                                         </button>
                                       </div>
@@ -404,7 +412,7 @@
                                 <br>
                                       </div>
                                       <div class="modal-footer">
-                                        <button type="button" onclick="clickOnMessage('<%= userRate.id %>')" id="myEditButton<%= userRate.id %>" class="btn btn-vcodes">
+                                        <button type="button" onclick="clickOnMessage('<%= userRate.id %>')" id="myEditButton<%= userRate.id %>" class="btn btn-disbots">
                                         <i class="fad fa-save"></i>&nbsp;Save</button>
                                       </form>
                                       </div>
@@ -425,7 +433,7 @@
                     <div class="rating-cards col-md-12">
                     <div class="ml-5">
                         <div class="ml-4 media p-2">
-                          <img class="mr-3 rounded-circle" alt="vcodes-xyz | Rating System" onError="imgError(this)" src="<%= sdb.icon %>" />
+                          <img class="mr-3 rounded-circle" alt="disbots-xyz | Rating System" onError="imgError(this)" src="<%= sdb.icon %>" />
                             <div class="media-body">
                                 <div class="row">
                                     <div class="col-8 d-flex">
@@ -439,15 +447,15 @@
                              <% if(req.user) { %>
                              <% if(req.user.id === sdb.ownerID) { %>
                              <div class="buttons mr-5" style="margin-right: 10px; float: right">
-                              <button onclick="replyTo('<%= userRate.id %>')" data-toggle="modal" data-target="#editReply<%= userRate.id %>" id="replyButton" class="btn btn-vcodes"><i class="fal fa-pencil"></i>&nbsp;Edit</button>
-                              &nbsp;<button onclick="clickOnDeletReply('<%= userRate.id %>')" id="replyDeleteButton<%= userRate.id%>" class="btn btn-vcodes"><i class="fal fa-trash"></i>&nbsp;Delete</button>
+                              <button onclick="replyTo('<%= userRate.id %>')" data-toggle="modal" data-target="#editReply<%= userRate.id %>" id="replyButton" class="btn btn-disbots"><i class="fal fa-pencil"></i>&nbsp;Edit</button>
+                              &nbsp;<button onclick="clickOnDeletReply('<%= userRate.id %>')" id="replyDeleteButton<%= userRate.id%>" class="btn btn-disbots"><i class="fal fa-trash"></i>&nbsp;Delete</button>
 
                                 <div class="modal fade" id="editReply<%= userRate.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content" style="background-color: var(--bg-card)">
                                       <div class="modal-header">
                                         <h5 class="modal-title" style="color: var(--body-text)!important;" id="exampleModalLongTitle">Replying to <%= userRate ? userRate.tag : 'undefined#0000' %></h5>
-                                        <button type="button" class="btn btn-vcodes" data-dismiss="modal" aria-label="Close">
+                                        <button type="button" class="btn btn-disbots" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true"><i class="fal fa-times fa-lg"></i></span>
                                         </button>
                                       </div>
@@ -459,7 +467,7 @@
                                         </div>
                                       </div>
                                       <div class="modal-footer">
-                                        <button type="button" onclick="clickOnEditReply('<%= userRate.id %>')" id="clickOnEditReply<%= userRate.id %>" class="btn btn-vcodes">
+                                        <button type="button" onclick="clickOnEditReply('<%= userRate.id %>')" id="clickOnEditReply<%= userRate.id %>" class="btn btn-disbots">
                                         <i class="fad fa-reply"></i>&nbsp;Reply</button>
                                       </form>
                                       </div>
@@ -709,21 +717,21 @@
 <%
 if (page != 1) {
 %>
-<a data-tooltip="Previous Page" data-tooltip-location="top" href="/server/<%= sdb.id %>?page=<%= page-1; %>" class="mr-1 btn btn-vcodes p-2">
+<a data-tooltip="Previous Page" data-tooltip-location="top" href="/server/<%= sdb.id %>?page=<%= page-1; %>" class="mr-1 btn btn-disbots p-2">
     <i class="fal fa-arrow-left"></i>
 </a>
   <% } else { %>
-    <a disabled="" class="btn btn-vcodes p-2 mr-1" style="opacity: 0.5;" style="color: #fff!important">
+    <a disabled="" class="btn btn-disbots p-2 mr-1" style="opacity: 0.5;" style="color: #fff!important">
         <i class="fal fa-arrow-left"></i>
     </a>
   <% } %>
-  <a data-tooltip="Current Page" data-tooltip-location="top" class="btn btn-vcodes mr-1" style="color: #fff!important" disabled="">
+  <a data-tooltip="Current Page" data-tooltip-location="top" class="btn btn-disbots mr-1" style="color: #fff!important" disabled="">
     <%= page %>
   </a>
   <%
   if (page != Math.ceil(data.length / 6) && data.length > 0) {
   %>
-  <a data-tooltip="Next Page" data-tooltip-location="top" href="/server/<%= sdb.id %>?page=<%= Number(page)+ Number(1); %>" class="btn btn-vcodes p-2">
+  <a data-tooltip="Next Page" data-tooltip-location="top" href="/server/<%= sdb.id %>?page=<%= Number(page)+ Number(1); %>" class="btn btn-disbots p-2">
     <i class="fal fa-arrow-right"></i>
 </a>
   <% } %></div>

@@ -23,7 +23,7 @@
     <h3 style="color: #fff;">
         <i class="fad fa-users mr-1"></i> Our Team
         </h3>
-        <div class="vcodes_divider"></div>
+        <div class="disbots_divider"></div>
         <br>
 <div class="row">
 <div class="container-fluid">
@@ -60,8 +60,8 @@
 </style>
 
 <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.sitecreator)).map(a => {%>
-<div class="vcodes_column">
-<div class="vcodes_teamcard border-animation">
+<div class="disbots_column">
+<div class="disbots_teamcard border-animation">
 <div class="avatar">
 <img draggable="false" class="pulse-avatar-<%=bot.users.cache.get(a.id).presence.status%>" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
 <div class="user">
@@ -70,7 +70,7 @@
 <h2 class="text-animation" ><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.sitecreator).name%></h2>
 </div>
 </div>
-<div class="vcodes_teamcard-footer">
+<div class="disbots_teamcard-footer">
 <a href="https://disbots.xyz/user/<%=a.id%>" class="btn btn-tag btn-block"><i class="fad fa-eye"></i>&nbsp;View</a>
 </div>
 </div>
@@ -81,8 +81,8 @@
 
 <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.yonetici)).map(a => {%>
 <% if(!bot.guilds.cache.get(config.server.id).members.cache.get(a.id).roles.cache.get(roles.sitecreator)) {%>
-<div class="vcodes_column">
-<div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.yonetici).hexColor%>;" class="vcodes_teamcard">
+<div class="disbots_column">
+<div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.yonetici).hexColor%>;" class="disbots_teamcard">
 <div class="avatar">
 <img draggable="false" class="pulse-avatar-<%=bot.users.cache.get(a.id).presence.status%>" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
 <div class="user">
@@ -90,7 +90,7 @@
 <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.yonetici).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.yonetici).name%></h2>
 </div>
 </div>
-<div class="vcodes_teamcard-footer">
+<div class="disbots_teamcard-footer">
 <a href="https://disbots.xyz/user/<%=a.id%>" class="btn btn-tag btn-block"><i class="fad fa-eye"></i>&nbsp;View</a>
 </div>
 </div>
@@ -103,8 +103,8 @@
   
 <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.moderator)).map(a => {%>
 <% if(!bot.guilds.cache.get(config.server.id).members.cache.get(a.id).roles.cache.get(roles.yonetici)) {%>
-<div class="vcodes_column">
-<div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.moderator).hexColor%>;" class="vcodes_teamcard">
+<div class="disbots_column">
+<div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.moderator).hexColor%>;" class="disbots_teamcard">
 <div class="avatar">
 <img draggable="false" class="pulse-avatar-<%=bot.users.cache.get(a.id).presence.status%>" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
 <div class="user">
@@ -112,7 +112,7 @@
 <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.moderator).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.moderator).name%></h2>
 </div>
 </div>
-<div class="vcodes_teamcard-footer">
+<div class="disbots_teamcard-footer">
 <a href="https://disbots.xyz/user/<%=a.id%>" class="btn btn-tag btn-block"><i class="fad fa-eye"></i>&nbsp;View</a>
 </div>
 </div>
@@ -126,8 +126,8 @@
 <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.partnerRole)).map(a => {%>
 <% if(!bot.guilds.cache.get(config.server.id).members.cache.get(a.id).roles.cache.get(roles.moderator)) {%>
 <% if(!bot.guilds.cache.get(config.server.id).members.cache.get(a.id).roles.cache.get(roles.yonetici)) {%>
-<div class="vcodes_column">
-<div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.partnerRole).hexColor%>;" class="vcodes_teamcard">
+<div class="disbots_column">
+<div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.partnerRole).hexColor%>;" class="disbots_teamcard">
 <div class="avatar">
 <img draggable="false" class="pulse-avatar-<%=bot.users.cache.get(a.id).presence.status%>" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
 <div class="user">
@@ -135,7 +135,7 @@
 <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.partnerRole).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.partnerRole).name%></h2>
 </div>
 </div>
-<div class="vcodes_teamcard-footer">
+<div class="disbots_teamcard-footer">
 <a href="https://disbots.xyz/user/<%=a.id%>" class="btn btn-tag btn-block"><i class="fad fa-eye"></i>&nbsp;View</a>
 </div>
 </div>
@@ -145,8 +145,8 @@
 <% }) %>
 
 <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.sponsor)).map(a => {%>
-    <div class="vcodes_column">
-    <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.sponsor).hexColor%>;" class="vcodes_teamcard">
+    <div class="disbots_column">
+    <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.sponsor).hexColor%>;" class="disbots_teamcard">
     <div class="avatar">
     <img draggable="false" class="pulse-avatar-<%=bot.users.cache.get(a.id).presence.status%>" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
     <div class="user">
@@ -154,7 +154,7 @@
     <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.sponsor).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.sponsor).name%></h2>
     </div>
     </div>
-    <div class="vcodes_teamcard-footer">
+    <div class="disbots_teamcard-footer">
     <a href="https://disbots.xyz/user/<%=a.id%>" class="btn btn-tag btn-block"><i class="fad fa-eye"></i>&nbsp;View</a>
     </div>
     </div>
@@ -169,15 +169,15 @@
     <h3 style="color: #fff;">
         <i class="fad fa-hands-helping"></i> Supporters
         </h3>
-        <div class="vcodes_divider"></div>
+        <div class="disbots_divider"></div>
         <br>
 <div class="row">
 <div class="container-fluid">
 <div class="row row-cols-1 row-cols-md-3">
 
         <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.sponsor)).map(a => {%>
-        <div class="vcodes_column">
-        <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.sponsor).hexColor%>;" class="vcodes_teamcard">
+        <div class="disbots_column">
+        <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.sponsor).hexColor%>;" class="disbots_teamcard">
         <div class="avatar">
         <img draggable="false" class="pulse-avatar-<%=bot.users.cache.get(a.id).presence.status%>" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
         <div class="user">
@@ -185,7 +185,7 @@
         <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.sponsor).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.sponsor).name%></h2>
         </div>
         </div>
-        <div class="vcodes_teamcard-footer">
+        <div class="disbots_teamcard-footer">
         <a href="https://disbots.xyz/user/<%=a.id%>" class="btn btn-tag btn-block"><i class="fad fa-eye"></i>&nbsp;View</a>
         </div>
         </div>
@@ -193,8 +193,8 @@
         <% }) %>
         <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.booster)).map(a => {%>
           <% if(!bot.guilds.cache.get(config.server.id).members.cache.get(a.id).roles.cache.get(roles.sponsor)) {%>
-          <div class="vcodes_column">
-            <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.booster).hexColor%>;" class="vcodes_teamcard">
+          <div class="disbots_column">
+            <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.booster).hexColor%>;" class="disbots_teamcard">
             <div class="avatar">
             <img draggable="false" class="pulse-avatar-<%=bot.users.cache.get(a.id).presence.status%>" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
             <div class="user">
@@ -202,7 +202,7 @@
             <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.booster).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.booster).name%></h2>
             </div>
             </div>
-            <div class="vcodes_teamcard-footer">
+            <div class="disbots_teamcard-footer">
             <a href="https://disbots.xyz/user/<%=a.id%>" class="btn btn-tag btn-block"><i class="fad fa-eye"></i>&nbsp;View</a>
             </div>
             </div>
@@ -212,8 +212,8 @@
             <% bot.guilds.cache.get(config.server.id).members.cache.filter(a => a.roles.cache.has(roles.supporter)).map(a => {%>
               <% if(!bot.guilds.cache.get(config.server.id).members.cache.get(a.id).roles.cache.get(roles.booster)) {%>
                 <% if(!bot.guilds.cache.get(config.server.id).members.cache.get(a.id).roles.cache.get(roles.sponsor)) {%>
-              <div class="vcodes_column">
-              <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.supporter).hexColor%>;" class="vcodes_teamcard">
+              <div class="disbots_column">
+              <div style="border-color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.supporter).hexColor%>;" class="disbots_teamcard">
               <div class="avatar">
               <img draggable="false" class="pulse-avatar-<%=bot.users.cache.get(a.id).presence.status%>" src="<%=bot.users.cache.get(a.id).avatarURL({dynamic: true})%>">
               <div class="user">
@@ -221,7 +221,7 @@
               <h2 style="color: <%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.supporter).hexColor%>"><%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.supporter).name%></h2>
               </div>
               </div>
-              <div class="vcodes_teamcard-footer">
+              <div class="disbots_teamcard-footer">
               <a href="https://disbots.xyz/user/<%=a.id%>" class="btn btn-tag btn-block"><i class="fad fa-eye"></i>&nbsp;View</a>
               </div>
               </div>

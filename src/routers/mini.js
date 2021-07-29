@@ -30,6 +30,12 @@ app.get("/bot-rules", async (req,res) => {
 app.get("/dc", async (req,res) => {
     res.redirect(global.config.server.invite)
 })
+app.get("/vanity/:username", async (req,res) => {
+    let botdata = await botsdata.findOne({
+      vanity: req.params.username
+    });
+    res.redirect('https://disbots.xyz/bot/'+botdata.botID)
+})
 app.get("/dsl", async (req,res) => {
     res.redirect(global.config.server.dblinvite)
 })

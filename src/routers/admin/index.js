@@ -5,6 +5,7 @@ const uptimedata = require("../../database/models/uptime.js");
 const appsdata = require("../../database/models/botlist/certificate-apps.js");
 let sitedatalari = require("../../database/models/analytics-site.js");
 const serversdata = require("../../database/models/servers/server.js");
+const reportappsdata = require("../../database/models/botlist/report-apps.js");
 
 
 
@@ -61,6 +62,21 @@ app.get("/admin/certificate-apps", checkAuth, async (req, res) => {
 	const botdata = await botsdata.find();
     const apps = await appsdata.find()
     res.render("admin/certificate-apps.ejs", {
+    	bot: global.Client,
+        path: req.path,
+        config: global.config,
+        user: req.isAuthenticated() ? req.user : null,
+        req: req,
+        roles:global.config.server.roles,
+        channels: global.config.server.channels,
+        botdata: botdata, 
+        apps: apps
+    })
+});
+app.get("/admin/report-apps", checkAuth, async (req, res) => {
+	const botdata = await botsdata.find();
+    const apps = await reportappsdata.find()
+    res.render("admin/report-app.ejs", {
     	bot: global.Client,
         path: req.path,
         config: global.config,

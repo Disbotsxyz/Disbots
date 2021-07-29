@@ -9,7 +9,7 @@
 <div class="container px-3 mt-2 pt-5">
     <center>
     <div class="container px-3 content is-widescreen pt-5">
-        <div class="bg-vote-vcodes pt-5">
+        <div class="bg-vote-disbots pt-5">
             <div class="botImg-voteArea mt-5">
                 <img style="border-radius: 10px;" draggable="false" src="<%= botdata.avatar %>">
             </div>
@@ -19,7 +19,7 @@
             <p class="text-muted">You can vote every 12 hours.</p>
             <form id="myVote" method="POST">
 
-            <button type="submit" onclick="myVote()" id="voteBTN" class="btn btn-vcodes p-3"><i class="fal fa-thumbs-up"></i>&nbsp;Confirm to Vote</button>
+            <button type="submit" onclick="myVote()" id="voteBTN" class="btn btn-disbots p-3"><i class="fal fa-thumbs-up"></i>&nbsp;Confirm to Vote</button>
             </form>
             <% } else { %>
             <script>
@@ -48,7 +48,7 @@
             <br>
         </div>
     </div>
-    <button onclick="location.href='/bot/<%=botdata.botID%>'" class="btn btn-vcodes p-2"><i class="fal fa-arrow-left"></i>&nbsp;Back to <%= botdata.username %></button>
+    <button onclick="location.href='/bot/<%=botdata.botID%>'" class="btn btn-disbots p-2"><i class="fal fa-arrow-left"></i>&nbsp;Back to <%= botdata.username %></button>
     </center>
 </div>
 

@@ -1,5 +1,54 @@
 <%- include('./meta.ejs') %>
 <head>
+<script>
+    document.onmousedown=disableclick;
+status="Stop trying to steal code";
+function disableclick(event)
+{
+  if(event.button==2)
+   {
+     alert(status);
+     return false;    
+   }
+}
+    document.onkeydown = function (e) {
+        status="Stop trying to steal code";
+        if (event.keyCode == 123) {
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'i'.charCodeAt(0))) {
+            alert(status);
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && (e.keyCode == 'C'.charCodeAt(0) || e.keyCode == 'c'.charCodeAt(0))) {
+            alert(status);
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && (e.keyCode == 'J'.charCodeAt(0) || e.keyCode == 'j'.charCodeAt(0))) {
+            alert(status);
+            return false;
+        }
+        if (e.ctrlKey && (e.keyCode == 'U'.charCodeAt(0) || e.keyCode == 'u'.charCodeAt(0))) {
+            alert(status);
+            return false;
+        }
+        if (e.ctrlKey && (e.keyCode == 'S'.charCodeAt(0) || e.keyCode == 's'.charCodeAt(0))) {
+            alert(status);
+            return false;
+        }
+        
+    }
+</script>
+<script async src="https://arc.io/widget.min.js#7XRL2vi1"></script>
+<script src="https://cdn.lr-ingest.io/LogRocket.min.js" crossorigin="anonymous"></script>
+<script>window.LogRocket && window.LogRocket.init('rd32is/disbots');
+LogRocket.identify('THE_USER_ID_IN_YOUR_APP', {
+  name: 'disbots',
+  email: 'disbots3@gmail.com',
+  // Add your own custom user variables here, ie:
+  subscriptionType: 'pro'
+});
+</script>
 </head>
 <style>
 .bg-indigo-600 {
@@ -23,27 +72,6 @@
 </style>
 
 <% if(user) {%>
-<div class="bg-indigo-600">
-  <div class="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
-    <div class="is-flex is-align-items-center justify-content-between is-flex-wrap">
-      <div class="w-0 is-flex-grow-1" style="align-items: center">
-        <span class="is-flex p-2 rounded-lg bg-indigo-600" style="opacity: 0%!important">
-         
-        </span>
-        <p class="ml-3 font-medium text-white truncate">
-          <span>
-            <span class="badge badge-danger is-size-6">EVENT</span>&nbsp; Join our server and react to giveaways and try to win Bot Boost for Permanent & Promotions! 🎉
-          </span>
-        </p>
-      </div>
-      <div class="is-flex justify-content-end">
-        <a href="/dc" class="btn btn-vcodes">
-          Join Our Discord
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
 <% } else { %>
 <div class="bg-indigo-600">
   <div class="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
@@ -54,12 +82,12 @@
         </span>
         <p class="ml-3 font-medium text-white truncate">
           <span>
-            &nbsp; Haven't joined our server yet? Join server soon and add bot we got 2 giveaways! 🎉
+            &nbsp; Haven't joined our server yet? You made me sad ☹️
             </span>
         </p>
       </div>
       <div class="is-flex justify-content-end">
-        <a href="/dc" class="btn btn-vcodes">
+        <a href="/dc" class="btn btn-disbots">
           Join Our Discord
         </a>
       </div>
@@ -68,7 +96,7 @@
 </div>
 <% } %>
 
-    <nav class="navbar navbar-expand-lg navbar-dark p-2 pl-4 pr-4 bg-vcodes z">
+    <nav class="navbar navbar-expand-lg navbar-dark p-2 pl-4 pr-4 bg-disbots z">
         <div class="container">
         <a title="Disbots" class="navbar-brand logoholder"><img id="logoimg" style="height:55px; width:55px;" src="../../img/logo.png" alt="Disbots"/></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" style="border: none">
@@ -91,10 +119,10 @@
             </li>
             <% } %>
             <li class="nav-item">
-                <a title="Disbots" class="nav-link" href="/servers"><i class="fal fa-server mr-1"></i>Servers &nbsp;<span class="badge badge-danger">NEW</span></a>
+                <a title="Disbots" class="nav-link" href="/servers"><i class="fal fa-server mr-1"></i>Servers</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/news"><i class="fad fa-newspaper mr-1"></i>News&nbsp;<span class="badge badge-danger">NEW</span></a>
+              <a class="nav-link" href="/news"><i class="fad fa-newspaper mr-1"></i>News</a>
             </li>
             <% } else { %>
             <li class="nav-item">
@@ -110,7 +138,7 @@
                 <a title="Disbots" class="nav-link" href="/dsl"><i class="fal fa-robot mr-1"></i> Invite DSL</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/news"><i class="fad fa-newspaper mr-1"></i>News&nbsp;<span class="badge badge-danger">NEW</span></a>
+              <a class="nav-link" href="/news"><i class="fad fa-newspaper mr-1"></i>News</a>
             </li>
             <% if(user) {%>
             <li class="nav-item"> 
@@ -125,6 +153,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="/partners"><i class="fal fa-handshake"></i>&nbsp;Partners</a>
             <a class="dropdown-item" href="/team"><i class="fad fa-users mr-1"></i>&nbsp;Team</a>
+            <a class="dropdown-item" href="/rewards"><i class="fad fa-coin mr-1"></i>&nbsp;Rewards</a>
             <a class="dropdown-item" href="/promotion"><i class="fas fa-stars"></i> Promotions</a>
             <a class="dropdown-item" href="/certification"><i class="fal fa-badge-check"></i>&nbsp;Certification</a>
             <a class="dropdown-item" href="/codes/categories"><i class="fal fa-code"></i>&nbsp;Code Share</a>
@@ -145,10 +174,10 @@
           <ul class="navbar-nav ml-auto">
             <% 
             let languages = global.config.website.languages;
-            %>
-
+            %>            
+            &nbsp;
             <li class="nav-item dropdown">
-                  <a class="btn btn-vcodes dropdown-toggle" href="#" id="navbarDropdown" translate="no" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a class="btn btn-disbots dropdown-toggle" href="#" id="navbarDropdown" translate="no" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fal fa-globe"></i>&nbsp;Language
                   </a>
                 <div class="dropdown-menu dropdown-menu-right" style="max-width:220px!important;">
@@ -163,14 +192,14 @@
           &nbsp;
             <% if(user) {%>
               <li class="nav-item dropdown">
-                  <a class="btn btn-vcodes" onclick='location.href = "/user/<%= user.id %>"' translate="no">
+                  <a class="btn btn-disbots" onclick='location.href = "/user/<%= user.id %>"' translate="no">
                   <img width="24" style="border-radius: 50%" src='https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png'>
                     <%=user.username%><small>#<%=user.discriminator%></small>
                   </a>
               </li>
             <% } else { %>
             <li class="nav-item">
-                <a title="Disbots" class="btn btn-vcodes" href="/login"><i class="fal fa-sign-in mr-1"></i> Login</a>
+                <a title="Disbots" class="btn btn-disbots" href="/login"><i class="fal fa-sign-in mr-1"></i> Login</a>
             </li>
 	    <% } %>
           </ul>

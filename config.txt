@@ -18,8 +18,15 @@
                 tags: [ "Moderation", "Fun", "Minecraft","Economy","Guard","NSFW","Anime","Invite","Music","Logging", "Web Dashboard", "Reddit", "Youtube", "Twitch", "Crypto", "Leveling", "Game", "Roleplay", "Utility", "Turkish" ],
                 languages: [
                     { flag: 'gb', code: 'en', name: 'English' },
+                    { flag: 'in', code: 'hi', name: 'हिंदी' },
+                    { flag: 'in', code: 'te', name: 'తెలుగు' },
                     { flag: 'tr', code: 'tr', name: 'Türkçe' },
-                    { flag: 'de', code: 'de', name: 'Deutsch' }
+                    { flag: 'de', code: 'de', name: 'Deutsch' },
+                    { flag: 'it', code: 'it', name: 'Italiano' },
+                    { flag: 'ne', code: 'ne', name: 'नेपाली' },
+                    { flag: 'ar', code: 'ar', name: 'العربية' },
+                    { flag: 'fr', code: 'fr', name: 'French' },
+                    { flag: 'pl', code: 'pl', name: 'Polish' }
                 ],
                 servers: {
                     tags: [
@@ -126,42 +133,58 @@
             server: {
                 id: "",
                 invite: "https://discord.gg/z7dBzygse4",
-                roles: {
-                    administrator: "",
-                    moderator: "",
-                    profile: {
-                        sitecreator : "",
-                        booster: "",
-                        sponsor: "",
-                        supporter: "",
-                        partnerRole: ""
-                    },
-                    codeshare: {
-                        javascript: "",
-                        html: "",
-                        substructure: "",
-                        bdfd: "", // Bot Designer For Discord
-                        fiveInvite: "",
-                        tenInvite: "",
-                        fifteenInvite: "",
-                        twentyInvite: ""
-                    },
-                    botlist: {
-                        developer: "",
-                        certified_developer: "",
-                        bot: "",
-                        certified_bot: "",
-                    }
-                },
-                channels: {
-                    codelog: "",
-                    login: "",
-                    webstatus: "",
-                    uptimelog: "",
-                    botlog: "",
-                    votes: ""
-                }
-            }
-        
-        
-        }
+    roles: {
+      yonetici: "",
+      manager: "",
+      booster: "",
+      sponsor: "",
+      community: "",
+      supporter: "",
+      partnerRole: "",
+      site_creator: "",
+      administrator: "",
+      moderator: "",
+      profile: {
+        sitecreator:"",
+        booster: "",
+        community: "",
+        sponsor: "",
+        supporter: "",
+        manager: "",
+        partnerRole: ""
+      },
+      codeshare: {
+        javascript: "JS",
+        html: "HTML",
+        substructure: "Substructure",
+        bdfd: "BDFD", // Bot Designer For Discord
+        fiveInvite: "5 INVITES",
+        tenInvite: "10 INVITES",
+        fifteenInvite: "15 INVITES",
+        twentyInvite: "20 INVITES"
+      },
+      botlist: {
+        ownerserver: "",
+        developer: "",
+        certified_developer: "",
+        boosted_developer: ""
+        promoted_developer: "",
+        premium_developer: "",
+        bot: "",
+        boosted_bot: "",
+        promoted_bot: "",
+        certified_bot: ""
+      }
+    },
+    channels: {
+      codelog: "",
+      login: "",
+      webstatus: "",
+      uptimelog: "",
+      botlog: "",
+      votes: ""
+    }
+  }
+
+
+}

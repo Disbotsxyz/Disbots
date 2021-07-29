@@ -7408,12 +7408,12 @@ a.has-text-danger-dark:focus,a.has-text-danger-dark:hover{
     padding-right:70px;
     padding-left:70px
 }
-.cardvcodesbotName{
+.carddisbotsbotName{
     font-weight:600;
     font-size:18px;
 }
 
-.cardvcodesbotCard{
+.carddisbotsbotCard{
     height:333px;
     max-height:333px;
     background:url(https://img.devsforum.net/tr/img/w4J3F10.png);
@@ -7422,10 +7422,10 @@ a.has-text-danger-dark:focus,a.has-text-danger-dark:hover{
     background-repeat: no-repeat;
     transition: all 0.3s;
 }
-.cardvcodesbotCard:hover{
+.carddisbotsbotCard:hover{
     transform:translateY(-5px)
 }
-.cardvcodesbotDesc{
+.carddisbotsbotDesc{
     margin-bottom:0;
     overflow:hidden;
     -o-text-overflow:ellipsis;
@@ -7445,7 +7445,7 @@ a.has-text-danger-dark:focus,a.has-text-danger-dark:hover{
 .status2{
     font-size:20px
 }
-.cardvcodesserverIMG{
+.carddisbotsserverIMG{
     width:120px;
     height:120px;
     border-radius:15px;
@@ -7453,14 +7453,14 @@ a.has-text-danger-dark:focus,a.has-text-danger-dark:hover{
     margin-left: -8px;
     margin-right:-27px;
 }
-.cardvcodesbotIMG{
+.carddisbotsbotIMG{
     width:120px;
     height:120px;
     border-radius:15px;
     margin-top:-40px;
     margin-right:-35px;
 }
-.cardvcodesbotButtons{
+.carddisbotsbotButtons{
     position:absolute;
     bottom:0;
     width:100%;

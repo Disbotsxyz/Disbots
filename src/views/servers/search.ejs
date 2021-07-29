@@ -34,9 +34,9 @@
                   <input type="hidden" name="page" value="1">
                 </form>
           <% global.config.website.servers.tags.slice(0, 3).map(tag => { %>
-          	<a title="vCodes" href="/servers/tag/<%= tag.name %>" class="btn btn-vcodes"><i class="<%= tag.icon %>"></i>&nbsp;<%= tag.name %></a>
+          	<a title="vcodes" href="/servers/tag/<%= tag.name %>" class="btn btn-vcodes"><i class="<%= tag.icon %>"></i>&nbsp;<%= tag.name %></a>
           <% }) %>
-          	<a title="vCodes" href="/servers/tags" class="btn btn-vcodes"><i class="fal fa-tags"></i>&nbsp;Explore Tags</a>
+          	<a title="vcodes" href="/servers/tags" class="btn btn-vcodes"><i class="fal fa-tags"></i>&nbsp;Explore Tags</a>
               </div>
       </div>
     </div>
@@ -151,7 +151,7 @@
               <i class="fad fa-handshake bodyIcon"></i></span>
             <% } %>
             </p>
-            <p translate="no" class="card-text vCodesbotDesc"><%= a.shortDesc %></p>
+            <p translate="no" class="card-text vcodesbotDesc"><%= a.shortDesc %></p>
           </div>
           <div class="card-footer">
             <a title="Disbots" href="/server/<%=a.id%>" class="btn  btn-bot">View</a>

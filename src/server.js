@@ -24,6 +24,7 @@ const voteSchema = require("./database/models/botlist/vote.js");
 const codesSchema = require("./database/models/codes.js");
 const uptimeSchema = require("./database/models/uptime.js");
 // MODELS
+const vanitysdata = require("./database/models/vanity/vanity.js");
 const db = require("./database/models/servers/server.js");
 const banSchema = require("./database/models/site-ban.js");
 const maintenceSchema = require('./database/models/maintence.js');
@@ -170,6 +171,13 @@ module.exports = async (client) => {
     res.set('Content-Type', 'text/plain');
     res.send(`Sitemap: https://disbots.xyz/sitemap.xml`);
   });
+  app.get("/ads.txt", function(req, res) {
+    res.send(`google.com, pub-2081004784180217, DIRECT, f08c47fec0942fa0`);
+  });
+  app.get("/arc-sw.js", function(req, res) {
+    res.set('Content-Type', 'application/javascript');
+    res.send(`!function(t){var e={};function r(n){if(e[n])return e[n].exports;var o=e[n]={i:n,l:!1,exports:{}};return t[n].call(o.exports,o,o.exports,r),o.l=!0,o.exports}r.m=t,r.c=e,r.d=function(t,e,n){r.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:n})},r.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},r.t=function(t,e){if(1&e&&(t=r(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var o in t)r.d(n,o,function(e){return t[e]}.bind(null,o));return n},r.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return r.d(e,"a",e),e},r.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},r.p="",r(r.s=100)}({100:function(t,e,r){"use strict";r.r(e);var n=r(2);if("undefined"!=typeof ServiceWorkerGlobalScope){var o="https://arc.io"+n.k;importScripts(o)}else if("undefined"!=typeof SharedWorkerGlobalScope){var c="https://arc.io"+n.i;importScripts(c)}else if("undefined"!=typeof DedicatedWorkerGlobalScope){var i="https://arc.io"+n.b;importScripts(i)}},2:function(t,e,r){"use strict";r.d(e,"a",(function(){return n})),r.d(e,"f",(function(){return c})),r.d(e,"j",(function(){return i})),r.d(e,"i",(function(){return a})),r.d(e,"b",(function(){return d})),r.d(e,"k",(function(){return f})),r.d(e,"c",(function(){return u})),r.d(e,"d",(function(){return s})),r.d(e,"e",(function(){return l})),r.d(e,"h",(function(){return m})),r.d(e,"g",(function(){return v}));var n={images:["bmp","jpeg","jpg","ttf","pict","svg","webp","eps","svgz","gif","png","ico","tif","tiff","bpg","avif","jxl"],video:["mp4","3gp","webm","mkv","flv","f4v","f4p","f4bogv","drc","avi","mov","qt","wmv","amv","mpg","mp2","mpeg","mpe","m2v","m4v","3g2","gifv","mpv","av1"],audio:["mid","midi","aac","aiff","flac","m4a","m4p","mp3","ogg","oga","mogg","opus","ra","rm","wav","webm","f4a","pat"],interchange:["json","yaml","xml","csv","toml","ini","bson","asn1","ubj"],archives:["jar","iso","tar","tgz","tbz2","tlz","gz","bz2","xz","lz","z","7z","apk","dmg","rar","lzma","txz","zip","zipx"],documents:["pdf","ps","doc","docx","ppt","pptx","xls","otf","xlsx"],other:["srt","swf"]},o="arc:",c={COMLINK_INIT:"".concat(o,"comlink:init"),NODE_ID:"".concat(o,":nodeId"),CDN_CONFIG:"".concat(o,"cdn:config"),P2P_CLIENT_READY:"".concat(o,"cdn:ready"),STORED_FIDS:"".concat(o,"cdn:storedFids"),SW_HEALTH_CHECK:"".concat(o,"cdn:healthCheck"),WIDGET_CONFIG:"".concat(o,"widget:config"),WIDGET_INIT:"".concat(o,"widget:init"),WIDGET_UI_LOAD:"".concat(o,"widget:load"),BROKER_LOAD:"".concat(o,"broker:load"),RENDER_FILE:"".concat(o,"inlay:renderFile"),FILE_RENDERED:"".concat(o,"inlay:fileRendered")},i="serviceWorker",a="/".concat("shared-worker",".js"),d="/".concat("dedicated-worker",".js"),f="/".concat("arc-sw-core",".js"),p="".concat("arc-sw",".js"),u=("/".concat(p),"/".concat("arc-sw"),"arc-db"),s="key-val-store",l=2**17,m="".concat("https://overmind.arc.io","/api/propertySession"),v="".concat("https://warden.arc.io","/mailbox/propertySession");"".concat("https://warden.arc.io","/mailbox/transfers")}});`)
+  });
   app.get("/sitemap.xml", async function(req, res) {
     let link = "<url><loc>https://disbots.xyz/</loc></url>";
     let botdataforxml = await botsdata.find()
@@ -201,637 +209,645 @@ module.exports = async (client) => {
       user: req.user.id
     })
     if (banned) {
-      client.users.fetch(req.user.id).then(async a => {
-        client.channels.cache.get(channels.login).send(new Discord.MessageEmbed().setAuthor(a.username, a.avatarURL({
-          dynamic: true
-        })).setThumbnail(a.avatarURL({
-          dynamic: true
-        })).setColor("RED").setDescription(`[**${a.username}**#${a.discriminator}](https://disbots.xyz/user/${a.id}) The user named **site** tried to log in but could not log in because he was blocked from the site.`).addField("Username", a.username).addField("User ID", a.id).addField("User Discriminator", a.discriminator))
-      })
-      req.session.destroy(() => {
-        res.json({
-          login: false,
-          message: "You have been blocked from disbots.",
-          logout: true
-        })
-        req.logout();
-      });
-    } else {
-      try {
-        const request = require('request');
-        request({
-          url: `https://discordapp.com/api/v8/guilds/${config.server.id}/members/${req.user.id}`,
-          method: "PUT",
-          json: {
-            access_token: req.user.accessToken
-          },
-          headers: {
-            "Authorization": `Bot ${client.token}`
-          }
-        });
-      } catch { };
-      res.redirect(req.session.backURL || '/')
-      client.users.fetch(req.user.id).then(async a => {
-        client.channels.cache.get(channels.login).send(new Discord.MessageEmbed().setAuthor(a.username, a.avatarURL({
-          dynamic: true
-        })).setThumbnail(a.avatarURL({
-          dynamic: true
-        })).setColor("GREEN").setDescription(`[**${a.username}**#${a.discriminator}](https://disbots.xyz/user/${a.id}) User named **site** logged in.`).addField("Username", a.username).addField("User ID", a.id).addField("User Discriminator", a.discriminator))
-
-      })
-    }
-  });
-  app.get("/logout", function(req, res) {
+    client.users.fetch(req.user.id).then(async a => {
+      client.channels.cache.get(channels.login).send(new Discord.MessageEmbed().setAuthor(a.username, a.avatarURL({
+        dynamic: true
+      })).setThumbnail(a.avatarURL({
+        dynamic: true
+      })).setColor("RED").setDescription(`[**${a.username}**#${a.discriminator}](https://disbots.xyz/user/${a.id}) The user named **site** tried to log in but could not log in because he was blocked from the site.`).addField("Username", a.username).addField("User ID", a.id).addField("User Discriminator", a.discriminator))
+    })
     req.session.destroy(() => {
+      res.json({
+        login: false,
+        message: "You have been blocked from disbots.",
+        logout: true
+      })
       req.logout();
-      res.redirect("/");
     });
+  } else {
+    try {
+      const request = require('request');
+      request({
+        url: `https://discordapp.com/api/v8/guilds/${config.server.id}/members/${req.user.id}`,
+        method: "PUT",
+        json: {
+          access_token: req.user.accessToken
+        },
+        headers: {
+          "Authorization": `Bot ${client.token}`
+        }
+      });
+    } catch { };
+    res.redirect(req.session.backURL || '/')
+    client.users.fetch(req.user.id).then(async a => {
+      client.channels.cache.get(channels.login).send(new Discord.MessageEmbed().setAuthor(a.username, a.avatarURL({
+        dynamic: true
+      })).setThumbnail(a.avatarURL({
+        dynamic: true
+      })).setColor("GREEN").setDescription(`[**${a.username}**#${a.discriminator}](https://disbots.xyz/user/${a.id}) User named **site** logged in.`).addField("Username", a.username).addField("User ID", a.id).addField("User Discriminator", a.discriminator))
+
+    })
+  }
+});
+app.get("/logout", function(req, res) {
+  req.session.destroy(() => {
+    req.logout();
+    res.redirect("/");
   });
-  const checkAdmin = async (req, res, next) => {
-    if (req.isAuthenticated()) {
-      if (client.guilds.cache.get(config.server.id).members.cache.get(req.user.id).roles.cache.get(roles.yonetici) || client.guilds.cache.get(config.server.id).members.cache.get(req.user.id).roles.cache.get(roles.moderator)) {
-        next();
-      } else {
-        res.redirect("/error?code=403&message=You is not competent to do this.")
+});
+const checkAdmin = async (req, res, next) => {
+  if (req.isAuthenticated()) {
+    if (client.guilds.cache.get(config.server.id).members.cache.get(req.user.id).roles.cache.get(roles.yonetici) || client.guilds.cache.get(config.server.id).members.cache.get(req.user.id).roles.cache.get(roles.moderator)) {
+      next();
+    } else {
+      res.redirect("/error?code=403&message=You is not competent to do this.")
+    }
+  } else {
+    req.session.backURL = req.url;
+    res.redirect("/login");
+  }
+}
+app.get("/bots/promoted", checkMaintence, async (req, res) => {
+  let page = req.query.page || 1;
+  let x = await botsdata.find()
+  let data = x.filter(b => b.promoted === "Promoted")
+  if (page < 1) return res.redirect(`/bots`);
+  if (data.length <= 0) return res.redirect("/");
+  if ((page > Math.ceil(data.length / 6))) return res.redirect(`/bots`);
+  if (Math.ceil(data.length / 6) < 1) {
+    page = 1;
+  };
+  renderTemplate(res, req, "botlist/bots-promoted.ejs", {
+    req,
+    roles,
+    config,
+    data,
+    page: page
+  });
+})
+app.get("/admin/premium-servers", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  const serverdata = await serversdata.find();
+  renderTemplate(res, req, "admin/premium-server.ejs", {
+    req,
+    roles,
+    config,
+    serverdata
+  })
+});
+app.post("/server/:id/new-comment", async (req, res) => {
+  let serverdata = await db.findOne({
+    id: req.params.id
+  });
+  if (!serverdata) return res.send({
+    error: "You entered an invalid server id."
+  });
+  if (!req.body.rating) {
+    await db.updateOne({
+      id: req.params.id
+    }, {
+        $push: {
+          rates: {
+            author: req.user.id,
+            star_rate: 1,
+            message: req.body.content,
+            date: Date.now()
+          }
+        }
+      })
+  } else {
+    await db.updateOne({
+      id: req.params.id
+    }, {
+        $push: {
+          rates: {
+            author: req.user.id,
+            star_rate: req.body.rating,
+            message: req.body.content,
+            date: Date.now()
+          }
+        }
+      })
+  }
+
+  return res.redirect('/server/' + req.params.id);
+})
+app.post("/server/:id/reply/:userID", async (req, res) => {
+  let serverdata = await db.findOne({
+    id: req.params.id
+  });
+  if (!serverdata) return res.send({
+    error: "You entered an invalid server id."
+  });
+  if (!req.params.userID) return res.send({
+    error: "You must enter a user id."
+  })
+  let message = req.body.replyM;
+  if (!message) return res.send({
+    error: "You must enter a reply message."
+  })
+  await db.update({
+    id: req.params.id,
+    'rates.author': req.params.userID
+  }, {
+      $set: {
+        'rates.$.reply': message
       }
-    } else {
-      req.session.backURL = req.url;
-      res.redirect("/login");
-    }
+    }, function(err, person) { if (err) return console.log(err); })
+  return res.redirect('/server/' + req.params.id);
+})
+
+app.post("/server/:id/edit/:userID", async (req, res) => {
+  let serverdata = await db.findOne({
+    id: req.params.id
+  });
+  if (!serverdata) return res.send({
+    error: "You entered an invalid server id."
+  });
+  if (!req.params.userID) return res.send({
+    error: "You must enter a user id."
+  })
+  let message = req.body.editM;
+  if (!message) return res.send({
+    error: "You must enter a edit message."
+  })
+  await db.update({
+    id: req.params.id,
+    'rates.author': req.params.userID
+  }, {
+      $set: {
+        'rates.$.star_rate': req.body.ratingEdit,
+        'rates.$.edit': message
+      }
+    }, function(err, person) { if (err) return console.log(err); })
+  return res.redirect('/server/' + req.params.id);
+})
+app.post("/server/:id/reply/:userID/edit", async (req, res) => {
+  let serverdata = await db.findOne({
+    id: req.params.id
+  });
+  if (!serverdata) return res.send({
+    error: "You entered an invalid server id."
+  });
+  if (!req.params.userID) return res.send({
+    error: "You must enter a user id."
+  })
+  let message = req.body.editReplyM;
+  if (!message) return res.send({
+    error: "You must enter a new reply message."
+  })
+  await db.update({
+    id: req.params.id,
+    'rates.author': req.params.userID
+  }, {
+      $set: {
+        'rates.$.reply': message
+      }
+    }, function(err, person) { if (err) return console.log(err); })
+  return res.redirect('/server/' + req.params.id);
+})
+app.post("/server/:id/reply/:userID/delete", async (req, res) => {
+  let serverdata = await db.findOne({
+    id: req.params.id
+  });
+  if (!serverdata) return res.send({
+    error: "You entered an invalid server id."
+  });
+  if (!req.params.userID) return res.send({
+    error: "You must enter a user id."
+  })
+  await db.update({
+    id: req.params.id,
+    'rates.author': req.params.userID
+  }, {
+      $unset: {
+        'rates.$.reply': null
+      }
+    }, function(err, person) { if (err) return console.log(err); })
+  return res.redirect('/server/' + req.params.id);
+})
+app.post("/server/:id/review/:userID/delete", async (req, res) => {
+  let serverdata = await db.findOne({
+    id: req.params.id
+  });
+  if (!serverdata) return res.send({
+    error: "You entered an invalid server id."
+  });
+  if (!req.params.userID) return res.send({
+    error: "You must enter a user id."
+  })
+  await db.update({
+    id: req.params.id,
+    'rates.author': req.params.userID
+  }, {
+      $unset: {
+        'rates.$.author': null,
+        'rates.$.star_rate': null,
+        'rates.$.message': null,
+        'rates.$.date': null,
+        'rates.$.edit': null,
+        'rates.$.reply': null
+      }
+    }, function(err, person) { if (err) return console.log(err); })
+  return res.redirect('/server/' + req.params.id);
+})
+
+app.get("/admin/premium/give/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  await serversdata.findOneAndUpdate({
+    id: req.params.botID
+  }, {
+      $set: {
+        premium: "Premium",
+      }
+    }, function(err, docs) { })
+  let serverdata = await serversdata.findOne({
+    id: req.params.botID
+  });
+
+  client.guilds.fetch(serverdata.id).then(bota => {
+    client.channels.cache.get(config.server.channels.botlog).send(`<:check:853262343949254696> <@${serverdata.ownerID}>'s server **${bota.name}** has been promoted to **Premium**.`)
+    client.users.cache.get(serverdata.ownerID).send(`<:check:853262343949254696> Your server named **${bota.name}** has been promoted to **Premium**.`)
+  });
+  let guild = client.guilds.cache.get(config.server.id)
+  guild.members.cache.get(serverdata.ownerID).roles.add(roles.botlist.premium_developer);
+  return res.redirect(`/admin/premium-servers?success=true&message=Promotion gived.&id=${req.params.botID}`)
+});
+app.get("/admin/premium/delete/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  let rBody = req.body;
+  await serversdata.findOneAndUpdate({
+    id: req.params.botID
+  }, {
+      $set: {
+        premium: "None",
+      }
+    }, function(err, docs) { })
+  let serverdata = await serversdata.findOne({
+    id: req.params.botID
+  });
+  client.guilds.fetch(serverdata.id).then(bota => {
+    client.channels.cache.get(config.server.channels.botlog).send(`<@${serverdata.ownerID}>'s server named **${bota.name}**'s Premium has been removed.`)
+    client.users.cache.get(serverdata.ownerID).send(`<:notcheck:853262343790526495> Your server named **${bota.name}**'s Premium has been removed.`)
+  });
+  await appsdata.deleteOne({
+    id: req.params.botID
+  })
+  let guild = client.guilds.cache.get(config.server.id)
+  guild.members.cache.get(serverdata.ownerID).roles.remove(roles.botlist.premium_developer);
+  return res.redirect(`/admin/premium-servers?success=true&message=Promotion deleted.`)
+});
+app.get("/admin/boost/delete/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  let rBody = req.body;
+  await botsdata.findOneAndUpdate({
+    botID: req.params.botID
+  }, {
+      $set: {
+        boosted: "None",
+      }
+    }, function(err, docs) { })
+  let botdata = await botsdata.findOne({
+    botID: req.params.botID
+  });
+  client.users.fetch(botdata.botID).then(bota => {
+    client.channels.cache.get(channels.botlog).send(`<@${botdata.ownerID}>'s bot named **${bota.tag}**'s promotion has been removed.`)
+    client.users.cache.get(botdata.ownerID).send(`<:notcheck:853262343790526495> Your bot named **${bota.tag}**'s boost has been removed.`)
+  });
+  await appsdata.deleteOne({
+    botID: req.params.botID
+  })
+  let guild = client.guilds.cache.get(config.server.id)
+  guild.members.cache.get(botdata.botID).roles.remove(roles.botlist.boosted_bot);
+  guild.members.cache.get(botdata.ownerID).roles.remove(roles.botlist.boosted_developer);
+  return res.redirect(`/admin/certificate-apps?success=true&message=Certificate deleted.`)
+});
+app.get("/promotion", checkMaintence, (req, res) => {
+  renderTemplate(res, req, "/botlist/promotion.ejs", {
+    config,
+    req,
+    roles
+  });
+});
+app.get("/rewards", checkMaintence,checkAuth, async (req, res) => {
+  renderTemplate(res, req, "/botlist/rewards.ejs", {
+    config,
+    req,
+    user: req.isAuthenticated() ? req.user : null,
+    roles
+  });
+});
+app.get("/admin/approvedservers", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  const serverdata = await serversdata.find()
+  renderTemplate(res, req, "admin/serverapproved.ejs", {
+    req,
+    roles,
+    config,
+    serverdata
+  })
+});
+app.get("/admin/server/delete/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  let botdata = await serversdata.findOne({ id: req.params.botID })
+  if (!botdata) return res.redirect("/error?code=404&message=You entered an invalid server id.");
+  let guild = client.guilds.cache.get(config.server.id)
+  await botdata.deleteOne({ id: req.params.guildID });
+  client.channels.cache.get(channels.botlog).send(`<:Decline:853262344876851211> <@${botdata.ownerID}>'s server named **${botdata.name}** has been deleted by ${req.user.username}.`)
+  guild.members.cache.get(botdata.ownerID).roles.remove(roles.botlist.ownerserver);
+  if (botdata.coowners) {
+    botdata.coowners.map(a => {
+      guild.members.cache.get(a).roles.remove(roles.botlist.ownerserver);
+    })
   }
-  app.get("/bots/promoted", checkMaintence, async (req, res) => {
-    let page = req.query.page || 1;
-    let x = await botsdata.find()
-    let data = x.filter(b => b.promoted === "Promoted")
-    if (page < 1) return res.redirect(`/bots`);
-    if (data.length <= 0) return res.redirect("/");
-    if ((page > Math.ceil(data.length / 6))) return res.redirect(`/bots`);
-    if (Math.ceil(data.length / 6) < 1) {
-      page = 1;
-    };
-    renderTemplate(res, req, "botlist/bots-promoted.ejs", {
-      req,
-      roles,
-      config,
-      data,
-      page: page
-    });
+  return res.redirect(`/admin/approvedservers?success=true&message=Server deleted.`)
+});
+app.get("/admin/promote/delete/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  let rBody = req.body;
+  await botsdata.findOneAndUpdate({
+    botID: req.params.botID
+  }, {
+      $set: {
+        promoted: "None",
+      }
+    }, function(err, docs) { })
+  let botdata = await botsdata.findOne({
+    botID: req.params.botID
+  });
+  client.users.fetch(botdata.botID).then(bota => {
+    client.channels.cache.get(channels.botlog).send(`<@${botdata.ownerID}>'s bot named **${bota.tag}**'s promotion has been removed.`)
+    client.users.cache.get(botdata.ownerID).send(`<:notcheck:853262343790526495> Your bot named **${bota.tag}**'s promotion has been removed.`)
+  });
+  await appsdata.deleteOne({
+    botID: req.params.botID
   })
-  app.get("/admin/premium-servers", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-    const serverdata = await serversdata.find();
-    renderTemplate(res, req, "admin/premium-server.ejs", {
-      req,
-      roles,
-      config,
-      serverdata
-    })
-  });
-  app.post("/server/:id/new-comment", async (req, res) => {
-    let serverdata = await db.findOne({
-      id: req.params.id
-    });
-    if (!serverdata) return res.send({
-      error: "You entered an invalid server id."
-    });
-    if (!req.body.rating) {
-      await db.updateOne({
-        id: req.params.id
-      }, {
-          $push: {
-            rates: {
-              author: req.user.id,
-              star_rate: 1,
-              message: req.body.content,
-              date: Date.now()
-            }
-          }
-        })
-    } else {
-      await db.updateOne({
-        id: req.params.id
-      }, {
-          $push: {
-            rates: {
-              author: req.user.id,
-              star_rate: req.body.rating,
-              message: req.body.content,
-              date: Date.now()
-            }
-          }
-        })
-    }
-
-    return res.redirect('/server/' + req.params.id);
+  let guild = client.guilds.cache.get(config.server.id)
+  guild.members.cache.get(botdata.botID).roles.remove(roles.botlist.promoted_bot);
+  guild.members.cache.get(botdata.ownerID).roles.remove(roles.botlist.promoted_developer);
+  return res.redirect(`/admin/promoted-bots?success=true&message=Promotion deleted.`)
+});
+app.get("/admin/boost-bots", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  const botdata = await botsdata.find();
+  renderTemplate(res, req, "admin/boosted-bots.ejs", {
+    req,
+    roles,
+    config,
+    botdata
   })
-  app.post("/server/:id/reply/:userID", async (req, res) => {
-    let serverdata = await db.findOne({
-      id: req.params.id
-    });
-    if (!serverdata) return res.send({
-      error: "You entered an invalid server id."
-    });
-    if (!req.params.userID) return res.send({
-      error: "You must enter a user id."
-    })
-    let message = req.body.replyM;
-    if (!message) return res.send({
-      error: "You must enter a reply message."
-    })
-    await db.update({
-      id: req.params.id,
-      'rates.author': req.params.userID
-    }, {
-        $set: {
-          'rates.$.reply': message
-        }
-      }, function(err, person) { if (err) return console.log(err); })
-    return res.redirect('/server/' + req.params.id);
+});
+app.get("/admin/promote-bots", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  const botdata = await botsdata.find();
+  renderTemplate(res, req, "admin/promoted-bots.ejs", {
+    req,
+    roles,
+    config,
+    botdata
   })
-
-  app.post("/server/:id/edit/:userID", async (req, res) => {
-    let serverdata = await db.findOne({
-      id: req.params.id
-    });
-    if (!serverdata) return res.send({
-      error: "You entered an invalid server id."
-    });
-    if (!req.params.userID) return res.send({
-      error: "You must enter a user id."
-    })
-    let message = req.body.editM;
-    if (!message) return res.send({
-      error: "You must enter a edit message."
-    })
-    await db.update({
-      id: req.params.id,
-      'rates.author': req.params.userID
-    }, {
-        $set: {
-          'rates.$.star_rate': req.body.ratingEdit,
-          'rates.$.edit': message
-        }
-      }, function(err, person) { if (err) return console.log(err); })
-    return res.redirect('/server/' + req.params.id);
+});
+app.get("/admin/boost-bots", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  const botdata = await botsdata.find();
+  renderTemplate(res, req, "admin/boosted-bots.ejs", {
+    req,
+    roles,
+    config,
+    botdata
   })
-  app.post("/server/:id/reply/:userID/edit", async (req, res) => {
-    let serverdata = await db.findOne({
-      id: req.params.id
-    });
-    if (!serverdata) return res.send({
-      error: "You entered an invalid server id."
-    });
-    if (!req.params.userID) return res.send({
-      error: "You must enter a user id."
-    })
-    let message = req.body.editReplyM;
-    if (!message) return res.send({
-      error: "You must enter a new reply message."
-    })
-    await db.update({
-      id: req.params.id,
-      'rates.author': req.params.userID
-    }, {
-        $set: {
-          'rates.$.reply': message
-        }
-      }, function(err, person) { if (err) return console.log(err); })
-    return res.redirect('/server/' + req.params.id);
+});
+app.get("/admin/promote-bots", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  const botdata = await botsdata.find();
+  renderTemplate(res, req, "admin/promoted-bots.ejs", {
+    req,
+    roles,
+    config,
+    botdata
   })
-  app.post("/server/:id/reply/:userID/delete", async (req, res) => {
-    let serverdata = await db.findOne({
-      id: req.params.id
-    });
-    if (!serverdata) return res.send({
-      error: "You entered an invalid server id."
-    });
-    if (!req.params.userID) return res.send({
-      error: "You must enter a user id."
-    })
-    await db.update({
-      id: req.params.id,
-      'rates.author': req.params.userID
-    }, {
-        $unset: {
-          'rates.$.reply': null
-        }
-      }, function(err, person) { if (err) return console.log(err); })
-    return res.redirect('/server/' + req.params.id);
-  })
-  app.post("/server/:id/review/:userID/delete", async (req, res) => {
-    let serverdata = await db.findOne({
-      id: req.params.id
-    });
-    if (!serverdata) return res.send({
-      error: "You entered an invalid server id."
-    });
-    if (!req.params.userID) return res.send({
-      error: "You must enter a user id."
-    })
-    await db.update({
-      id: req.params.id,
-      'rates.author': req.params.userID
-    }, {
-        $unset: {
-          'rates.$.author': null,
-          'rates.$.star_rate': null,
-          'rates.$.message': null,
-          'rates.$.date': null,
-          'rates.$.edit': null,
-          'rates.$.reply': null
-        }
-      }, function(err, person) { if (err) return console.log(err); })
-    return res.redirect('/server/' + req.params.id);
-  })
+});
+app.get("/admin/boost/give/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  await botsdata.findOneAndUpdate({
+    botID: req.params.botID
+  }, {
+      $set: {
+        boosted: "Boosted",
+      }
+    }, function(err, docs) { })
+  let botdata = await botsdata.findOne({
+    botID: req.params.botID
+  });
 
-  app.get("/admin/premium/give/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-    await serversdata.findOneAndUpdate({
-      id: req.params.botID
-    }, {
-        $set: {
-          premium: "Premium",
-        }
-      }, function(err, docs) { })
-    let serverdata = await serversdata.findOne({
-      id: req.params.botID
-    });
-
-    client.guilds.fetch(serverdata.id).then(bota => {
-      client.channels.cache.get(config.server.channels.botlog).send(`<:check:853262343949254696> <@${serverdata.ownerID}>'s server **${bota.name}** has been promoted to **Premium**.`)
-      client.users.cache.get(serverdata.ownerID).send(`<:check:853262343949254696> Your server named **${bota.name}** has been promoted to **Premium**.`)
-    });
-    let guild = client.guilds.cache.get(config.server.id)
-    guild.members.cache.get(serverdata.ownerID).roles.add(roles.botlist.premium_developer);
-    return res.redirect(`/admin/premium-servers?success=true&message=Promotion gived.&id=${req.params.botID}`)
+  client.users.fetch(botdata.botID).then(bota => {
+    client.channels.cache.get(channels.botlog).send(`<:check:853262343949254696> <@${botdata.ownerID}>'s bot  **${bota.tag}** has been **Boosted**.`)
+    client.users.cache.get(botdata.ownerID).send(`<:check:853262343949254696> Your bot named **${bota.tag}** has been **Boosted**.`)
   });
-  app.get("/admin/premium/delete/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-    let rBody = req.body;
-    await serversdata.findOneAndUpdate({
-      id: req.params.botID
-    }, {
-        $set: {
-          premium: "None",
-        }
-      }, function(err, docs) { })
-    let serverdata = await serversdata.findOne({
-      id: req.params.botID
-    });
-    client.guilds.fetch(serverdata.id).then(bota => {
-      client.channels.cache.get(config.server.channels.botlog).send(`<@${serverdata.ownerID}>'s server named **${bota.name}**'s Premium has been removed.`)
-      client.users.cache.get(serverdata.ownerID).send(`<:notcheck:853262343790526495> Your server named **${bota.name}**'s Premium has been removed.`)
-    });
-    await appsdata.deleteOne({
-      id: req.params.botID
+  let guild = client.guilds.cache.get(config.server.id)
+  guild.members.cache.get(botdata.botID).roles.add(roles.botlist.boosted_bot);
+  guild.members.cache.get(botdata.ownerID).roles.add(roles.botlist.boosted_developer);
+  if (botdata.coowners) {
+    botdata.coowners.map(a => {
+      if (guild.members.cache.get(a)) {
+        guild.members.cache.get(a).roles.add(roles.botlist.boosted_developer);
+      }
     })
-    let guild = client.guilds.cache.get(config.server.id)
-    guild.members.cache.get(serverdata.ownerID).roles.remove(roles.botlist.premium_developer);
-    return res.redirect(`/admin/premium-servers?success=true&message=Promotion deleted.`)
-  });
-  app.get("/admin/boost/delete/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-    let rBody = req.body;
-    await botsdata.findOneAndUpdate({
-      botID: req.params.botID
-    }, {
-        $set: {
-          boosted: "None",
-        }
-      }, function(err, docs) { })
-    let botdata = await botsdata.findOne({
-      botID: req.params.botID
-    });
-    client.users.fetch(botdata.botID).then(bota => {
-      client.channels.cache.get(channels.botlog).send(`<@${botdata.ownerID}>'s bot named **${bota.tag}**'s promotion has been removed.`)
-      client.users.cache.get(botdata.ownerID).send(`<:notcheck:853262343790526495> Your bot named **${bota.tag}**'s boost has been removed.`)
-    });
-    await appsdata.deleteOne({
-      botID: req.params.botID
-    })
-    let guild = client.guilds.cache.get(config.server.id)
-    guild.members.cache.get(botdata.botID).roles.remove(roles.botlist.boosted_bot);
-    guild.members.cache.get(botdata.ownerID).roles.remove(roles.botlist.boosted_developer);
-    return res.redirect(`/admin/certificate-apps?success=true&message=Certificate deleted.`)
-  });
-  app.get("/promotion", checkMaintence, (req, res) => {
-    renderTemplate(res, req, "/botlist/promotion.ejs", {
-      config,
-      req,
-      roles
-    });
-  });
-  app.get("/admin/approvedservers", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-        const serverdata = await serversdata.find()
-        renderTemplate(res, req, "admin/serverapproved.ejs", {
-            req,
-            roles,
-            config,
-            serverdata
-        })
-    });
-  app.get("/admin/server/delete/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-        let botdata = await serversdata.findOne({ id: req.params.botID })
-        if (!botdata) return res.redirect("/error?code=404&message=You entered an invalid server id.");
-        let guild = client.guilds.cache.get(config.server.id)
-        await botdata.deleteOne({ id: req.params.guildID });
-        client.channels.cache.get(channels.botlog).send(`<:Decline:853262344876851211> <@${botdata.ownerID}>'s server named **${botdata.name}** has been deleted by ${req.user.username}.`)
-        guild.members.cache.get(botdata.ownerID).roles.remove(roles.botlist.ownerserver);
-        if (botdata.coowners) {
-            botdata.coowners.map(a => {
-                guild.members.cache.get(a).roles.remove(roles.botlist.ownerserver);
-            })
-        }
-        return res.redirect(`/admin/approvedservers?success=true&message=Server deleted.`)
-  });
-  app.get("/admin/promote/delete/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-    let rBody = req.body;
-    await botsdata.findOneAndUpdate({
-      botID: req.params.botID
-    }, {
-        $set: {
-          promoted: "None",
-        }
-      }, function(err, docs) { })
-    let botdata = await botsdata.findOne({
-      botID: req.params.botID
-    });
-    client.users.fetch(botdata.botID).then(bota => {
-      client.channels.cache.get(channels.botlog).send(`<@${botdata.ownerID}>'s bot named **${bota.tag}**'s promotion has been removed.`)
-      client.users.cache.get(botdata.ownerID).send(`<:notcheck:853262343790526495> Your bot named **${bota.tag}**'s promotion has been removed.`)
-    });
-    await appsdata.deleteOne({
-      botID: req.params.botID
-    })
-    let guild = client.guilds.cache.get(config.server.id)
-    guild.members.cache.get(botdata.botID).roles.remove(roles.botlist.promoted_bot);
-    guild.members.cache.get(botdata.ownerID).roles.remove(roles.botlist.promoted_developer);
-    return res.redirect(`/admin/promoted-bots?success=true&message=Promotion deleted.`)
-  });
-  app.get("/admin/boost-bots", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-    const botdata = await botsdata.find();
-    renderTemplate(res, req, "admin/boosted-bots.ejs", {
-      req,
-      roles,
-      config,
-      botdata
-    })
-  });
-  app.get("/admin/promote-bots", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-    const botdata = await botsdata.find();
-    renderTemplate(res, req, "admin/promoted-bots.ejs", {
-      req,
-      roles,
-      config,
-      botdata
-    })
-  });
-  app.get("/admin/boost-bots", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-    const botdata = await botsdata.find();
-    renderTemplate(res, req, "admin/boosted-bots.ejs", {
-      req,
-      roles,
-      config,
-      botdata
-    })
-  });
-  app.get("/admin/promote-bots", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-    const botdata = await botsdata.find();
-    renderTemplate(res, req, "admin/promoted-bots.ejs", {
-      req,
-      roles,
-      config,
-      botdata
-    })
-  });
-  app.get("/admin/boost/give/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-    await botsdata.findOneAndUpdate({
-      botID: req.params.botID
-    }, {
-        $set: {
-          boosted: "Boosted",
-        }
-      }, function(err, docs) { })
-    let botdata = await botsdata.findOne({
-      botID: req.params.botID
-    });
-
-    client.users.fetch(botdata.botID).then(bota => {
-      client.channels.cache.get(channels.botlog).send(`<:check:853262343949254696> <@${botdata.ownerID}>'s bot  **${bota.tag}** has been **Boosted**.`)
-      client.users.cache.get(botdata.ownerID).send(`<:check:853262343949254696> Your bot named **${bota.tag}** has been **Boosted**.`)
-    });
-    let guild = client.guilds.cache.get(config.server.id)
-    guild.members.cache.get(botdata.botID).roles.add(roles.botlist.boosted_bot);
-    guild.members.cache.get(botdata.ownerID).roles.add(roles.botlist.boosted_developer);
-    if (botdata.coowners) {
-      botdata.coowners.map(a => {
-        if (guild.members.cache.get(a)) {
-          guild.members.cache.get(a).roles.add(roles.botlist.boosted_developer);
-        }
-      })
-    }
-    return res.redirect(`/admin/boost-apps?success=true&message=Promotion gived.&botID=${req.params.botID}`)
-  });
-  app.get("/admin/promote/give/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-    await botsdata.findOneAndUpdate({
-      botID: req.params.botID
-    }, {
-        $set: {
-          promoted: "Promoted",
-        }
-      }, function(err, docs) { })
-    let botdata = await botsdata.findOne({
-      botID: req.params.botID
-    });
-
-    client.users.fetch(botdata.botID).then(bota => {
-      client.channels.cache.get(channels.botlog).send(`<:check:853262343949254696> <@${botdata.ownerID}>'s bot  **${bota.tag}** has been **Promoted**.`)
-      client.users.cache.get(botdata.ownerID).send(`<:check:853262343949254696> Your bot named **${bota.tag}** has been **Promoted**.`)
-    });
-    let guild = client.guilds.cache.get(config.server.id)
-    guild.members.cache.get(botdata.botID).roles.add(roles.botlist.promoted_bot);
-    guild.members.cache.get(botdata.ownerID).roles.add(roles.botlist.promoted_developer);
-    if (botdata.coowners) {
-      botdata.coowners.map(a => {
-        if (guild.members.cache.get(a)) {
-          guild.members.cache.get(a).roles.add(roles.botlist.promoted_developer);
-        }
-      })
-    }
-    return res.redirect(`/admin/promote-bots?success=true&message=Promotion gived.&botID=${req.params.botID}`)
-  });
-  app.get("/admin/team", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-    if (!config.bot.owners.includes(req.user.id)) return res.redirect('../admin');
-    const Database = require("void.db");
-    renderTemplate(res, req, "/admin/administrator/team.ejs", {
-      req,
-      roles,
-      config,
-      db
-    })
-  });
-  app.get("/team", checkMaintence, (req, res) => {
-    const Database = require("void.db");
-    renderTemplate(res, req, "team.ejs", {
-      roles,
-      config,
-      req: req
-    });
-  });
-  app.get("/bots/promoted", checkMaintence, async (req, res) => {
-    let page = req.query.page || 1;
-    let x = await botsdata.find()
-    let data = x.filter(b => b.promoted === "Promoted")
-    if (page < 1) return res.redirect(`/bots`);
-    if (data.length <= 0) return res.redirect("/");
-    if ((page > Math.ceil(data.length / 6))) return res.redirect(`/bots`);
-    if (Math.ceil(data.length / 6) < 1) {
-      page = 1;
-    };
-    renderTemplate(res, req, "botlist/bots-promoted.ejs", {
-      req,
-      roles,
-      config,
-      data,
-      page: page
-    });
-  })
-  app.get("/bots/boosted", checkMaintence, async (req, res) => {
-    let page = req.query.page || 1;
-    let x = await botsdata.find()
-    let data = x.filter(b => b.boosted === "Boosted")
-    if (page < 1) return res.redirect(`/bots`);
-    if (data.length <= 0) return res.redirect("/");
-    if ((page > Math.ceil(data.length / 6))) return res.redirect(`/bots`);
-    if (Math.ceil(data.length / 6) < 1) {
-      page = 1;
-    };
-    renderTemplate(res, req, "botlist/bots-boosted.ejs", {
-      req,
-      roles,
-      config,
-      data,
-      page: page
-    });
-  })
-  app.get("/admin/news", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-    if (!config.bot.owners.includes(req.user.id)) return res.redirect('../admin');
-    const Database = require("void.db");
-    const db = new Database(path.join(__dirname, './database/json/news.json'));
-    renderTemplate(res, req, "/admin/administrator/news.ejs", { req, roles, config, db })
-  });
-  app.post("/admin/news", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-    if (!config.bot.owners.includes(req.user.id)) return res.redirect('../admin');
-    const Database = require("void.db");
-    const db = new Database(path.join(__dirname, './database/json/news.json'));
-    const datum = new Date().toLocaleString();
-    db.push(`news`, {
-      code: createID(12),
-      icon: req.body.icon,
-      banner: 'https://media.discordapp.net/attachments/832615475878821939/861598860006522890/wallpaper.jpg?width=1246&height=701',
-      ownerID: req.user.id,
-      serverName: req.body.serverName,
-      color: req.body.color,
-      rank: req.body.rank,
-      date: datum,
-      description: req.body.partnerDesc,
-      views: 0
-    })
-    let rBody = req.body;
-
-
-    const webhook = require("webhook-discord");
-
-    const Hook = new webhook.Webhook("WEBHOOK-URL");
-    const msg = new webhook.MessageBuilder()
-      .setName('Disbots | News')
-      .setAvatar(req.body.icon)
-      .setTitle(req.body.serverName)
-      .setDescription(`<@${req.user.id}> Posted a News \n\nLink:\n[website](https://disbots.xyz/news)`)
-      .setColor('#0099ff')
-      .setFooter(`Copyright © disbots.xyz official 2021`)
-    Hook.send(msg);
-
-
-    return res.redirect('/admin/news?success=true&message=News added.')
-
-  });
-  function createID(length) {
-    var result = '';
-    var characters = '123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
   }
-  app.get("/news", checkMaintence, (req, res) => {
-    const Database = require("void.db");
-    const db = new Database(path.join(__dirname, './database/json/news.json'));
-    renderTemplate(res, req, "news.ejs", { roles, config, db: db, req: req });
+  return res.redirect(`/admin/boost-apps?success=true&message=Promotion gived.&botID=${req.params.botID}`)
+});
+app.get("/admin/promote/give/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  await botsdata.findOneAndUpdate({
+    botID: req.params.botID
+  }, {
+      $set: {
+        promoted: "Promoted",
+      }
+    }, function(err, docs) { })
+  let botdata = await botsdata.findOne({
+    botID: req.params.botID
   });
-  app.get("/admin/certificate/delete/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-        const botdata = await botsdata.findOne({
-            botID: req.params.botID
-        })
-        if (!botdata) return res.redirect("/error?code=404&message=You entered an invalid bot id.");
-        renderTemplate(res, req, "admin/certificate-delete.ejs", {
-            req,
-            roles,
-            config,
-            botdata
-        })
-    });
-    app.post("/admin/certificate/delete/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
-        let rBody = req.body;
-        await botsdata.findOneAndUpdate({
-            botID: req.params.botID
-        }, {
-            $set: {
-                certificate: "None",
-            }
-        }, function(err, docs) {})
-        let botdata = await botsdata.findOne({
-            botID: req.params.botID
-        });
-        client.users.fetch(botdata.botID).then(bota => {
-            client.channels.cache.get(channels.botlog).send(`<@${botdata.ownerID}>'s bot named **${bota.tag}** has not been granted a certificate.`)
-            client.users.cache.get(botdata.ownerID).send(`<:notcheck:853262343790526495> Your bot named **${bota.tag}** certificate application has been declined.\nReason: **${rBody['reason']}**`)
-        });
-        await appsdata.deleteOne({
-            botID: req.params.botID
-        })
-        let guild = client.guilds.cache.get(config.server.id)
-        guild.members.cache.get(botdata.botID).roles.remove(roles.botlist.certified_bot);
-        guild.members.cache.get(botdata.ownerID).roles.remove(roles.botlist.certified_developer);
-        return res.redirect(`/admin/certificate-apps?success=true&message=Certificate deleted.`)
-    });
-  app.use(async (req, res, next) => {
-    var getIP = require('ipware')().get_ip;
-    var ipInfo = getIP(req);
-    var geoip = require('geoip-lite');
-    var ip = ipInfo.clientIp;
-    var geo = geoip.lookup(ip);
 
-    if (geo) {
-      let sitedatas = require("./database/models/analytics-site.js")
-      await sitedatas.updateOne({ id: config.website.clientID }, { $inc: { [`country.${geo.country}`]: 1 } }, { upsert: true })
-    }
-    return next();
+  client.users.fetch(botdata.botID).then(bota => {
+    client.channels.cache.get(channels.botlog).send(`<:check:853262343949254696> <@${botdata.ownerID}>'s bot  **${bota.tag}** has been **Promoted**.`)
+    client.users.cache.get(botdata.ownerID).send(`<:check:853262343949254696> Your bot named **${bota.tag}** has been **Promoted**.`)
+  });
+  let guild = client.guilds.cache.get(config.server.id)
+  guild.members.cache.get(botdata.botID).roles.add(roles.botlist.promoted_bot);
+  guild.members.cache.get(botdata.ownerID).roles.add(roles.botlist.promoted_developer);
+  if (botdata.coowners) {
+    botdata.coowners.map(a => {
+      if (guild.members.cache.get(a)) {
+        guild.members.cache.get(a).roles.add(roles.botlist.promoted_developer);
+      }
+    })
+  }
+  return res.redirect(`/admin/promote-bots?success=true&message=Promotion gived.&botID=${req.params.botID}`)
+});
+app.get("/admin/team", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  if (!config.bot.owners.includes(req.user.id)) return res.redirect('../admin');
+  const Database = require("void.db");
+  renderTemplate(res, req, "/admin/administrator/team.ejs", {
+    req,
+    roles,
+    config,
+    db
   })
-  const http = require('http').createServer(app);
-  const io = require('socket.io')(http);
-  io.on('connection', socket => {
-    io.emit("userCount", io.engine.clientsCount);
+});
+app.get("/team", checkMaintence, (req, res) => {
+  const Database = require("void.db");
+  renderTemplate(res, req, "team.ejs", {
+    roles,
+    config,
+    req: req
   });
-  http.listen(3000, () => { console.log("[disbots.xyz]: Website running on 3000 port.") });
+});
+app.get("/bots/promoted", checkMaintence, async (req, res) => {
+  let page = req.query.page || 1;
+  let x = await botsdata.find()
+  let data = x.filter(b => b.promoted === "Promoted")
+  if (page < 1) return res.redirect(`/bots`);
+  if (data.length <= 0) return res.redirect("/");
+  if ((page > Math.ceil(data.length / 6))) return res.redirect(`/bots`);
+  if (Math.ceil(data.length / 6) < 1) {
+    page = 1;
+  };
+  renderTemplate(res, req, "botlist/bots-promoted.ejs", {
+    req,
+    roles,
+    config,
+    data,
+    page: page
+  });
+})
+app.get("/bots/boosted", checkMaintence, async (req, res) => {
+  let page = req.query.page || 1;
+  let x = await botsdata.find()
+  let data = x.filter(b => b.boosted === "Boosted")
+  if (page < 1) return res.redirect(`/bots`);
+  if (data.length <= 0) return res.redirect("/");
+  if ((page > Math.ceil(data.length / 6))) return res.redirect(`/bots`);
+  if (Math.ceil(data.length / 6) < 1) {
+    page = 1;
+  };
+  renderTemplate(res, req, "botlist/bots-boosted.ejs", {
+    req,
+    roles,
+    config,
+    data,
+    page: page
+  });
+})
+app.get("/admin/news", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  if (!config.bot.owners.includes(req.user.id)) return res.redirect('../admin');
+  const Database = require("void.db");
+  const db = new Database(path.join(__dirname, './database/json/news.json'));
+  renderTemplate(res, req, "/admin/administrator/news.ejs", { req, roles, config, db })
+});
+app.post("/admin/news", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  if (!config.bot.owners.includes(req.user.id)) return res.redirect('../admin');
+  const Database = require("void.db");
+  const db = new Database(path.join(__dirname, './database/json/news.json'));
+  const datum = new Date().toLocaleString();
+  db.push(`news`, {
+    code: createID(12),
+    icon: req.body.icon,
+    banner: 'https://media.discordapp.net/attachments/832615475878821939/861598860006522890/wallpaper.jpg?width=1246&height=701',
+    ownerID: req.user.id,
+    serverName: req.body.serverName,
+    color: req.body.color,
+    rank: req.body.rank,
+    date: datum,
+    description: req.body.partnerDesc,
+    views: 0
+  })
+  let rBody = req.body;
 
-  //------------------- Routers -------------------//
 
-  /* General */
-  console.clear();
-  /*
-    (WARN)
-    You can delete the log here, but you cannot write your own name in the Developed by section.
-    * log = first console.log
-  */
-  console.log(`
+  const webhook = require("webhook-discord");
+
+  const Hook = new webhook.Webhook("WEBHOOK");
+  const msg = new webhook.MessageBuilder()
+    .setName('Disbots | News')
+    .setAvatar(req.body.icon)
+    .setTitle(req.body.serverName)
+    .setDescription(`<@${req.user.id}> Posted a News \n\nLink:\n[website](https://disbots.xyz/news)`)
+    .setColor('#0099ff')
+    .setFooter(`Copyright © disbots.xyz official 2021`)
+  Hook.send(msg);
+
+
+  return res.redirect('/admin/news?success=true&message=News added.')
+
+});
+function createID(length) {
+  var result = '';
+  var characters = '123456789';
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+app.get("/news", checkMaintence, (req, res) => {
+  const Database = require("void.db");
+  const db = new Database(path.join(__dirname, './database/json/news.json'));
+  renderTemplate(res, req, "news.ejs", { roles, config, db: db, req: req });
+});
+app.get("/admin/certificate/delete/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  const botdata = await botsdata.findOne({
+    botID: req.params.botID
+  })
+  if (!botdata) return res.redirect("/error?code=404&message=You entered an invalid bot id.");
+  renderTemplate(res, req, "admin/certificate-delete.ejs", {
+    req,
+    roles,
+    config,
+    botdata
+  })
+});
+app.post("/admin/certificate/delete/:botID", checkMaintence, checkAdmin, checkAuth, async (req, res) => {
+  let rBody = req.body;
+  await botsdata.findOneAndUpdate({
+    botID: req.params.botID
+  }, {
+      $set: {
+        certificate: "None",
+      }
+    }, function(err, docs) { })
+  let botdata = await botsdata.findOne({
+    botID: req.params.botID
+  });
+  client.users.fetch(botdata.botID).then(bota => {
+    client.channels.cache.get(channels.botlog).send(`<@${botdata.ownerID}>'s bot named **${bota.tag}** has not been granted a certificate.`)
+    client.users.cache.get(botdata.ownerID).send(`<:notcheck:853262343790526495> Your bot named **${bota.tag}** certificate application has been declined.\nReason: **${rBody['reason']}**`)
+  });
+  await appsdata.deleteOne({
+    botID: req.params.botID
+  })
+  let guild = client.guilds.cache.get(config.server.id)
+  guild.members.cache.get(botdata.botID).roles.remove(roles.botlist.certified_bot);
+  guild.members.cache.get(botdata.ownerID).roles.remove(roles.botlist.certified_developer);
+  return res.redirect(`/admin/certificate-apps?success=true&message=Certificate deleted.`)
+});
+app.use(async (req, res, next) => {
+  var getIP = require('ipware')().get_ip;
+  var ipInfo = getIP(req);
+  var geoip = require('geoip-lite');
+  var ip = ipInfo.clientIp;
+  var geo = geoip.lookup(ip);
+
+  if (geo) {
+    let sitedatas = require("./database/models/analytics-site.js")
+    await sitedatas.updateOne({ id: config.website.clientID }, { $inc: { [`country.${geo.country}`]: 1 } }, { upsert: true })
+  }
+  return next();
+})
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+io.on('connection', socket => {
+  io.emit("userCount", io.engine.clientsCount);
+});
+http.listen(3000, () => { console.log("[disbots.xyz]: Website running on 3000 port.") });
+
+//------------------- Routers -------------------//
+
+/* General */
+console.clear();
+/*
+  (WARN)
+  You can delete the log here, but you cannot write your own name in the Developed by section.
+  * log = first console.log
+*/
+console.log(`
       [===========================================]
                        disbots.xyz
         https://github.com/disbots-xyz/benedict
@@ -840,119 +856,121 @@ module.exports = async (client) => {
                     Achievements =)
       [===========================================]
       `)
-  console.log("\x1b[32m", "System loading, please wait...")
-  sleep(1050)
-  console.clear();
-  console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: General routers loading...");
-  sleep(500);
-  app.use("/", require('./routers/index.js'))
-  app.use("/", require('./routers/partners.js'))
-  app.use("/", require('./routers/mini.js'))
+console.log("\x1b[32m", "System loading, please wait...")
+sleep(1050)
+console.clear();
+console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: General routers loading...");
+sleep(500);
+app.use("/", require('./routers/index.js'))
+app.use("/", require('./routers/partners.js'))
+app.use("/", require('./routers/mini.js'))
 
-  /* Uptime System */
-  console.log(" ")
-  console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: Uptime system routers loading...");
-  sleep(500);
-  app.use("/uptime", require('./routers/uptime/add.js'))
-  app.use("/uptime", require('./routers/uptime/delete.js'))
-  app.use("/uptime", require('./routers/uptime/links.js'))
+/* Uptime System */
+console.log(" ")
+console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: Uptime system routers loading...");
+sleep(500);
+app.use("/uptime", require('./routers/uptime/add.js'))
+app.use("/uptime", require('./routers/uptime/delete.js'))
+app.use("/uptime", require('./routers/uptime/links.js'))
 
-  /* Profile System */
-  console.log(" ")
-  console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: Profile system routers loading...");
-  sleep(500);
-  app.use("/user", require('./routers/profile/index.js'))
-  app.use("/user", require('./routers/profile/edit.js'))
+/* Profile System */
+console.log(" ")
+console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: Profile system routers loading...");
+sleep(500);
+app.use("/user", require('./routers/profile/index.js'))
+app.use("/user", require('./routers/profile/edit.js'))
 
-  /* Code Share System */
-  console.log(" ")
-  console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: Code Share system routers loading...");
-  sleep(500);
-  app.use("/codes", require('./routers/codeshare/view.js'))
-  app.use("/codes", require('./routers/codeshare/list.js'))
-  app.use("/codes", require('./routers/codeshare/categories.js'))
+/* Code Share System */
+console.log(" ")
+console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: Code Share system routers loading...");
+sleep(500);
+app.use("/codes", require('./routers/codeshare/view.js'))
+app.use("/codes", require('./routers/codeshare/list.js'))
+app.use("/codes", require('./routers/codeshare/categories.js'))
 
-  /* Botlist System */
-  console.log(" ")
-  console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: Botlist system routers loading...");
-  sleep(500);
-  app.use("/", require('./routers/botlist/addbot.js'))
-  app.use("/", require('./routers/botlist/mini.js'))
-  app.use("/", require('./routers/botlist/vote.js'))
-  app.use("/", require('./routers/botlist/bot/view.js'))
-  app.use("/", require('./routers/botlist/bot/edit.js'))
-  app.use("/", require('./routers/botlist/bot/analytics.js'))
-  app.use("/", require('./routers/botlist/apps/cerificate-app.js'))
+/* Botlist System */
+console.log(" ")
+console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: Botlist system routers loading...");
+sleep(500);
+app.use("/", require('./routers/botlist/addbot.js'))
+app.use("/", require('./routers/botlist/mini.js'))
+app.use("/", require('./routers/botlist/vote.js'))
+app.use("/", require('./routers/botlist/bot/view.js'))
+app.use("/", require('./routers/botlist/bot/edit.js'))
+app.use("/", require('./routers/botlist/bot/analytics.js'))
+app.use("/", require('./routers/botlist/apps/cerificate-app.js'))
+app.use("/", require('./routers/botlist/apps/report-app.js'))
 
-  /* Server List System */
-  console.log(" ")
-  console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: Serverlist system routers loading...");
-  sleep(500);
-  app.use("/servers", require('./routers/servers/index.js'))
-  app.use("/server", require('./routers/servers/add.js'))
-  app.use("/servers", require('./routers/servers/tags.js'))
-  app.use("/servers", require('./routers/servers/search.js'))
-  app.use("/servers", require('./routers/servers/tag.js'))
-  app.use("/server", require('./routers/servers/server/view.js'))
-  app.use("/server", require('./routers/servers/server/edit.js'))
-  app.use("/server", require('./routers/servers/server/join.js'))
-  app.use("/server", require('./routers/servers/server/analytics.js'))
-  app.use("/server", require('./routers/servers/server/delete.js'))
+/* Server List System */
+console.log(" ")
+console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: Serverlist system routers loading...");
+sleep(500);
+app.use("/servers", require('./routers/servers/index.js'))
+app.use("/server", require('./routers/servers/add.js'))
+app.use("/servers", require('./routers/servers/tags.js'))
+app.use("/servers", require('./routers/servers/search.js'))
+app.use("/servers", require('./routers/servers/tag.js'))
+app.use("/server", require('./routers/servers/server/view.js'))
+app.use("/server", require('./routers/servers/server/edit.js'))
+app.use("/server", require('./routers/servers/server/join.js'))
+app.use("/server", require('./routers/servers/server/analytics.js'))
+app.use("/server", require('./routers/servers/server/delete.js'))
 
-  /* Admin Panel */
-  app.use(async (req, res, next) => {
-    if (req.path.includes('/admin')) {
-      if (req.isAuthenticated()) {
-        if (client.guilds.cache.get(config.server.id).members.cache.get(req.user.id).roles.cache.get(global.config.server.roles.administrator) || client.guilds.cache.get(config.server.id).members.cache.get(req.user.id).roles.cache.get(global.config.server.roles.moderator) || req.user.id === "714451348212678658") {
-          next();
-        } else {
-          res.redirect("/error?code=403&message=You is not competent to do this.")
-        }
+/* Admin Panel */
+app.use(async (req, res, next) => {
+  if (req.path.includes('/admin')) {
+    if (req.isAuthenticated()) {
+      if (client.guilds.cache.get(config.server.id).members.cache.get(req.user.id).roles.cache.get(global.config.server.roles.administrator) || client.guilds.cache.get(config.server.id).members.cache.get(req.user.id).roles.cache.get(global.config.server.roles.moderator) || req.user.id === "714451348212678658") {
+        next();
       } else {
-        req.session.backURL = req.url;
-        res.redirect("/login");
+        res.redirect("/error?code=403&message=You is not competent to do this.")
       }
     } else {
-      next();
+      req.session.backURL = req.url;
+      res.redirect("/login");
     }
+  } else {
+    next();
+  }
+})
+console.log(" ")
+console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: Admin Panel system routers loading...");
+sleep(500);
+app.use("/", require('./routers/admin/index.js'))
+app.use("/", require('./routers/admin/maintence.js'))
+app.use("/", require('./routers/admin/ban.js'))
+app.use("/", require('./routers/admin/partner.js'))
+app.use("/", require('./routers/admin/botlist/confirm.js'))
+app.use("/", require('./routers/admin/botlist/decline.js'))
+app.use("/", require('./routers/admin/botlist/delete.js'))
+app.use("/", require('./routers/admin/botlist/certificate/give.js'))
+app.use("/", require('./routers/admin/botlist/certificate/decline.js'))
+app.use("/", require('./routers/admin/botlist/certificate/rdelete.js'))
+app.use("/", require('./routers/admin/codeshare/index.js'))
+app.use("/", require('./routers/admin/codeshare/edit.js'))
+app.use("/", require('./routers/admin/codeshare/add.js'))
+app.use("/", require('./routers/admin/uptime/index.js'))
+
+
+/* Bot System */
+console.log(" ")
+console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: Bot system loading...");
+app.use("/", require('./routers/api/api.js'))
+sleep(500)
+
+app.use((req, res) => {
+  req.query.code = 404;
+  req.query.message = `Page not found.`;
+  res.status(404).render("error.ejs", {
+    bot: global.Client,
+    path: req.path,
+    config: global.config,
+    user: req.isAuthenticated() ? req.user : null,
+    req: req,
+    roles: global.config.server.roles,
+    channels: global.config.server.channels
   })
-  console.log(" ")
-  console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: Admin Panel system routers loading...");
-  sleep(500);
-  app.use("/", require('./routers/admin/index.js'))
-  app.use("/", require('./routers/admin/maintence.js'))
-  app.use("/", require('./routers/admin/ban.js'))
-  app.use("/", require('./routers/admin/partner.js'))
-  app.use("/", require('./routers/admin/botlist/confirm.js'))
-  app.use("/", require('./routers/admin/botlist/decline.js'))
-  app.use("/", require('./routers/admin/botlist/delete.js'))
-  app.use("/", require('./routers/admin/botlist/certificate/give.js'))
-  app.use("/", require('./routers/admin/botlist/certificate/decline.js'))
-  app.use("/", require('./routers/admin/codeshare/index.js'))
-  app.use("/", require('./routers/admin/codeshare/edit.js'))
-  app.use("/", require('./routers/admin/codeshare/add.js'))
-  app.use("/", require('./routers/admin/uptime/index.js'))
-
-
-  /* Bot System */
-  console.log(" ")
-  console.log('\x1b[36m%s\x1b[0m', "[disbots.xyz]: Bot system loading...");
-  app.use("/", require('./routers/api/api.js'))
-  sleep(500)
-
-  app.use((req, res) => {
-    req.query.code = 404;
-    req.query.message = `Page not found.`;
-    res.status(404).render("error.ejs", {
-      bot: global.Client,
-      path: req.path,
-      config: global.config,
-      user: req.isAuthenticated() ? req.user : null,
-      req: req,
-      roles: global.config.server.roles,
-      channels: global.config.server.channels
-    })
-  });
+});
 };
 
 function sleep(milliseconds) {

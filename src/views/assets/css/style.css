@@ -81,7 +81,7 @@ body {
   background-color: var(--bg-section);  
 }
 
-.bg-vcodes {
+.bg-disbots {
     background-color: var(--bg-section);
     color: #fff;
 }
@@ -181,14 +181,14 @@ body {
 }
 
 /* Other styles for the page not related to the animated dropdown */
-.btn-outline-vcodes {
+.btn-outline-disbots {
   background-color: transparent;
   border: 2px solid #7289da;
   color: #fff;
   font-weight: 500;
   transition: all 0.3s;
 }
-.btn-outline-vcodes:hover {
+.btn-outline-disbots:hover {
   background-color: #7289da;
   border: 2px solid #7289da;
   color: #2c2f33;
@@ -773,13 +773,13 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, 
 
 
 /* Custom Card Horizantal */
-.vcodes_column {
+.disbots_column {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center
 }
 
-.vcodes_teamcard {
+.disbots_teamcard {
 	margin: 10px 3px;
 	position: relative;
 	width: 300px;
@@ -797,19 +797,19 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, 
 	user-select: none
 }
 
-.vcodes_teamcard {
+.disbots_teamcard {
 	background: #23272a;
 	box-shadow: transparent 0 2px 52px 0;
   transition: all 0.3s;
   border-left: 3px solid;
 }
 
-.vcodes_teamcard:hover {
+.disbots_teamcard:hover {
 	transform: translateY(-6px);
 	z-index: 6;
 }
 
-.vcodes_teamcard .user h1 {
+.disbots_teamcard .user h1 {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -820,7 +820,7 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, 
 	margin: 0 0 0 5px
 }
 
-.vcodes_teamcard .user h2 {
+.disbots_teamcard .user h2 {
 	width: 98%;
 	font-size: 14px;
 	color: rgb(255 255 255/70%);
@@ -829,13 +829,13 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, 
 	margin: 0 0 0 5px
 }
 
-.vcodes_teamcard .avatar img {
+.disbots_teamcard .avatar img {
 	height: 60px;
 	border-radius: 50%;
 	margin-right: 5px
 }
 
-.vcodes_teamcard .avatar span {
+.disbots_teamcard .avatar span {
 	z-index: 1;
 	position: absolute;
 	bottom: 28px;
@@ -1614,13 +1614,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.vcodes_tippy {
+.disbots_tippy {
   position: relative;
   transition: all 0.5s ease;
   text-transform: uppercase;
   text-decoration: none;
 }
-.vcodes_tippy:before {
+.disbots_tippy:before {
   content: "";
   position: absolute;
   opacity: 0;
@@ -1634,7 +1634,7 @@ body {
   border-width: 10px 10px 0 10px;
   border-color: #282828 transparent transparent transparent;
 }
-.vcodes_tippy:after {
+.disbots_tippy:after {
   text-transform: none;
   content: attr(data-tooltip);
   font-size: 14px;
@@ -1654,13 +1654,13 @@ body {
   transform: translate3d(-50%, 0%, 0);
   transition: all 0.1s ease;
 }
-.vcodes_tippy:hover:before, .vcodes_tippy:hover:after {
+.disbots_tippy:hover:before, .disbots_tippy:hover:after {
   opacity: 1;
 }
-.vcodes_tippy:hover:before {
+.disbots_tippy:hover:before {
   transform: translate3d(-50%, calc(-100% - 18px), 0);
 }
-.vcodes_tippy:hover:after {
+.disbots_tippy:hover:after {
   transform: translate3d(-50%, calc(-100% - 16px), 0);
 }
 
@@ -2085,7 +2085,7 @@ ul.summary-list > li:last-child  {
 a:hover{
     text-decoration: none;
 }
-.vcodes_divider {
+.disbots_divider {
     width: 25%;
     border: 3px solid #fff;
     border-bottom-left-radius: 10px;
@@ -2277,7 +2277,7 @@ a:hover{
   .btn-vote:hover {
     background-color:#5668ac;
   }
-  .bg-vote-vcodes {
+  .bg-vote-disbots {
     height: auto;
     width: 100%;
     padding-left: 20px!important;
@@ -2302,7 +2302,7 @@ a:hover{
     justify-content: space-between;
     padding: inherit;
 }
-.vcodes-logo-nav {
+.disbots-logo-nav {
     width: 100px;
 }
 
@@ -2408,9 +2408,9 @@ color: #fff!important;
     margin-right: 10px!important;
 }
 
-.jumbotron.vcodes{
+.jumbotron.disbots{
     padding-top: 8px!important;
-    /* background: linear-gradient(70deg, rgba(35, 39, 42, 1) 60%, rgba(35, 39, 42, 0.2) 70%), url(https://vcodes.xyz/img/section.svg); */
+    /* background: linear-gradient(70deg, rgba(35, 39, 42, 1) 60%, rgba(35, 39, 42, 0.2) 70%), url(https://disbots.xyz/img/section.svg); */
     background-color: var(--bg-section)
 }
 .bg-transparent {
@@ -2422,13 +2422,14 @@ color: #fff!important;
   color: #fff;
 }
 
-.vcodes-card-custom {
+.disbots-card-custom {
   overflow: hidden;
+  border-radius: 20px;
   min-height: 450px;
   box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
 }
 
-.vcodes-card-custom-img {
+.disbots-card-custom-img {
   height: 200px;
   min-height: 200px;
   background-repeat: no-repeat;
@@ -2436,7 +2437,7 @@ color: #fff!important;
   background-position: center;
   border-color: inherit;
 }
-.vcodes-card-custom-img::after {
+.disbots-card-custom-img::after {
   position: absolute;
   content: '';
   top: 161px;
@@ -2453,7 +2454,7 @@ color: #fff!important;
   border-left-color: inherit;
 }
 
-.vcodes-card-custom-avatar img {
+.disbots-card-custom-avatar img {
   border-radius: 50%;
   border: 7px solid var(--bg-card);
   position: absolute;
@@ -2474,7 +2475,7 @@ color: #fff!important;
 .btn-group {
   max-width: 100%!important;
 }
-.vCodesbotDesc {
+.disbotsbotDesc {
   min-height: 95px;
   overflow-y: auto;
   max-height: 95px!important;
@@ -2492,19 +2493,19 @@ color: #fff!important;
 .badge-stats.mt-1 {
     margin-top: -10px!important;
 }
-.mb-vcodes {
+.mb-disbots {
     margin-bottom: 13px;
 }
-.mt-vcodes {
+.mt-disbots {
   margin-top: -18px!important;
 }
 .is-multiline {
   max-width: 100%;
 }
-.card.vcodes-card-custom {
+.card.disbots-card-custom {
   transition: all 0.2s;
 }
-.card.vcodes-card-custom:hover {
+.card.disbots-card-custom:hover {
   transform: translateY(-5px);
   box-shadow: 0 0 20px rgba(10, 10, 10, 1);
 }
@@ -2778,7 +2779,7 @@ select.language:hover {
   color: #727272!important;
 }
 /* CUSTOM */
-.alert-vcodes {
+.alert-disbots {
     background-color: #23272a;
     border-left: 5px solid #f14668;
     color: #fff;
@@ -2797,7 +2798,7 @@ select.language:hover {
     background-color: #23272a;
 }
 
-.btn-vcodes {
+.btn-disbots {
   border-radius: 5px;
   background-color: var(--button-green);
   color: var(--button-text-section);
@@ -2807,7 +2808,7 @@ select.language:hover {
   padding-top: 5px;
   transition: all .1s;
 }
-.btn-vcodes:hover {
+.btn-disbots:hover {
   background-color: var(--button-green-hover);
   color: var(--button-text-section);
 }
