@@ -169,7 +169,7 @@
         certified_developer: "",
         boosted_developer: "",
         promoted_developer: "",
-        premium_developer: "",
+        premium_developer: "", // premium server owner role id
         bot: "",
         boosted_bot: "",
         promoted_bot: "",
