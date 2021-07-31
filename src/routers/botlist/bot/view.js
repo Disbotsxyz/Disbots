@@ -27,8 +27,7 @@ app.get("/bot/:botID", async (req, res, next) => {
                         aowner: aowner,
                         coowner: coowner,
                         abot: abot,
-                        botdata: botdata,
-                        uptimerate: uptimerate
+                        botdata: botdata
                     })
                 });
             });
