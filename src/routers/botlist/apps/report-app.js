@@ -13,7 +13,7 @@ app.get("/:botID/report", global.checkAuth, async (req, res) => {
         reporterID: req.user.id
     })
     if (!userbots) return res.redirect('/error?code=401&message=There is no bot on our website with this id.');
-    if (!checkreporter) return res.redirect('/error?code=401&message=You have already reported this bot.');
+    if (checkreporter) return res.redirect('/error?code=401&message=You have already reported this bot.');
 	    res.render("botlist/apps/report.ejs", {
 	        bot: global.Client,
 	        path: req.path,
