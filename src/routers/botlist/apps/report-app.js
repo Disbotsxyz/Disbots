@@ -10,7 +10,8 @@ app.get("/:botID/report", global.checkAuth, async (req, res) => {
         botID: req.params.botID
     })
     const checkreporter = await apps.find({
-        reporterID: req.user.id
+        reporterID: req.user.id,
+	botID: req.params.botID
     })
     if (!userbots) return res.redirect('/error?code=401&message=There is no bot on our website with this id.');
     if (checkreporter) return res.redirect('/error?code=401&message=You have already reported this bot.');
