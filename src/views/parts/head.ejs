@@ -38,7 +38,7 @@ function disableclick(event)
         }
         
     }
-
+</script>
 </head>
 <style>
 .bg-indigo-600 {
@@ -60,7 +60,7 @@ function disableclick(event)
 }
 
 </style>
-
+<meta name='dmca-site-verification' content='OEcrVEErMzk3S0ZvMk9Wa3V1d0xidz090' />
 <% if(user) {%>
 <% } else { %>
 <div class="bg-indigo-600">
@@ -85,69 +85,70 @@ function disableclick(event)
   </div>
 </div>
 <% } %>
-
     <nav class="navbar navbar-expand-lg navbar-dark p-2 pl-4 pr-4 bg-disbots z">
         <div class="container">
         <a title="Disbots" class="navbar-brand logoholder"><img id="logoimg" style="height:55px; width:55px;" src="../../img/logo.png" alt="Disbots"/></a>
+        <div class="sidebar-brand-text mx-3" style="text-shadow: 2px 2px 5px black;">Disbots <sup>xyz</sup></div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" style="border: none">
-          <span class="fal fa-bars fa-2x"></span>
+          <span class="fad fa-bars fa-2x"></span>
         </button>
       
         <div class="collapse navbar-collapse" id="navbarColor02">
           <ul class="navbar-nav mainlink mr-auto">
             <% if(!req.originalUrl.includes('/server')) { %>
             <li class="nav-item">
-              <a title="Disbots" class="nav-link nvhome" href="/"><i class="fal fa-home mr-1"></i> Home</a>
+              <a title="Disbots" class="nav-link nvhome" href="/"><i class="fad fa-home mr-1"></i> Home</a>
             </li>
             <li class="nav-item">
-              <a title="Disbots" class="nav-link" href="/bots"><i class="fal fa-robot mr-1"></i> Bots</a>
+              <a title="Disbots" class="nav-link" href="/bots"><i class="fad fa-robot mr-1"></i> Bots</a>
             </li>
 
             <% if(user) {%>
             <li class="nav-item">
-                <a title="Disbots" class="nav-link" href="/addbot"><i class="fal fa-plus mr-1"></i> Add Bot</a>
+                <a title="Disbots" class="nav-link" href="/addbot"><i class="fad fa-plus mr-1"></i> Add Bot</a>
             </li>
             <% } %>
             <li class="nav-item">
-                <a title="Disbots" class="nav-link" href="/servers"><i class="fal fa-server mr-1"></i>Servers</a>
+                <a title="Disbots" class="nav-link" href="/servers"><i class="fad fa-server mr-1"></i>Servers</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/news"><i class="fad fa-newspaper mr-1"></i>News</a>
             </li>
             <% } else { %>
             <li class="nav-item">
-              <a title="Disbots" class="nav-link nvhome" href="/servers"><i class="fal fa-home mr-1"></i> Home</a>
+              <a title="Disbots" class="nav-link nvhome" href="/servers"><i class="fad fa-home mr-1"></i> Home</a>
             </li>
             <li class="nav-item">
-                <a title="Disbots" class="nav-link" href="/servers/tags"><i class="fal fa-tags mr-1"></i> Tags</a>
+                <a title="Disbots" class="nav-link" href="/servers/tags"><i class="fad fa-tags mr-1"></i> Tags</a>
             </li>
             <li class="nav-item">
-                <a title="Disbots" class="nav-link" href="/"><i class="fal fa-robot mr-1"></i> Bots</a>
+                <a title="Disbots" class="nav-link" href="/"><i class="fad fa-robot mr-1"></i> Bots</a>
             </li>
             <li class="nav-item">
-                <a title="Disbots" class="nav-link" href="/dsl"><i class="fal fa-robot mr-1"></i> Invite DSL</a>
+                <a title="Disbots" class="nav-link" href="/dsl"><i class="fad fa-robot mr-1"></i> Invite DSL</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/news"><i class="fad fa-newspaper mr-1"></i>News</a>
             </li>
             <% if(user) {%>
             <li class="nav-item"> 
-                <a title="Disbots" class="nav-link" href="/server/add"><i class="fal fa-plus mr-1"></i> Add Server</a>
+                <a title="Disbots" class="nav-link" href="/server/add"><i class="fad fa-plus mr-1"></i> Add Server</a>
             </li>
             <% } %>
             <% } %>
         <li class="nav-item dropdown" style="font-family: Arial, FontAwesome; z-index: 999999999; width: 100px;">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fal fa-ellipsis-h"></i>&nbsp;More
+            <i class="fad fa-ellipsis-h"></i>&nbsp;More
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/partners"><i class="fal fa-handshake"></i>&nbsp;Partners</a>
-            <a class="dropdown-item" href="/team"><i class="fad fa-users mr-1"></i>&nbsp;Team</a>
-            <a class="dropdown-item" href="/rewards"><i class="fad fa-coin mr-1"></i>&nbsp;Rewards</a>
-            <a class="dropdown-item" href="/promotion"><i class="fas fa-stars"></i> Promotions</a>
-            <a class="dropdown-item" href="/certification"><i class="fal fa-badge-check"></i>&nbsp;Certification</a>
-            <a class="dropdown-item" href="/codes/categories"><i class="fal fa-code"></i>&nbsp;Code Share</a>
-            <a class="dropdown-item" href="/uptime/links"><i class="fal fa-sync-alt"></i>&nbsp;Uptime</a>
+            <a class="dropdown-item" onclick="location.href='/partners'"><i class="fad fa-handshake"></i>&nbsp;Partners</a>
+            <a class="dropdown-item" onclick="location.href='/team'"><i class="fad fa-users mr-1"></i>&nbsp;Team</a>
+            <a class="dropdown-item" onclick="location.href='/rewards'"><i class="fad fa-coin mr-1"></i>&nbsp;Rewards</a>
+            <a class="dropdown-item" onclick="location.href='/promotion'"><i class="fad fa-stars"></i> Promotions</a>
+            <a class="dropdown-item" onclick="location.href='certification'"><i class="fad fa-badge-check"></i>&nbsp;Certification</a>
+            <a class="dropdown-item" onclick="location.href='https://stats.uptimerobot.com/50DlwT0XxV'"><i class="fad fa-chart-bar mr-1"></i>&nbsp;Status</a>
+            <a class="dropdown-item" onclick="location.href='/codes/categories'"><i class="fad fa-code"></i>&nbsp;Code Share</a>
+            <a class="dropdown-item"  onclick="location.href='/uptime/links'"><i class="fad fa-sync-alt"></i>&nbsp;Uptime</a>
             <% if(user) { %>
                 <% 
                 let guild = bot.guilds.cache.get(config.server.id).members.cache.get(user.id);
@@ -168,7 +169,7 @@ function disableclick(event)
             &nbsp;
             <li class="nav-item dropdown">
                   <a class="btn btn-disbots dropdown-toggle" href="#" id="navbarDropdown" translate="no" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fal fa-globe"></i>&nbsp;Language
+                    <i class="fad fa-globe"></i>&nbsp;Language
                   </a>
                 <div class="dropdown-menu dropdown-menu-right" style="max-width:220px!important;">
             <% languages.map(x => { %>
@@ -189,7 +190,7 @@ function disableclick(event)
               </li>
             <% } else { %>
             <li class="nav-item">
-                <a title="Disbots" class="btn btn-disbots" href="/login"><i class="fal fa-sign-in mr-1"></i> Login</a>
+                <a title="Disbots" class="btn btn-disbots" href="/login"><i class="fad fa-sign-in mr-1"></i> Login</a>
             </li>
 	    <% } %>
           </ul>
