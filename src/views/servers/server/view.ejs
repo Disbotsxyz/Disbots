@@ -176,17 +176,6 @@
           </div>
         </div> 
         <div class="col-xl-8 order-xl-1">
-        <% if(sdb.annoucementtitle) { %>
-        <div class="card bg-secondary shadow">
-        <div style="padding: 1px!important;" class="card-body">
-            <pre translate="no" class="bot"><strong><h4><i class="fas fa-bullhorn"></i> <%=sdb.annoucementtitle%></h4></strong>
-<%=sdb.annoucementdesc%>
-                                                                                                                                                                                                                                  - <%=sdb.annoucementdate%>
-</pre>
-        </div>
-        </div>
-        <br><br>  
-        <% } %>
           <div class="card bg-secondary shadow">
             <div style="padding: 1px!important;" class="card-body">
                 <pre translate="no" class="bot"><% let $ = global.Client.htmll.load(sdb.longDesc) %><%- $.html() %></pre>
