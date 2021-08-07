@@ -1,0 +1,42 @@
+{
+    "botinfo": {
+      "usage": "<SET_YOUR_PREFIX_HERE>botinfo <id>",
+      "longDescription": "Shows all info on a list bot",
+      "shortDescription": "shows bot info"
+    },
+    "bots": {
+      "usage": "<SET_YOUR_PREFIX_HERE>bots",
+      "longDescription": "Shows all bots you have in the server",
+      "shortDescription": "lists your bots"
+    },
+    "botvote": {
+      "usage": "<SET_YOUR_PREFIX_HERE>botvote <id/mention>",
+      "longDescription": "Votes mentioned bot on dislist",
+      "shortDescription": "Votes for a bot"
+    },
+    "eval": {
+      "usage": "<SET_YOUR_PREFIX_HERE>eval <code>",
+      "longDescription": "Executes code. :warning: OWNER ONLY! :warning:",
+      "shortDescription": "executes code"
+    },
+    "help": {
+      "usage": "<SET_YOUR_PREFIX_HERE>help (cmd)",
+      "longDescription": "Shows help on a command or lists commands",
+      "shortDescription": "help command"
+    },
+    "ping": {
+      "usage": "<SET_YOUR_PREFIX_HERE>ping",
+      "longDescription": "Shows client and api latency",
+      "shortDescription": "Sends ping"
+    },
+    "topvoted": {
+      "usage": "<SET_YOUR_PREFIX_HERE>topvoted",
+      "longDescription": "Lists the most voted bots of the week",
+      "shortDescription": "Shows most popular bots"
+    },
+    "uptime": {
+      "usage": "<SET_YOUR_PREFIX_HERE>uptime <id>",
+      "longDescription": "Shows how long a bot has been online",
+      "shortDescription": "sends uptime"
+    }
+  }
