@@ -1,4 +1,6 @@
 const url = require("url");
+const { Canvas, resolveImage } = require("canvas-constructor");
+const { registerFont } = require("canvas");
 const path = require("path");
 const express = require("express");
 const passport = require("passport");
@@ -89,8 +91,8 @@ module.exports = async (client) => {
   app.use(passport.session());
 
 
-  app.engine("disbots-xyz", ejs.renderFile);
-  app.set("view engine", "disbots-xyz");
+  app.engine("disbots.xyz", ejs.renderFile);
+  app.set("view engine", "disbots.xyz");
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({
@@ -195,7 +197,7 @@ module.exports = async (client) => {
   },
     passport.authenticate("discord", { prompt: 'none' }));
   app.get("/callback", passport.authenticate("discord", {
-    failureRedirect: "/error?code=999&message=We encountered an error while connecting."
+    failureRedirect: "/"
   }), async (req, res) => {
     let banned = await banSchema.findOne({
       user: req.user.id
@@ -476,7 +478,7 @@ app.get("/admin/premium/delete/:botID", checkMaintence, checkAdmin, checkAuth, a
     id: req.params.botID
   });
   client.guilds.fetch(serverdata.id).then(bota => {
-    client.channels.cache.get(config.server.channels.botlog).send(`<@${serverdata.ownerID}>'s server named **${bota.name}**'s Premium has been removed.`)
+    client.channels.cache.get(config.server.channels.botlog).send(`<:notcheck:853262343790526495> <@${serverdata.ownerID}>'s server named **${bota.name}**'s Premium has been removed.`)
     client.users.cache.get(serverdata.ownerID).send(`<:notcheck:853262343790526495> Your server named **${bota.name}**'s Premium has been removed.`)
   });
   await appsdata.deleteOne({
@@ -499,7 +501,7 @@ app.get("/admin/boost/delete/:botID", checkMaintence, checkAdmin, checkAuth, asy
     botID: req.params.botID
   });
   client.users.fetch(botdata.botID).then(bota => {
-    client.channels.cache.get(channels.botlog).send(`<@${botdata.ownerID}>'s bot named **${bota.tag}**'s promotion has been removed.`)
+    client.channels.cache.get(channels.botlog).send(`<:notcheck:853262343790526495> <@${botdata.ownerID}>'s bot named **${bota.tag}**'s promotion has been removed.`)
     client.users.cache.get(botdata.ownerID).send(`<:notcheck:853262343790526495> Your bot named **${bota.tag}**'s boost has been removed.`)
   });
   await appsdata.deleteOne({
@@ -561,7 +563,7 @@ app.get("/admin/promote/delete/:botID", checkMaintence, checkAdmin, checkAuth, a
     botID: req.params.botID
   });
   client.users.fetch(botdata.botID).then(bota => {
-    client.channels.cache.get(channels.botlog).send(`<@${botdata.ownerID}>'s bot named **${bota.tag}**'s promotion has been removed.`)
+    client.channels.cache.get(channels.botlog).send(`<:notcheck:853262343790526495> <@${botdata.ownerID}>'s bot named **${bota.tag}**'s promotion has been removed.`)
     client.users.cache.get(botdata.ownerID).send(`<:notcheck:853262343790526495> Your bot named **${bota.tag}**'s promotion has been removed.`)
   });
   await appsdata.deleteOne({
@@ -746,7 +748,7 @@ app.post("/admin/news", checkMaintence, checkAdmin, checkAuth, async (req, res) 
 
   const webhook = require("webhook-discord");
 
-  const Hook = new webhook.Webhook("WEBHOOK");
+  const Hook = new webhook.Webhook("YOUR-WEBHOOK-FOR-NEWS");
   const msg = new webhook.MessageBuilder()
     .setName('Disbots | News')
     .setAvatar(req.body.icon)
@@ -844,6 +846,7 @@ console.log(`
                        disbots.xyz
         https://github.com/disbots-xyz/benedict
                 Developed by Claudette
+
                     Achievements =)
       [===========================================]
       `)
@@ -887,6 +890,7 @@ app.use("/", require('./routers/botlist/addbot.js'))
 app.use("/", require('./routers/botlist/mini.js'))
 app.use("/", require('./routers/botlist/vote.js'))
 app.use("/", require('./routers/botlist/bot/view.js'))
+app.use("/", require('./routers/botlist/bot/announcement.js'))
 app.use("/", require('./routers/botlist/bot/edit.js'))
 app.use("/", require('./routers/botlist/bot/analytics.js'))
 app.use("/", require('./routers/botlist/apps/cerificate-app.js'))
@@ -903,6 +907,7 @@ app.use("/servers", require('./routers/servers/search.js'))
 app.use("/servers", require('./routers/servers/tag.js'))
 app.use("/server", require('./routers/servers/server/view.js'))
 app.use("/server", require('./routers/servers/server/edit.js'))
+app.use("/server", require('./routers/servers/server/announcement.js'))
 app.use("/server", require('./routers/servers/server/join.js'))
 app.use("/server", require('./routers/servers/server/analytics.js'))
 app.use("/server", require('./routers/servers/server/delete.js'))

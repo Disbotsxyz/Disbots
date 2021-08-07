@@ -4,6 +4,7 @@ const { Client, Collection } = require("discord.js");
 const client = (global.Client = new Client())
 const config = require("./config.js");
 global.config = config;
+const disbots = require("disbots-xyz");
 const fs = require("fs");
 client.htmll = require('cheerio');
 const request = require("request");
@@ -23,7 +24,7 @@ client.on('presenceUpdate', async(oldPresence, newPresence) =>
         return
       }
 
-    if(newPresence.guild.id == "852825880271257611")
+    if(newPresence.guild.id == "Your-Guild-ID")
     {
      if(botdata.status == "UnApproved")
 
@@ -56,7 +57,7 @@ if(!uptimerate)
         return;
       }
          
-       client.channels.cache.get("859637439576014888").send(`<@${newPresence.userID}> is Offline And Uptime Rate - ${uptimerate}%`) 
+       client.channels.cache.get("Your-Guild-Uptime-Channel-ID").send(`<@${newPresence.userID}> is Offline And Uptime Rate - ${uptimerate}%`) 
 
       }
       
@@ -96,6 +97,53 @@ if(!uptimerate)
     
 
 })
+let voiceStates = {}
+
+client.on('voiceStateUpdate', async(oldState, newState) => {
+  var { id } = oldState // This is the user's ID
+  if (!oldState.channel) {
+    console.log("user connected.");
+    // The user has joined a voice channel
+    voiceStates[id] = new Date()
+  } else if (!newState.channel) {
+    console.log("user disconnected.");
+    var now = new Date()
+    var joined = voiceStates[id] || new Date()
+    var rewards = Math.floor(Math.random() * 10) + 1;
+    // This will be the difference in milliseconds
+    var dateDiff = now.getTime() - joined.getTime()
+    if (dateDiff >= 600000) {
+      console.log("Gave 1 coin to user as he is in more that 1 min in vc")
+      var randomNumber = Math.floor(Math.random() * 10) + 1;
+      var find = await profiledata.findOne({ userID: newState.member.id })
+      if (!find.userID){
+        await new profiledata({
+           userID: newState.member.id, 
+           coins: '0'
+      })
+      }
+      let mycoins = find.coins
+      if (find.coins) {
+      await profiledata.findOneAndUpdate({
+        userID: newState.member.id
+    }, {
+        $set: {
+            coins: parseInt(mycoins)+5
+        }
+    }, function(err, docs) {})}
+    if (!find.coins) {
+      await profiledata.findOneAndUpdate({
+        userID: newState.member.id
+    }, {
+        $set: {
+            coins: '0'
+        }
+    }, function(err, docs) {})}
+    client.channels.cache.get('Your-Guild-General-Channel-ID').send(`Hey <@${newState.member.id}>, Thankyou for being active! You have got some **Disbots Coins** for being active!`)
+    }
+  }
+})
+
 /*=======================================================================================*/
 require('events').EventEmitter.prototype._maxListeners = 100;
 client.komutlar = new Discord.Collection();
@@ -201,13 +249,13 @@ client.on('guildMemberRemove', async member => {
     let serverdata = await serverlar.findOne({ ownerID: member.id })
     if(!data) return
     let find = await botlar.find({ ownerID: member.id })
+    client.guilds.fetch(config.server.id).then(bota => {
+      client.channels.cache.get(config.server.channels.botlog).send(`<:Decline:853262344876851211> <@${data.ownerID}>'s bot **${bota.username}** has been kicked from server and deleted from website \nReason: Owner left server`)
+    });
     await find.forEach(async b => {
         member.guild.members.cache.get(b.botID).kick();
         await botlar.deleteOne({ botID: b.botID })
     })
-    client.guilds.fetch(config.server.id).then(bota => {
-      client.channels.cache.get(config.server.channels.botlog).send(`<:Decline:853262344876851211> <@${data.ownerID}>'s bot **${bota.username}** has been kicked from server and deleted from website \nReason: Owner left server`)
-    });
     if(!serverdata) return
     let serverfind = await serverdata.find({ ownerID: member.id })
     client.guilds.fetch(config.server.id).then(bota => {
@@ -252,66 +300,7 @@ client.on('ready',async () => {
 });
 
 
-let voiceStates = {}
 
-client.on('voiceStateUpdate', async(oldState, newState) => {
-  var { id } = oldState // This is the user's ID
-  if (!oldState.channel) {
-    console.log("user connected.");
-    // The user has joined a voice channel
-    voiceStates[id] = new Date()
-  } else if (!newState.channel) {
-    console.log("user disconnected.");
-    var now = new Date()
-    var joined = voiceStates[id] || new Date()
-    var rewards = Math.floor(Math.random() * 10) + 1;
-    // This will be the difference in milliseconds
-    var dateDiff = now.getTime() - joined.getTime()
-    if (dateDiff >= 600000) {
-      console.log("Gave 1 coin to user as he is in more that 1 min in vc")
-      var randomNumber = Math.floor(Math.random() * 10) + 1;
-      var find = await profiledata.findOne({ userID: newState.member.id })
-      if (!find.userID){
-        await new profiledata({
-           userID: newState.member.id, 
-           coins: '0'
-      })
-      }
-      let mycoins = find.coins
-      if (find.coins) {
-      await profiledata.findOneAndUpdate({
-        userID: newState.member.id
-    }, {
-        $set: {
-            coins: parseInt(mycoins)+1
-        }
-    }, function(err, docs) {})}
-    if (!find.coins) {
-      await profiledata.findOneAndUpdate({
-        userID: newState.member.id
-    }, {
-        $set: {
-            coins: '0'
-        }
-    }, function(err, docs) {})}
-    client.channels.cache.get('859637418528735253').send(`Hey <@${newState.member.id}>, Thankyou for being active! You have got some **Disbots Coins** for being active!`)
-    }
-    if (dateDiff > 30000000) {
-      console.log("Gave 1 coin to user as he is in more that 1 min in vc")
-      var randomNumber = Math.floor(Math.random() * 15) + 1;
-      var find = await profiledata.findOne({ userID: newState.member.id })
-      let mycoins = find.coins
-      await profiledata.findOneAndUpdate({
-        userID: newState.member.id
-    }, {
-        $set: {
-            coins: parseInt(mycoins)+1
-        }
-    }, function(err, docs) {})
-    client.channels.cache.get('859637418528735253').send(`Hey <@${newState.member.id}>, Thankyou for being active! You have got some **Disbots Coins** for being active!`)
-    }
-  }
-})
 
 /*=======================================================================================*/
 

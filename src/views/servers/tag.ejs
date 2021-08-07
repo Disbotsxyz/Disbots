@@ -16,7 +16,7 @@
                           <input name="q" autocomplete="off" id="search" class="mainInput searchIcon isMobile sectionInput rounded-lg" style="border: none;color: var(--body-text);" type="text"  placeholder="Search servers...">
                           <span class="search-icon-input input-group-append">
                               <button id="search" class="btn rounded-pill ms-n3 sectionSubmit" type="submit">
-                                  <i class="fal fa-search"></i>
+                                  <i class="fad fa-search"></i>
                               </button>
                           </span>
                    </div>
@@ -25,10 +25,10 @@
         <div class="mainInput resultSection">
         <b id="searchResultTitle"><i class="fa fa-search"></i> Search Results</b>
         <span class="has-text-white has-text-centered" id="loadingIcon">
-        <i class="fal fa-spinner fa-pulse is-size-3"></i>
+        <i class="fad fa-spinner fa-pulse is-size-3"></i>
         </span>
-            <span id="searchResults"><i class="fal fa-bug"></i>&nbsp;You haven't made any searchs.</span>
-            <button style="display:none;" class="btn btn-disbots showMore"><i class="fal fa-list"></i> Show More</button>
+            <span id="searchResults"><i class="fad fa-bug"></i>&nbsp;You haven't made any searchs.</span>
+            <button style="display:none;" class="btn btn-disbots showMore"><i class="fad fa-list"></i> Show More</button>
         </div>
         </div>
                   <input type="hidden" name="page" value="1">
@@ -36,7 +36,7 @@
           <% global.config.website.servers.tags.slice(0, 3).map(tag => { %>
           	<a title="Disbots" href="/servers/tag/<%= tag.name %>" class="btn btn-disbots"><i class="<%= tag.icon %>"></i>&nbsp;<%= tag.name %></a>
           <% }) %>
-          	<a title="Disbots" href="/servers/tags" class="btn btn-disbots"><i class="fal fa-tags"></i>&nbsp;Explore Tags</a>
+          	<a title="Disbots" href="/servers/tags" class="btn btn-disbots"><i class="fad fa-tags"></i>&nbsp;Explore Tags</a>
               </div>
       </div>
     </div>
@@ -74,7 +74,7 @@
               let data = response.data;
               if (data.length == 0) {
                 $('searchResultTitle').hide();
-                $("#searchResults").html("<i class='fal fa-bug'></i>&nbsp;No results were found.");
+                $("#searchResults").html("<i class='fad fa-bug'></i>&nbsp;No results were found.");
                 $('.showMore').hide();
                 return;
               }

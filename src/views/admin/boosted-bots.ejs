@@ -34,9 +34,13 @@
                                 <td><button onclick="location.href='https://discord.com/api/oauth2/authorize?client_id=<%= row.botID %>&permissions=0&scope=bot'" class="btn btn-primary btn-sm">Perm 0</button>
                                     <button onclick="location.href='https://discord.com/api/oauth2/authorize?client_id=<%= row.botID %>&permissions=8&scope=bot" class="btn btn-info btn-sm">Perm 8</button> </td>
                                 <td class="text-center">
-                                        <button onclick="newtab('/admin/boost/give/<%= row.botID %>')" class="btn btn-success btn-sm">give boost</button>
+                                    <% if(row.boosted === "None") { %>
+                                    <button onclick="newtab('/admin/boost/give/<%= row.botID %>')" class="btn btn-success btn-sm">give boost</button>
+                                    <% } %>
+                                    <% if(row.boosted === "Boosted") { %>
                                     <button onclick="newtab('/admin/boost/delete/<%= row.botID %>')" class="btn btn-danger btn-sm">remove boost</button>
                                     </td>
+                                    <% } %>
                             </tr>
                             <% }) %>
                         </tbody>

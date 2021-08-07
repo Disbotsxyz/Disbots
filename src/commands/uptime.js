@@ -1,5 +1,4 @@
 const Discord = require('discord.js')
-const vcodes = require("vcodes.js");
 const ms = require("parse-ms");
 const db = require("quick.db");
 const botsdata = require("../database/models/botlist/bots.js")
@@ -15,7 +14,10 @@ var bot = message.mentions.users.first()
     }
     if(!bot)
     {
-      return message.channel.send("You have given an invalid bot id or mention")
+      const embed = new Discord.MessageEmbed()
+      .setDescription(`<:notcheck:853262343790526495> *You have given an invalid bot ID or mention.*\n<:check:853262343949254696> **Ex.** *d!uptime @bot or 123456789123456789*`)
+       .setColor("#7289da")
+      return message.channel.send(embed)
     } 
       
     
@@ -23,7 +25,10 @@ var bot = message.mentions.users.first()
       let botdata = await botsdata.findOne({ botID: bot.id });
       if(!botdata)
       {
-        return message.channel.send("Not a bot");
+         const embed1 = new Discord.MessageEmbed()
+      .setDescription(`<:notcheck:853262343790526495> *Thats not a current bot in disbots or in guild.*`)
+       .setColor("#7289da")
+      return message.channel.send(embed1)
       }
         var checking = db.fetch(`rate_${bot.id}`);
    if(!checking)
@@ -44,8 +49,11 @@ var bot = message.mentions.users.first()
     var ochecks = db.fetch(`offlinechecks_${bot.id}`);
     let checks = db.fetch(`checks_${bot.id}`); 
  
-   
-message.channel.send(`Uptime - ${checking}% Checks - ${ochecks || 0}/${checks || 0} \n${check} Time - ${days}d ${hour}h ${minutes}m ${seconds}s`)
+     const embed2 = new Discord.MessageEmbed()
+      .setDescription(`<:The_connection_is_excellent:865066398874861638> Uptime - ${checking}% Checks - ${ochecks || 0}/${checks || 0} \n<:blurple_support:853259976767176704> ${check} Time - ${days}d ${hour}h ${minutes}m ${seconds}s`)
+       .setColor("#7289da")
+      return message.channel.send(embed2)
+
 }
 
 exports.conf = {

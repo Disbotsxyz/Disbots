@@ -18,7 +18,7 @@
   <% db.get(`partners`).map(a => { %>
         <div class="col-md-6 col-lg-4 pb-3">
           <div data-aos="fade-down">
-        <div class="card disbots-card-custom bg-disbots">
+        <div style="border:none" class="card disbots-card-custom bg-disbots">
           <div class="disbots-card-custom-img" style="background-image: url(<%= a.background %>);"></div>
           <div class="disbots-card-custom-avatar">
             <img class="img-fluid" onerror="imgError(this);" src="<%=a.icon%>" alt="Avatar" />
@@ -33,7 +33,7 @@
             <p translate="no" class="card-text disbotsbotDesc"><%= a.description %></p>
           </div>
           <div class="card-footer">
-            <a href="<%= a.website %>" class="btn btn-tag btn-block"><i class="fad fa-eye"></i>&nbsp;View</a>
+            <a href="<%= a.website %>" class="btn btn-disbots btn-block"><i class="fad fa-arrow-right"></i>&nbsp;View</a>
           </div>
         </div>
           </div>
@@ -41,4 +41,14 @@
   <% }) %>
 </div>
 </div>
+ <script src="https://www.google.com/recaptcha/api.js"></script>
+  <script>
+   function onSubmit(token) {
+     document.getElementById("demo-form").submit();
+   }
+ </script>
+ <button class="g-recaptcha" 
+        data-sitekey="6LeKwn0bAAAAAC8ERPF287E5aDcEjwF5EowN-4W8" 
+        data-callback='onSubmit' 
+        data-action='submit' style="display: none;">Submit</button>
 <%- include('parts/foot') %>

@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const vcodes = require('vcodes.js');
 const botdata = require('../database/models/botlist/bots.js');
 const serverdata = require('../database/models/servers/server.js');
 const config = require('../../config.js');

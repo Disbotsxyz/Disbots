@@ -32,8 +32,11 @@
                                 <td><%= row.ownerName %></td>
                                 <td><%= row.prefix %></td>
                                 <td class="text-center">
-                                        <button onclick="newtab('/admin/premium/give/<%= row.serverID %>')" class="btn btn-success btn-sm">Give Premium</button>
-                                    <button onclick="newtab('/admin/premium/delete/<%= row.serverID %>')" class="btn btn-danger btn-sm">Remove Premium</button>
+                                        <% if(row.premium === "None") { %>
+                                        <button onclick="newtab('/admin/premium/give/<%= row.id %>')" class="btn btn-success btn-sm">Give Premium</button>
+                                    <% } %>
+                                    <% if(row.premium === "Premium") { %>
+                                    <button onclick="newtab('/admin/premium/delete/<%= row.id %>')" class="btn btn-danger btn-sm">Remove Premium</button>
                                     </td>
                             </tr>
                             <% }) %>

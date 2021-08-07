@@ -64,7 +64,7 @@ input[type="text"]:disabled {
       </div>
       <p class="text-muted"></p>
       <p class="text-muted">Spaces with <span style="color: rgb(175, 22, 22)">*</span> next to it are required.</p>
-      <button type="button" name="btnSubmit" onclick="clickOnEdit()" id="myButton" class="btn btn-disbots"><i class="fal fa-paper-plane"></i> Submit</button>
+      <button type="button" name="btnSubmit" onclick="clickOnEdit()" id="myButton" class="btn btn-disbots"><i class="fad fa-paper-plane"></i> Submit</button>
    </form>
 </div>
 </div></div>
@@ -89,9 +89,9 @@ function clickOnEdit() {
                         title: 'Oops...',
                         closeOnConfirm: false,
                         text: data.message,
-                        footer: 'Copyright 2021 &copy Disbots.xyz - All right reserved.'
+                        footer: 'Copyright 2021  Disbots.xyz - All right reserved.'
                     })
-                    $("#myButton").html('<i class="fal fa-paper-plane"></i>&nbsp;Submit');
+                    $("#myButton").html('<i class="fad fa-paper-plane"></i>&nbsp;Submit');
                     $("#myButton").attr("disabled", false);
                     return;
                 } else {
@@ -100,9 +100,9 @@ function clickOnEdit() {
                         title: 'Nice...',
                         closeOnConfirm: false,
                         text: data.message,
-                        footer: 'Copyright 2021 &copy Disbots.xyz - All right reserved.'
+                        footer: 'Copyright 2021  Disbots.xyz - All right reserved.'
                     })
-                    $("#myButton").html('<i class="fal fa-paper-plane"></i>&nbsp;Submit');
+                    $("#myButton").html('<i class="fad fa-paper-plane"></i>&nbsp;Submit');
                     $("#myButton").attr("disabled", false);
                     return;
                 }

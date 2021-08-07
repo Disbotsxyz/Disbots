@@ -35,6 +35,9 @@ app.get("/view/:code", global.checkAuth, async (req, res) => {
     if (koddata.codeCategory == "bdfd") {
         if (!client.guilds.cache.get(config.server.id).members.cache.get(req.user.id).roles.cache.get(config.server.roles.codeshare.bdfd)) return res.redirect("/error?code=403&message=You is not competent to do this.");
     }
+    if (koddata.codeCategory == "python") {
+        if (!client.guilds.cache.get(config.server.id).members.cache.get(req.user.id).roles.cache.get(config.server.roles.codeshare.bdfd)) return res.redirect("/error?code=403&message=You is not competent to do this.");
+    }
     res.render("codeshare/codeview.ejs", {
         bot: global.Client,
         path: req.path,

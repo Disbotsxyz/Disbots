@@ -9,7 +9,7 @@
 <div class="container px-3 px-3 mt-5 pt-5">
     <div class="columns container px-3 is-multiline">
         <div class="column is-2">
-            <img onerror="imgError(this);" draggable="false" class="pulse-avatar-<%=member.presence.status%>"  onerror=" imgerror(this);"="" src="<%= member.avatarURL({dynamic: true}) %>" style="width: 300px; border-radius: 50%;">
+            <img onerror="imgError(this);" draggable="false" class="pulse-avatar-<%=member.presence.status%>"  onerror=" imgerror(this);"="" src="<%= member.avatarURL({dynamic: true}) %>?size=1024" style="width: 300px; border-radius: 50%;">
         </div>
         <div class="column is-6">
           <p translate="no" class="has-text-white is-size-3" style="margin-bottom: 10px;"><%= member.username %><span class="is-size-4" style="opacity: 0.7;">#<%= member.discriminator %></span>&nbsp;<i class="status-circle fad fa-circle status-<%=member.presence.status%>"></i></p>
@@ -21,8 +21,9 @@
             <%
             let sitecreatorRole = cacheServer.roles.cache.get(roles.profile.sitecreator);
             let adminRole = cacheServer.roles.cache.get(roles.yonetici);
-            let moderatorRole = cacheServer.roles.cache.get(roles.moderator);
+            let bottester = cacheServer.roles.cache.get(roles.moderator);
             let manager = cacheServer.roles.cache.get(roles.profile.manager);
+            let servermoderator = cacheServer.roles.cache.get(roles.moderatorrole);
             let sponsorRole = cacheServer.roles.cache.get(roles.profile.sponsor);
             let certifiedDeveloper = cacheServer.roles.cache.get(roles.botlist.certified_developer);
             let developer = cacheServer.roles.cache.get(roles.botlist.developer);
@@ -35,13 +36,16 @@
             let boosters = cacheServer.roles.cache.get(roles.profile.booster);
             %>
             <% if (sitecreatorRole) { %>
-            <span data-tooltip="<%=sitecreatorRole.name%>" data-tooltip-location="top"> <i class="fas fa-laptop-code has-text-success" style="color: <%=sitecreatorRole.hexColor%>;bottom: -5px; font-size: 26px;"></i></span>
+            <span data-tooltip="<%=sitecreatorRole.name%>" data-tooltip-location="top"> <i class="fad fa-laptop-code has-text-success" style="color: <%=sitecreatorRole.hexColor%>;bottom: -5px; font-size: 26px;"></i></span>
             <% } %>
             <% if (manager) { %>
-            <span data-tooltip="<%=manager.name%>" data-tooltip-location="top"> <i class="fas fa-shield-alt has-text-info" style="color: <%=manager.hexColor%>;bottom: -5px; font-size: 26px;"></i></span>
+            <span data-tooltip="<%=manager.name%>" data-tooltip-location="top"> <i class="fad fa-shield-alt has-text-info" style="color: <%=manager.hexColor%>;bottom: -5px; font-size: 26px;"></i></span>
             <% } %>
-            <% if (moderatorRole) { %>
-            <span data-tooltip="<%=moderatorRole.name%>" data-tooltip-location="top"> <i class="fad fa-gavel" style="color: <%=moderatorRole.hexColor%>;bottom: -5px; font-size: 26px;"></i></span>
+            <% if (servermoderator) { %>
+            <span data-tooltip="<%=servermoderator.name%>" data-tooltip-location="top"> <i class="fad fa-hammer" style="color: <%=servermoderator.hexColor%>;bottom: -5px; font-size: 26px;"></i></span>
+            <% } %>
+            <% if (bottester) { %>
+            <span data-tooltip="<%=bottester.name%>" data-tooltip-location="top"> <i class="fad fa-gavel" style="color: <%=bottester.hexColor%>;bottom: -5px; font-size: 26px;"></i></span>
             <% } %>
             <% if (sponsorRole) { %>
             <span data-tooltip="<%=sponsorRole.name%>" data-tooltip-location="top"> <i class="fad fa-badge-dollar" style="color: <%=sponsorRole.hexColor%>;bottom: -5px; font-size: 26px;"></i></span>
@@ -56,7 +60,7 @@
             <span data-tooltip="<%=partnerRoleCache.name%>" data-tooltip-location="top"> <span data-tooltip="DisBots Partner" data-tooltip-location="top"><img draggable="false" src="https://img.devsforum.net/tr/img/i9Y7Y1.png" width="32px"></span></span>
             <% } %>
             <% if (promotedDeveloper) { %>
-            <span data-tooltip="<%=promotedDeveloper.name%>" data-tooltip-location="top"> <i class="fas fa-stars has-text-warning" style="color: <%=promotedDeveloper.hexColor%>;bottom: -5px; font-size: 26px;"></i></span>
+            <span data-tooltip="<%=promotedDeveloper.name%>" data-tooltip-location="top"> <i class="fad fa-stars has-text-warning" style="color: <%=promotedDeveloper.hexColor%>;bottom: -5px; font-size: 26px;"></i></span>
             <% } %>
             <% if (boostedDeveloper) { %>
             <span data-tooltip="<%=boostedDeveloper.name%>" data-tooltip-location="top"> <span data-tooltip="Boosted Bot Developer" data-tooltip-location="top"><img draggable="false" src="https://discordapp.com/assets/9ba64f1fa91ccde0eba506c1c33f3d1a.svg" width="32px"></span></span>

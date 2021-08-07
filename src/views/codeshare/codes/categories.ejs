@@ -5,7 +5,28 @@
             <p class="has-text-white title is-large"><i class="fa fa-code has-text-info"></i>&nbsp; Codes</p>
           </div>
           <div class="columns is-multiline is-desktop is-variable is-7 mt-5 pt-5">
-
+                    <div class="column is-3 mb-5">    
+                        <div style="background-color: var(--bg-card);" class="box carddisbotsbotCard">
+                          <div>
+                            <i draggable="false" style="font-size: 140px;" class="fab fa-python  is-pulled-left has-text-warning carddisbotsbotIMG z"></i>
+                          </div>
+                          <div class="is-pulled-right is-inline-block">
+                             <span class="badge badge-stats mt-1 w-100">Total: <%= data.filter(a => a.codeCategory.toLowerCase() === "python").length %></span>
+                             </div>
+                           <br><br><br>
+                          <p style="margin-top: 5px;" class="carddisbotsbotName has-text-white mt-5">
+                            Python Codes
+                        </p>   
+                          <center>
+        
+                          <div class="carddisbotsbotButtons">
+                              <a href="/codes/list/python" style="width: 70%; color: #fff;padding: 5px 20px;" class="btn btn-disbots"><i class="fal fa-eye"></i>&nbsp;View</a>
+                              <br><br>
+        
+                             </div>
+                         </center>
+                        </div>
+                    </div>
                     <div class="column is-3 mb-5">    
                         <div style="background-color: var(--bg-card);" class="box carddisbotsbotCard">
                           <div>

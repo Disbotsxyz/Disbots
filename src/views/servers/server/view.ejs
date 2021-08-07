@@ -82,12 +82,12 @@
                   </div>
     
                   <a href="/server/<%= sdb.id %>/edit" class="is-flex mt-1">
-                    <div class="box-2-p"><i class="mt-1 fal fa-pencil"></i></div>
+                    <div class="box-2-p"><i class="mt-1 fad fa-pencil"></i></div>
                     <p class="box-2">Edit Server</p>
                   </a>
                   <form action="#" id="my_form" method="POST">
                     <a href="javascript:{}" onclick="document.getElementById('my_form').submit();" class="is-flex mt-1">
-                        <div class="box-2-p"><i class="fal fa-sync-alt is-size-6 mt-1"></i></div>
+                        <div class="box-2-p"><i class="fad fa-sync-alt is-size-6 mt-1"></i></div>
                         <p class="box-2">Refresh Data</p>
                     </a>
                 </form>
@@ -99,27 +99,34 @@
               </div>
 
               <div class="is-flex mt-1">
-                <div class="box-2-p"><i class="mt-1 fal fa-users"></i></div>
+                <div class="box-2-p"><i class="mt-1 fad fa-users"></i></div>
                 <p class="box-2">Members:&nbsp;<%= guildGet.memberCount.toLocaleString().replace(',', '.') %> </p>
               </div>
               <div class="is-flex mt-1">
-                <div class="box-2-p"><i class="mt-1 fal fa-robot"></i></div>
+                <div class="box-2-p"><i class="mt-1 fad fa-robot"></i></div>
                 <p class="box-2">Bots:&nbsp;<%= guildGet.members.cache.filter(a => a.user.bot).size %> </p>
               </div>
               <div class="is-flex mt-1">
-                <div class="box-2-p"><i class="mt-1 fal fa-icons"></i></div>
+                <div class="box-2-p"><i class="mt-1 fad fa-icons"></i></div>
                 <p class="box-2">Emoji:&nbsp;<%= guildGet.emojis.cache.size || "0" %> </p>
               </div>
               <div class="is-flex mt-1">
-                <div class="box-2-p"><i class="mt-1 fal fa-user"></i></div>
+                <div class="box-2-p"><i class="mt-1 fad fa-user"></i></div>
                 <p class="box-2">Role Count:&nbsp;<%= guildGet.roles.cache.size || "0" %> </p>
               </div>
               <div class="is-flex mt-1">
-                <div class="box-2-p"><i class="mt-1 fal fa-diamond"></i></div>
+                <div class="box-2-p"><i class="mt-1 fad fa-diamond"></i></div>
                 <p class="box-2">Boost Level:&nbsp;<%= guildGet.premiumTier  || "0" %> </p>
               </div>
+              <div class="h6 mt-4"><i class="fas fa-smile-wink"></i> Emotes:</div>
+              <div style="width:100%"><div class="is-flex mt-1"><p style="margin:5px">
+              <% for(i of emotes) { %>
+              <span data-toggle="tooltip" data-html="true"><img style="max-width:32px;max-height:32px" src="<%= i %>"></span>
+              <% } %>
+              </div>
+              </div>
              <div class="h6 mt-4">
-                <i class="fal fa-user-crown"></i> Owners
+                <i class="fad fa-user-crown"></i> Owners
               </div>
               <% guildGet.members.cache.filter(a => !a.user.bot && a.permissions.has('ADMINISTRATOR')).map(admin => { %>
               <a style="text-decoration: none;margin-bottom: -5px;" href="/user/<%= admin.user.id %>" class="is-flex mt-1">
@@ -128,16 +135,15 @@
                 <% if(admin.user.id === sdb.ownerID) { %>
                   &nbsp;<span data-tooltip="Guild Owner" data-tooltip-location="top"><i class="fa fa-crown has-text-warning"></i></span>
                 <% } %></p>
-                
               </a>
               <% }) %>
               <% if(sdb.id == sdb.id) {%>
               <div class="h6 mt-4">
-                <i class="fal fa-star"></i> Rating
+                <i class="fad fa-star"></i> Rating
               </div>
               
               <div class="is-flex mt-1">
-                <div class="box-2-p"><i class="mt-1 fal fa-stars"></i></div>
+                <div class="box-2-p"><i class="mt-1 fad fa-stars"></i></div>
                 <%
                 let count = new Array();
                 let rating;
@@ -153,14 +159,13 @@
                 </script>
               </div>
               <div class="is-flex mt-1">
-                <div class="box-2-p"><i class="mt-1 fal fa-comment"></i></div>
+                <div class="box-2-p"><i class="mt-1 fad fa-comment"></i></div>
                 <p class="box-2">Reviews: &nbsp;<%= sdb.rates ? sdb.rates.length : 0 %> </p>
               </div>
               <% } %>
             <div class="h6 mt-4">
                 <i class="fad fa-tags"></i> Tags
               </div>
-
               <div style="width: 80%;">
                 <% sdb.tags.map(a => {%>
                     <a translate="no" style="margin: 5px;" href="/servers/tag/<%=a%>" class="btn btn-sm btn-tag"><%=a%></a>
@@ -169,8 +174,19 @@
               <br><br>
             </div>
           </div>
-        </div>
+        </div> 
         <div class="col-xl-8 order-xl-1">
+        <% if(sdb.annoucementtitle) { %>
+        <div class="card bg-secondary shadow">
+        <div style="padding: 1px!important;" class="card-body">
+            <pre translate="no" class="bot"><strong><h4><i class="fas fa-bullhorn"></i> <%=sdb.annoucementtitle%></h4></strong>
+<%=sdb.annoucementdesc%>
+                                                                                                                                                                                                                                  - <%=sdb.annoucementdate%>
+</pre>
+        </div>
+        </div>
+        <br><br>  
+        <% } %>
           <div class="card bg-secondary shadow">
             <div style="padding: 1px!important;" class="card-body">
                 <pre translate="no" class="bot"><% let $ = global.Client.htmll.load(sdb.longDesc) %><%- $.html() %></pre>
@@ -181,7 +197,7 @@
   <% if(sdb.id == sdb.id) { %>
       <hr style="opacity: 5%;">
       <h4 class="has-text-white">
-        Ratings & Reviews <span class="badge badge-danger">Beta v2.0</span>
+        Ratings & Reviews
       </h4>
       <%
       if(req.user) { 
@@ -351,15 +367,15 @@
                              if(!c.reply) {
                              if(req.user.id === sdb.ownerID) { 
                              %>
-                              &nbsp;<button data-toggle="modal" data-target="#reply<%= userRate.id %>" id="replyButton" class="btn btn-disbots"><i class="fal fa-reply"></i>&nbsp;Reply</button>
-                              &nbsp;<button onclick="clickOnDeletReview('<%= userRate.id %>')" id="reviewDeleteButton<%= userRate.id %>" class="btn btn-disbots"><i class="fal fa-trash"></i>&nbsp;Delete</button>
+                              &nbsp;<button data-toggle="modal" data-target="#reply<%= userRate.id %>" id="replyButton" class="btn btn-disbots"><i class="fad fa-reply"></i>&nbsp;Reply</button>
+                              &nbsp;<button onclick="clickOnDeletReview('<%= userRate.id %>')" id="reviewDeleteButton<%= userRate.id %>" class="btn btn-disbots"><i class="fad fa-trash"></i>&nbsp;Delete</button>
                                 <div class="modal fade" id="reply<%= userRate.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content" style="background-color: var(--bg-card)">
                                       <div class="modal-header">
                                         <h5 class="modal-title" style="color: var(--body-text)!important;" id="exampleModalLongTitle">Replying to <%= userRate ? userRate.tag : 'undefined#0000' %></h5>
                                         <button type="button" class="btn btn-disbots" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true"><i class="fal fa-times fa-lg"></i></span>
+                                          <span aria-hidden="true"><i class="fad fa-times fa-lg"></i></span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
@@ -380,9 +396,9 @@
                              <% }} %>
 
                              <% if(userRate.id == req.user.id) { %>
-                              &nbsp;<button class="btn btn-disbots" data-toggle="modal" data-target="#edit<%= userRate.id %>" id="editButton"><i class="fal fa-pencil"></i>&nbsp;Edit</button>
+                              &nbsp;<button class="btn btn-disbots" data-toggle="modal" data-target="#edit<%= userRate.id %>" id="editButton"><i class="fad fa-pencil"></i>&nbsp;Edit</button>
                               <% if(req.user.id != sdb.ownerID) { %>
-                              &nbsp;<button onclick="clickOnDeletReview('<%= userRate.id %>')" id="reviewDeleteButton<%= userRate.id %>" class="btn btn-disbots"><i class="fal fa-trash"></i>&nbsp;Delete</button>
+                              &nbsp;<button onclick="clickOnDeletReview('<%= userRate.id %>')" id="reviewDeleteButton<%= userRate.id %>" class="btn btn-disbots"><i class="fad fa-trash"></i>&nbsp;Delete</button>
                               <% } %>
                                 <div class="modal fade" id="edit<%= userRate.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -390,7 +406,7 @@
                                       <div class="modal-header">
                                         <h5 class="modal-title" style="color: var(--body-text)!important;" id="exampleModalLongTitle">Editing review to <%= userRate ? userRate.tag : 'undefined#0000' %></h5>
                                         <button type="button" class="btn btn-disbots" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true"><i class="fal fa-times fa-lg"></i></span>
+                                          <span aria-hidden="true"><i class="fad fa-times fa-lg"></i></span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
@@ -447,8 +463,8 @@
                              <% if(req.user) { %>
                              <% if(req.user.id === sdb.ownerID) { %>
                              <div class="buttons mr-5" style="margin-right: 10px; float: right">
-                              <button onclick="replyTo('<%= userRate.id %>')" data-toggle="modal" data-target="#editReply<%= userRate.id %>" id="replyButton" class="btn btn-disbots"><i class="fal fa-pencil"></i>&nbsp;Edit</button>
-                              &nbsp;<button onclick="clickOnDeletReply('<%= userRate.id %>')" id="replyDeleteButton<%= userRate.id%>" class="btn btn-disbots"><i class="fal fa-trash"></i>&nbsp;Delete</button>
+                              <button onclick="replyTo('<%= userRate.id %>')" data-toggle="modal" data-target="#editReply<%= userRate.id %>" id="replyButton" class="btn btn-disbots"><i class="fad fa-pencil"></i>&nbsp;Edit</button>
+                              &nbsp;<button onclick="clickOnDeletReply('<%= userRate.id %>')" id="replyDeleteButton<%= userRate.id%>" class="btn btn-disbots"><i class="fad fa-trash"></i>&nbsp;Delete</button>
 
                                 <div class="modal fade" id="editReply<%= userRate.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -456,7 +472,7 @@
                                       <div class="modal-header">
                                         <h5 class="modal-title" style="color: var(--body-text)!important;" id="exampleModalLongTitle">Replying to <%= userRate ? userRate.tag : 'undefined#0000' %></h5>
                                         <button type="button" class="btn btn-disbots" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true"><i class="fal fa-times fa-lg"></i></span>
+                                          <span aria-hidden="true"><i class="fad fa-times fa-lg"></i></span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
@@ -641,7 +657,7 @@
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-      $("#replyDeleteButton" + userID).html('<i class="fal fa-trash"></i>&nbsp;Delete');
+      $("#replyDeleteButton" + userID).html('<i class="fad fa-trash"></i>&nbsp;Delete');
       $("#replyDeleteButton" + userID).attr("disabled", false);
       Swal.fire({
           icon: 'success',
@@ -657,7 +673,7 @@
          window.location.href = '/server/<%= sdb.id %>';
       });
       } else {
-      $("#replyDeleteButton" + userID).html('<i class="fal fa-trash"></i>&nbsp;Delete');
+      $("#replyDeleteButton" + userID).html('<i class="fad fa-trash"></i>&nbsp;Delete');
       $("#replyDeleteButton" + userID).attr("disabled", false);
         Swal.fire(
           'Canceled..',
@@ -683,7 +699,7 @@
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-      $("#reviewDeleteButton" + userID).html('<i class="fal fa-trash"></i>&nbsp;Delete');
+      $("#reviewDeleteButton" + userID).html('<i class="fad fa-trash"></i>&nbsp;Delete');
       $("#reviewDeleteButton" + userID).attr("disabled", false);
       Swal.fire({
           icon: 'success',
@@ -699,7 +715,7 @@
          window.location.href = '/server/<%= sdb.id %>';
       });
       } else {
-      $("#reviewDeleteButton" + userID).html('<i class="fal fa-trash"></i>&nbsp;Delete');
+      $("#reviewDeleteButton" + userID).html('<i class="fad fa-trash"></i>&nbsp;Delete');
       $("#reviewDeleteButton" + userID).attr("disabled", false);
         Swal.fire(
           'Canceled..',
@@ -718,11 +734,11 @@
 if (page != 1) {
 %>
 <a data-tooltip="Previous Page" data-tooltip-location="top" href="/server/<%= sdb.id %>?page=<%= page-1; %>" class="mr-1 btn btn-disbots p-2">
-    <i class="fal fa-arrow-left"></i>
+    <i class="fad fa-arrow-left"></i>
 </a>
   <% } else { %>
     <a disabled="" class="btn btn-disbots p-2 mr-1" style="opacity: 0.5;" style="color: #fff!important">
-        <i class="fal fa-arrow-left"></i>
+        <i class="fad fa-arrow-left"></i>
     </a>
   <% } %>
   <a data-tooltip="Current Page" data-tooltip-location="top" class="btn btn-disbots mr-1" style="color: #fff!important" disabled="">
@@ -732,7 +748,7 @@ if (page != 1) {
   if (page != Math.ceil(data.length / 6) && data.length > 0) {
   %>
   <a data-tooltip="Next Page" data-tooltip-location="top" href="/server/<%= sdb.id %>?page=<%= Number(page)+ Number(1); %>" class="btn btn-disbots p-2">
-    <i class="fal fa-arrow-right"></i>
+    <i class="fad fa-arrow-right"></i>
 </a>
   <% } %></div>
       

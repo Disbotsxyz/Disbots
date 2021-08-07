@@ -1,5 +1,4 @@
 const Discord = require('discord.js')
-const vcodes = require("vcodes.js");
 const botdata = require("../database/models/botlist/bots.js")
 module.exports.run = async (client,message,args) => {
    if (!message.member.roles.cache.some((role) => role.name === 'Bot Tester')) return message.channel.send("Ah, I think you are not a bot tester");

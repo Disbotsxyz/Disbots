@@ -14,7 +14,7 @@ app.get("/admin/delete/:botID/report", global.checkAuth, async (req, res) => {
     const botdata = await botsdata.findOne({
         botID: req.params.botID
     });
-    client.channels.cache.get(channels.botlog).send(`<:notcheck:853262343790526495> The report applied on <@${botdata.ownerID}>'s bot has been deleted.`)
+    client.channels.cache.get(channels.reportlog).send(`<:notcheck:853262343790526495> The report applied on <@${botdata.ownerID}>'s bot has been deleted.`)
     await appsdata.deleteOne({
         botID: req.params.botID
     })

@@ -4,6 +4,7 @@ const bot = new Discord.Client();
 const config = require("../../config.js");
 const { Client, Util } = require('discord.js');
 const botsdata = require("../database/models/botlist/bots.js");
+const disbots = require("disbots-xyz");
 const parseMilliseconds = require("parse-ms")
 const { MessageButton } = require("discord-buttons");
 
@@ -16,7 +17,10 @@ module.exports.run = async (client, message, args) => {
     var bot = client.users.cache.get(bot)
   }
   if (!bot) {
-    return message.channel.send("You have given an invalid bot id or mention")
+        const embed = new Discord.MessageEmbed()
+      .setDescription(`<:notcheck:853262343790526495> *You have given an invalid bot ID or mention.*\n<:check:853262343949254696> **Ex.** *d!votebot @bot or 123456789123456789*`)
+       .setColor("#7289da")
+      return message.channel.send(embed)
   }
   try {
   const votes = require("../database/models/botlist/vote.js");

@@ -68,6 +68,7 @@ body {
     font-family: 'Quicksand', sans-serif;
     background-color: var(--bg-body);
 }
+
 ::-webkit-scrollbar {
   width: 6px
 }
@@ -89,6 +90,53 @@ body {
   text-decoration: none;
   color: #6c757d;
   transition: all 0.3s;
+}
+.alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+.entity-announcement__body {
+    white-space: pre-wrap;
+    padding: 10px 15px;
+}
+.mb-2 {
+    margin-bottom: .5rem!important;
+}
+.entity-announcement {
+    border: var(--border-subtle-thin);
+    background: var(--announcement-content-background);
+    color: var(--text);
+}
+.entity-content__description {
+    background: unset;
+    border: unset;
+    padding: unset;
+}
+.entity-content__description {
+    background: var(--background-secondary);
+    border: var(--border-subtle-thin);
+    word-break: break-word;
+    padding: 20px;
+    text-align: left;
 }
 .card-body {
     -ms-flex: 1 1 auto;

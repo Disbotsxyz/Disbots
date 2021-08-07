@@ -155,6 +155,7 @@
                         </thead>
                         <tbody>
                             <% 
+                            if(siteD) {
                             if(siteD.country) {
                             Object.keys(siteD.country[0]).sort((a,b) => siteD.country[0][b] - siteD.country[0][a]).map(b => {
                             %>
@@ -168,6 +169,7 @@
                             <% 
                             })
                             } 
+                            }
                             %>
                         </tbody>
                         <tfoot>

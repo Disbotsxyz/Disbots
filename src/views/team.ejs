@@ -78,7 +78,7 @@
 <br><br>
 <div class="container">
    <h3 style="color: #fff;">
-   <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black; color:blue;"><i class="fas fa-user-shield has-text-warning" style="color: #00cfff;bottom: -5px; font-size: 26px;"></i>&nbsp;Community Managers [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.manager).members.size%>]</p>
+   <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black; color:blue;"><i class="fad fa-user-shield has-text-warning" style="color: #00cfff;bottom: -5px; font-size: 26px;"></i>&nbsp;Community Managers [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.manager).members.size%>]</p>
    </h3>
    <div class="disbots_divider"></div>
    <br>
@@ -132,7 +132,7 @@
 <br><br>
 <div class="container">
    <h3 style="color: #fff;">
-   <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black; color:blue;"><i class="fas fa-dollar-sign has-text-primary" style="color: #00cfff;bottom: -5px; font-size: 26px;"></i> Sponsors [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.sponsor).members.size%>]</p>
+   <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black; color:blue;"><i class="fad fa-dollar-sign has-text-primary" style="color: #00cfff;bottom: -5px; font-size: 26px;"></i> Sponsors [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.sponsor).members.size%>]</p>
    </h3>
    <div class="disbots_divider"></div>
    <br>
@@ -159,7 +159,7 @@
 <br><br>
 <div class="container">
    <h3 style="color: #fff;">
-   <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black; color:blue;"><i class="fas fa-hands-helping has-text-primary" style="color: #00cfff;bottom: -5px; font-size: 26px;"></i> Supporters [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.supporter).members.size%>]</p>
+   <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black; color:blue;"><i class="fad fa-hands-helping has-text-primary" style="color: #00cfff;bottom: -5px; font-size: 26px;"></i> Supporters [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.supporter).members.size%>]</p>
    </h3>
    <div class="disbots_divider"></div>
    <br>
@@ -240,7 +240,7 @@
 <br><br>
 <div class="container">
    <h3 style="color: #fff;">
-   <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black; color:blue;"><i class="fas fa-stars has-text-warning" style="color: #00cfff;bottom: -5px; font-size: 26px;"></i>&nbsp;Promoted Developers [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.promoted_developer).members.size%>]</p>
+   <p class="has-text-white title is-large" style="text-shadow: 2px 2px 5px black; color:blue;"><i class="fad fa-stars has-text-warning" style="color: #00cfff;bottom: -5px; font-size: 26px;"></i>&nbsp;Promoted Developers [<%=bot.guilds.cache.get(config.server.id).roles.cache.get(roles.botlist.promoted_developer).members.size%>]</p>
    </h3>
    <div class="disbots_divider"></div>
    <br>
@@ -353,4 +353,14 @@
 </div>
 </div>
 </div>
+ <script src="https://www.google.com/recaptcha/api.js"></script>
+  <script>
+   function onSubmit(token) {
+     document.getElementById("demo-form").submit();
+   }
+ </script>
+ <button class="g-recaptcha" 
+        data-sitekey="6LeKwn0bAAAAAC8ERPF287E5aDcEjwF5EowN-4W8" 
+        data-callback='onSubmit' 
+        data-action='submit' style="display: none;">Submit</button>
 <%- include('parts/foot') %>

@@ -54,7 +54,7 @@ app.post("/add", global.checkAuth, async (req,res) => {
             }
     }, { upsert: true })
 
-    if(autoCreate === "true") {
+    if(autoCreate === "true" && !(InviteLink && InviteLink.length > 2)) {
     guild.fetchInvites().then(async fetchinvite => {
       fetchinvite.array().find(a => a.inviter.id === client.user.id)
         ? fetchinvite.array().find(a => a.inviter.id === client.user.id).code

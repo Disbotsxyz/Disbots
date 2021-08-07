@@ -1,5 +1,15 @@
 <%- include('../../parts/head', {bot, user, path}) %>
      <br><br>
+
+<div class="container is-widescreen">
+          <div class="columns is-tablet">
+            <div class="column is-two-thirds">
+              <h1 id="botlistitle">Report</h1>
+              <p class="has-text-white">Fill in the form below to submit a report.</p>
+          </div>
+        </div>
+      </div>
+
 <div class="container">
   <br><br>
 <div class="container contact-form bg-vote-disbots">
@@ -11,22 +21,32 @@
      <div class="row">
           <div class="col-md-6">
               <div class="form-group">
-                <label><i class="fad fa-database"></i> Are you sure want to report the bot?
-		<br></label>
+                <label> Choose one<br></label>
                 <br>
-                <select name="confirm" id="confirm" required>
-                    <option value="Yes" selected>Yes</option>
-                    <option value="No">No</option>
-                </select>    
+                <div class="form-group">
+                  <select name="tags" id="tags" one required>
+                    <% config.website.reporttags.map(a => {%>
+                      <option value="<%= a %>"><%= a %></option>
+                  <% }); %>
+                  </select>
+                </div>
               </div>
               <br>
               <div class="form-group">
-                  <label>Reason :</label>
-                  <textarea type="text" id="reason" name="reason" style="width: 100%;"></textarea>
+                  <label>Please include as much information as possible, including proof (e.g. screenshots and user IDs)</label>
+                  <textarea type="text" minlength="100" placeholder="Please include as much information as possible, including proof (e.g. screenshots and user IDs)" id="reason" name="reason" required="required" style="width: 100%;"></textarea>
             </div>
           </div>
       </div>
       <br><br><br><br>
+      <div class="field">
+  <strong><p style="color:red">Please make sure your report has enough details. If not, we may have to discard your report.</p></strong>
+  <p>If we need more information, our moderators can DM you if you join the <a href="https://discord.gg/YhTU6Akzmy">Discord Bot List server</a>.</p>
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
+  <label class="form-check-label" for="flexCheckDefault" required>
+    I have provided all the information that I have available.
+  </label>
+</div>
       <button type="submit" name="btnSubmit" class="btn btn-primary"><i class="fad fa-save"></i> Submit</button>
   </form>
 </div>

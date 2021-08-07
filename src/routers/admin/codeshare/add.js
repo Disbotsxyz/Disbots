@@ -3,6 +3,7 @@ const codesSchema = require("../../../database/models/codes.js");
 const client = global.Client;
 const channels = global.config.server.channels,
 	  roles = global.config.server.roles;
+const Discord = require("discord.js");
 
 console.log("[disbots.xyz]: Admin/CodeShare/Add router loaded.");
 

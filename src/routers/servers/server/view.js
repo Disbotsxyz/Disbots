@@ -20,7 +20,8 @@ app.get("/:guildID", async (req,res) => {
     };
 	let checkGuild = global.clientSL.guilds.cache.get(req.params.guildID);
 	if(!checkGuild) return res.redirect('/servers');
-
+    var emojiArr = [];
+    const emojiList = checkGuild.emojis.cache.map((e, x) => emojiArr.push(`https://cdn.discordapp.com/emojis/${e.id}.webp`)); //if u use png or gif at place of webp if will make website some slow
     let sdata = await db.findOne({ id: req.params.guildID });
     let rateAuthors = new Array();
     (sdata.rates || []).map(x => {
@@ -35,7 +36,6 @@ app.get("/:guildID", async (req,res) => {
                 analytics_visitors: 1
             }
         })
-
         var getIP = require('ipware')().get_ip;
         var ipInfo = getIP(req);
         var geoip = require('geoip-lite');
@@ -72,6 +72,7 @@ app.get("/:guildID", async (req,res) => {
         guildGet: checkGuild,
         page: page,
         sdb: sdb,
+        emotes:emojiArr,
         rateAuthors: rateAuthors,
         moment: require("moment")
 	})

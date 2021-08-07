@@ -1,4 +1,3 @@
-
 <section class="jumbotron disbots">
     <br><br>
     <div class="container px-3 mb-5 mt-1">
@@ -13,10 +12,10 @@
               <div class="z">
                 <form action="/search">
                    <div class="input-group">
-                          <input name="q" autocomplete="off" id="search" class="mainInput searchIcon isMobile sectionInput rounded-lg" style="border: none;color: var(--body-text);" type="text"  placeholder="Search bots...">
+                          <input name="q" autocomplete="off" id="search" class="mainInput searchIcon isMobile sectionInput rounded-lg" style="background-color: #2c2f33!important; max-width: 80%; text-shadow: 2px 2px 5px black;" type="text"  placeholder="Search bots...">
                           <span class="search-icon-input input-group-append">
                               <button id="search" class="btn rounded-pill ms-n3 sectionSubmit" type="submit">
-                                  <i class="fal fa-search"></i>
+                                  <i class="fad fa-search"></i>
                               </button>
                           </span>
                    </div>
@@ -25,19 +24,19 @@
         <div class="mainInput resultSection">
         <b id="searchResultTitle"><i class="fa fa-search"></i> Search Results</b>
         <span class="has-text-white has-text-centered" id="loadingIcon">
-        <i class="fal fa-spinner fa-pulse is-size-3"></i>
+        <i class="fad fa-spinner fa-pulse is-size-3"></i>
         </span>
-            <span id="searchResults"><i class="fal fa-bug"></i>&nbsp;You haven't made any searchs.</span>
-            <button style="display:none;" class="btn btn-disbots showMore"><i class="fal fa-list"></i> Show More</button>
+            <span id="searchResults"><i class="fad fa-bug"></i>&nbsp;You haven't made any searchs.</span>
+            <button style="display:none;" class="btn btn-disbots showMore"><i class="fad fa-list"></i> Show More</button>
         </div>
         </div>
                   <input type="hidden" name="page" value="1">
                 </form>
-          <a translate="no" title="Disbots" href="/tag/Moderation" class="btn btn-disbots"><i class="fal fa-magic"></i>&nbsp;Moderation</a>
-          <a translate="no" title="Disbots" href="/tag/Fun" class="btn btn-disbots"><i class="fal fa-smile"></i>&nbsp;Fun</a>
-          <a translate="no" title="Disbots" href="/tag/NSFW" class="btn btn-disbots"><i class="fal fa-lips"></i>&nbsp;NSFW</a>
-          <a translate="no" title="Disbots" href="/tag/Utility" class="btn btn-disbots"><i class="fal fa-cogs"></i>&nbsp;Utility</a>
-          <a title="Disbots" href="/tags" class="btn btn-disbots"><i class="fal fa-tags"></i>&nbsp;Explore Tags</a>
+          <a translate="no" title="Disbots" href="/tag/Moderation" class="btn btn-disbots"><i class="fad fa-magic"></i>&nbsp;Moderation</a>
+          <a translate="no" title="Disbots" href="/tag/Fun" class="btn btn-disbots"><i class="fad fa-smile"></i>&nbsp;Fun</a>
+          <a translate="no" title="Disbots" href="/tag/NSFW" class="btn btn-disbots"><i class="fad fa-lips"></i>&nbsp;NSFW</a>
+          <a translate="no" title="Disbots" href="/tag/Utility" class="btn btn-disbots"><i class="fad fa-cogs"></i>&nbsp;Utility</a>
+          <a title="Disbots" href="/tags" class="btn btn-disbots"><i class="fad fa-tags"></i>&nbsp;Explore Tags</a>
               </div>
       </div>
     </div>
@@ -74,7 +73,7 @@
               let data = response.data;
               if (data.length == 0) {
                 $('searchResultTitle').hide();
-                $("#searchResults").html("<i class='fal fa-bug'></i>&nbsp;No results were found.");
+                $("#searchResults").html("<i class='fad fa-bug'></i>&nbsp;No results were found.");
                 $('.showMore').hide();
                 return;
               }

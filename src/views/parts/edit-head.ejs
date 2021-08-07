@@ -293,6 +293,7 @@
    <nav class="dashboard-nav-list">
       <a href="/bot/<%= req.params.botID %>/edit" class="dashboard-nav-item"><i class="fas fa-pencil"></i> Edit </a>
       <a href="/bot/<%= req.params.botID %>/analytics" class="dashboard-nav-item"><i class="fas fa-chart-bar"></i> Analytics </a>
+      <a href="/bot/<%= req.params.botID %>/announcement" class="dashboard-nav-item"><i class="fas fa-bullhorn"></i> Announcements </a>
       <div class="nav-item-divider"></div>
       <% if(botdata.status === "Approved") { %>
       <input hidden="hidden" style="pointer-events: none; color: #fff;background-color: transparent; border: none;" type="password" id="token" value="<%= botdata.token %>" name="">
@@ -334,6 +335,7 @@
    <nav class="dashboard-nav-list">
       <a href="/server/<%= req.params.guildID %>/edit" class="dashboard-nav-item"><i class="fas fa-pencil"></i> Edit </a>
       <a href="/server/<%= req.params.guildID %>/analytics" class="dashboard-nav-item"><i class="fas fa-chart-bar"></i> Analytics </a>
+      <a href="/server/<%= req.params.guildID %>/announcement" class="dashboard-nav-item"><i class="fas fa-bullhorn"></i> Announcements </a>
       <div class="nav-item-divider"></div>
       <a style="color: red;cursor: pointer" onclick="return deleteReady();" class="dashboard-nav-item"><i class="fas fa-trash"></i> Delete </a>
       <script>

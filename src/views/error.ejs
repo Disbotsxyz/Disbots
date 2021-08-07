@@ -1,7 +1,4 @@
 <%- include('parts/head', {bot, user,path}) %>
-<head>
-<script async src="https://arc.io/widget.min.js#7XRL2vi1"></script>
-</head>
 <%
 var url = new URL(`https://disbots.xyz/error?code=${req.query.code}&message=${req.query.message}`);
 var params = new URLSearchParams(url.search);

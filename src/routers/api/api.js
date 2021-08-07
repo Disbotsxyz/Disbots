@@ -8,7 +8,7 @@ console.log("[disbots.xyz]: Api router loaded.");
 app.get("/api", async (req, res) => {
     res.json({
         "Hello": "World",
-        "Template By": "disbots.xyz"
+        "Template By": "Disbots Team"
         });
 });
 app.get("/api/bots/:botID", async (req, res) => {

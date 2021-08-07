@@ -1,5 +1,5 @@
 <%- include('../parts/head', {bot, user, path}) %>
-<section class="jumbotron vcodes">
+<section class="jumbotron disbots">
     <br><br>
     <div class="container px-3 mb-5 mt-1">
       <div class="mb-3 mx-auto">
@@ -16,7 +16,7 @@
                           <input name="q" autocomplete="off" id="search" class="mainInput searchIcon isMobile sectionInput rounded-lg" style="border: none;color: var(--body-text);" type="text"  placeholder="Search servers...">
                           <span class="search-icon-input input-group-append">
                               <button id="search" class="btn rounded-pill ms-n3 sectionSubmit" type="submit">
-                                  <i class="fal fa-search"></i>
+                                  <i class="fad fa-search"></i>
                               </button>
                           </span>
                    </div>
@@ -25,18 +25,18 @@
         <div class="mainInput resultSection">
         <b id="searchResultTitle"><i class="fa fa-search"></i> Search Results</b>
         <span class="has-text-white has-text-centered" id="loadingIcon">
-        <i class="fal fa-spinner fa-pulse is-size-3"></i>
+        <i class="fad fa-spinner fa-pulse is-size-3"></i>
         </span>
-            <span id="searchResults"><i class="fal fa-bug"></i>&nbsp;You haven't made any searchs.</span>
-            <button style="display:none;" class="btn btn-vcodes showMore"><i class="fal fa-list"></i> Show More</button>
+            <span id="searchResults"><i class="fad fa-bug"></i>&nbsp;You haven't made any searchs.</span>
+            <button style="display:none;" class="btn btn-disbots showMore"><i class="fad fa-list"></i> Show More</button>
         </div>
         </div>
                   <input type="hidden" name="page" value="1">
                 </form>
           <% global.config.website.servers.tags.slice(0, 3).map(tag => { %>
-          	<a title="vcodes" href="/servers/tag/<%= tag.name %>" class="btn btn-vcodes"><i class="<%= tag.icon %>"></i>&nbsp;<%= tag.name %></a>
+          	<a title="disbots" href="/servers/tag/<%= tag.name %>" class="btn btn-disbots"><i class="<%= tag.icon %>"></i>&nbsp;<%= tag.name %></a>
           <% }) %>
-          	<a title="vcodes" href="/servers/tags" class="btn btn-vcodes"><i class="fal fa-tags"></i>&nbsp;Explore Tags</a>
+          	<a title="disbots" href="/servers/tags" class="btn btn-disbots"><i class="fad fa-tags"></i>&nbsp;Explore Tags</a>
               </div>
       </div>
     </div>
@@ -74,7 +74,7 @@
               let data = response.data;
               if (data.length == 0) {
                 $('searchResultTitle').hide();
-                $("#searchResults").html("<i class='fal fa-bug'></i>&nbsp;No results were found.");
+                $("#searchResults").html("<i class='fad fa-bug'></i>&nbsp;No results were found.");
                 $('.showMore').hide();
                 return;
               }
@@ -135,14 +135,14 @@
     <% let guildCache = global.clientSL.guilds.cache.get(a.id) %>
       <div class="col-md-6 col-lg-4 pb-3">
         <div data-aos="fade-left">
-        <div class="card vcodes-card-custom bg-vcodes border-white border-0">
-          <div class="vcodes-card-custom-img" onerror="backImgError(this);" style="background-image: url(<%= guildCache.banner ? 'https://cdn.discordapp.com/banners/'+a.id+'/'+guildCache.banner+'?size=1024' : 'https://Disbots.xyz/img/undefined_back.png' %>);" title="Disbots.xyz" ></div>
-          <div class="vcodes-card-custom-avatar">
+        <div class="card disbots-card-custom bg-disbots border-white border-0">
+          <div class="disbots-card-custom-img" onerror="backImgError(this);" style="background-image: url(<%= guildCache.banner ? 'https://cdn.discordapp.com/banners/'+a.id+'/'+guildCache.banner+'?size=1024' : 'https://Disbots.xyz/img/undefined_back.png' %>);" title="Disbots.xyz" ></div>
+          <div class="disbots-card-custom-avatar">
             <img class="img-fluid" title="Discord Bot Avatar" onerror="imgError(this);" src="<%=a.icon%>" alt="Avatar" />
           </div>
           <div class="card-body">
-           <div class="is-pulled-right mt-vcodes mt-1" style="max-width: 28.5%!important;">
-            <span data-tooltip="Votes this Month" data-tooltip-location="left" class="badge badge-stats mb-vcodes mt-1 w-100"><i class="fad fa-chevron-up"></i>&nbsp;<%= a.votes %></span><span data-tooltip="Bumps this Month" data-tooltip-location="left" class="badge badge-stats mb-vcodes mt-1 w-100"><i class="fad fa-bomb"></i>&nbsp;<%= a.bumps %></span>
+           <div class="is-pulled-right mt-disbots mt-1" style="max-width: 28.5%!important;">
+            <span data-tooltip="Votes this Month" data-tooltip-location="left" class="badge badge-stats mb-disbots mt-1 w-100"><i class="fad fa-chevron-up"></i>&nbsp;<%= a.votes %></span><span data-tooltip="Bumps this Month" data-tooltip-location="left" class="badge badge-stats mb-disbots mt-1 w-100"><i class="fad fa-bomb"></i>&nbsp;<%= a.bumps %></span>
             <span data-tooltip="Members" data-tooltip-location="left" class="badge badge-stats mt-1 w-100"><i class="fad fa-users"></i>&nbsp;<%= guildCache.memberCount > 999 ? guildCache.memberCount.toLocaleString().split(',')[0]+'k' : guildCache.memberCount %></span>
               </div>
             <p translate="no" class="card-title is-size-4"><%= a.name %>
@@ -151,7 +151,7 @@
               <i class="fad fa-handshake bodyIcon"></i></span>
             <% } %>
             </p>
-            <p translate="no" class="card-text vcodesbotDesc"><%= a.shortDesc %></p>
+            <p translate="no" class="card-text disbotsbotDesc"><%= a.shortDesc %></p>
           </div>
           <div class="card-footer">
             <a title="Disbots" href="/server/<%=a.id%>" class="btn  btn-bot">View</a>
@@ -169,21 +169,21 @@
 <%
 if (page != 1) {
 %>
-<a data-tooltip="Previous Page" data-tooltip-location="top" href="/search?q=<%=req.query.q%>&page=<%= page-1; %>" class="btn btn-vcodes p-2">
+<a data-tooltip="Previous Page" data-tooltip-location="top" href="/search?q=<%=req.query.q%>&page=<%= page-1; %>" class="btn btn-disbots p-2">
     <i class="fad fa-arrow-left"></i>
 </a>
   <% } else { %>
-    <a disabled="" class="btn btn-vcodes p-2" style="opacity: 0.5;" style="color: #fff!important">
+    <a disabled="" class="btn btn-disbots p-2" style="opacity: 0.5;" style="color: #fff!important">
         <i class="fad fa-arrow-left"></i>
     </a>
   <% } %>
-  <a data-tooltip="Current Page" data-tooltip-location="top" class="btn btn-vcodes" style="color: #fff!important" disabled="">
+  <a data-tooltip="Current Page" data-tooltip-location="top" class="btn btn-disbots" style="color: #fff!important" disabled="">
     <%= page %>
   </a>
   <%
   if (page != Math.ceil(data.length / 6) && data.length > 0) {
   %>
-  <a data-tooltip="Next Page" data-tooltip-location="top" href="/search?q=<%=req.query.q%>&page=<%= Number(page)+ Number(1); %>" class="btn btn-vcodes p-2">
+  <a data-tooltip="Next Page" data-tooltip-location="top" href="/search?q=<%=req.query.q%>&page=<%= Number(page)+ Number(1); %>" class="btn btn-disbots p-2">
     <i class="fad fa-arrow-right"></i>
 </a>
   <% } %>

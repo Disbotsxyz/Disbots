@@ -6,6 +6,7 @@
     <meta property="og:image" content="<%= botdata.avatar %>">
 </head>
 <br>
+
 <div class="main-content">
     <% if(botdata.status != "Approved") {%>
         <br><br>
@@ -93,12 +94,12 @@
                   </div>
     
                   <a href="/bot/<%= botdata.botID %>/edit" class="is-flex mt-1">
-                    <div class="box-2-p"><i class="mt-1 fal fa-pencil"></i></div>
+                    <div class="box-2-p"><i class="mt-1 fad fa-pencil"></i></div>
                     <p class="box-2">Edit Bot</p>
                   </a>
                   <form action="#" id="my_form" method="POST">
                     <a href="javascript:{}" onclick="document.getElementById('my_form').submit();" class="is-flex mt-1">
-                        <div class="box-2-p"><i class="fal fa-sync-alt is-size-6 mt-1"></i></div>
+                        <div class="box-2-p"><i class="fad fa-sync-alt is-size-6 mt-1"></i></div>
                         <p class="box-2">Refresh Data</p>
                     </a>
                 </form>
@@ -111,22 +112,22 @@
               </div>
 
               <div class="is-flex mt-1">
-                <div class="box-2-p"><i class="mt-1 fal fa-terminal"></i></div>
+                <div class="box-2-p"><i class="mt-1 fad fa-terminal"></i></div>
                 <p class="box-2">Prefix:&nbsp;<%= botdata.prefix %> </p>
               </div>
               <div class="is-flex mt-1">
-                <div class="box-2-p"><i class="mt-1 fal fa-vote-yea"></i></div>
+                <div class="box-2-p"><i class="mt-1 fad fa-vote-yea"></i></div>
                 <p class="box-2">Votes:&nbsp;<%= botdata.votes || "0" %> </p>
               </div>
               <% if(botdata.serverCount) {%>
               <div class="is-flex mt-1">
-                <div class="box-2-p"><i class="mt-1 fal fa-server"></i></div>
+                <div class="box-2-p"><i class="mt-1 fad fa-server"></i></div>
                 <p class="box-2">Servers:&nbsp;<%= botdata.serverCount || "N/A" %> </p>
               </div>
               <% } %>
               <% if(botdata.shardCount) {%>
               <div class="is-flex mt-1">
-                <div class="box-2-p"><i class="mt-1 fal fa-sitemap"></i></div>
+                <div class="box-2-p"><i class="mt-1 fad fa-sitemap"></i></div>
                 <p class="box-2">Shards:&nbsp;<%= botdata.shardCount || "N/A"%> </p>
               </div>
               <% } %>
@@ -135,7 +136,7 @@
                 <p class="box-2">Status:&nbsp;<%= bot.users.cache.get(botdata.botID).presence.status.toUpperCase() %></p>
               </div>
              <div class="h6 mt-4">
-                <i class="fal fa-user-crown"></i> Owners
+                <i class="fad fa-user-crown"></i> Owners
               </div>
               <a style="text-decoration: none;margin-bottom: -5px;" href="/user/<%= botdata.ownerID %>" class="is-flex mt-1">
                 <div class="box-2-p ownerIMG" style="background: url(<%= aowner.avatarURL({dynamic:true}) %>) center center no-repeat; background-size: 100%;"></div>
@@ -149,11 +150,11 @@
               <% }) %>
               <% if(botdata.status == "Approved") {%>
               <div class="h6 mt-4">
-                <i class="fal fa-star"></i> Rating
+                <i class="fad fa-star"></i> Rating
               </div>
               
               <div class="is-flex mt-1">
-                <div class="box-2-p"><i class="mt-1 fal fa-stars"></i></div>
+                <div class="box-2-p"><i class="mt-1 fad fa-stars"></i></div>
                 <%
                 let count = new Array();
                 let rating;
@@ -169,7 +170,7 @@
                 </script>
               </div>
               <div class="is-flex mt-1">
-                <div class="box-2-p"><i class="mt-1 fal fa-comment"></i></div>
+                <div class="box-2-p"><i class="mt-1 fad fa-comment"></i></div>
                 <p class="box-2">Reviews: &nbsp;<%= botdata.rates ? botdata.rates.length : 0 %> </p>
               </div>
               <% } %>
@@ -195,16 +196,20 @@
                 <% } %>
                 <% if(botdata.website) {%>
                 <a href="<%= botdata.website %>" class="is-flex mt-1">
-                  <div style="background: rgb(33, 167, 111);" class="box-2-p"><i class="fal fa-globe is-size-6 mt-1"></i></div>
+                  <div style="background: rgb(33, 167, 111);" class="box-2-p"><i class="fad fa-globe is-size-6 mt-1"></i></div>
                   <p style="background: rgb(8, 187, 112);color:#fff"class="box-2">Website</p>
                 </a>
                 <% } %>
                 <% if(botdata.github) {%>
                 <a href="<%= botdata.github %>" class="is-flex mt-1">
-                  <div style="background: rgb(0, 0, 0);" class="box-2-p"><i class="fal fa-github is-size-6 mt-1"></i></div>
+                  <div style="background: rgb(0, 0, 0);" class="box-2-p"><i class="fad fa-github is-size-6 mt-1"></i></div>
                   <p style="background: rgb(8, 8, 8); color:#fff" class="box-2">Github</p>
                 </a>
                 <% } %>
+                <a href="https://disbots.xyz/api/embed/<%= botdata.botID %>" class="is-flex mt-1">
+                  <div style="background: rgb(61, 224, 197)" class="box-2-p"><i class="fad fa-robot is-size-6 mt-1"></i></div>
+                  <p style="background: #00ffd5;color:#fff" class="box-2">Widget</p>
+                </a>
                 <div class="h6 mt-4">
                 <i class="fad fa-backspace is-size-6 mt-1"></i> Report
               </div>
@@ -216,6 +221,17 @@
           </div>
         </div>
         <div class="col-xl-8 order-xl-1">
+        <% if(botdata.annoucementtitle) { %>
+          <div class="card bg-secondary shadow">
+          <div style="padding: 1px!important;" class="card-body">
+            <pre translate="no" class="bot"><strong><h4><i class="fas fa-bullhorn"></i> <%=botdata.annoucementtitle%></h4></strong>
+<%=botdata.annoucementdesc%>
+                                                                                                                                                                                                                                  - <%=botdata.annoucementdate%>
+        </pre>
+        </div>
+        </div>
+        <br><br>  
+        <% } %>
           <div class="card bg-secondary shadow">
             <div style="padding: 1px!important;" class="card-body">
                 <pre translate="no" class="bot"><% let $ = bot.htmll.load(botdata.longDesc) %><%- $.html() %></pre>
@@ -396,15 +412,15 @@
                              if(!c.reply) {
                              if(req.user.id === botdata.ownerID || botdata.coowners.includes(req.user.id)) { 
                              %>
-                              &nbsp;<button data-toggle="modal" data-target="#reply<%= userRate.id %>" id="replyButton" class="btn btn-disbots"><i class="fal fa-reply"></i>&nbsp;Reply</button>
-                              &nbsp;<button onclick="clickOnDeletReview('<%= userRate.id %>')" id="reviewDeleteButton<%= userRate.id %>" class="btn btn-disbots"><i class="fal fa-trash"></i>&nbsp;Delete</button>
+                              &nbsp;<button data-toggle="modal" data-target="#reply<%= userRate.id %>" id="replyButton" class="btn btn-disbots"><i class="fad fa-reply"></i>&nbsp;Reply</button>
+                              &nbsp;<button onclick="clickOnDeletReview('<%= userRate.id %>')" id="reviewDeleteButton<%= userRate.id %>" class="btn btn-disbots"><i class="fad fa-trash"></i>&nbsp;Delete</button>
                                 <div class="modal fade" id="reply<%= userRate.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content" style="background-color: var(--bg-card)">
                                       <div class="modal-header">
                                         <h5 class="modal-title" style="color: var(--body-text)!important;" id="exampleModalLongTitle">Replying to <%= userRate ? userRate.tag : 'undefined#0000' %></h5>
                                         <button type="button" class="btn btn-disbots" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true"><i class="fal fa-times fa-lg"></i></span>
+                                          <span aria-hidden="true"><i class="fad fa-times fa-lg"></i></span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
@@ -425,9 +441,9 @@
                              <% }} %>
 
                              <% if(userRate.id == req.user.id) { %>
-                              &nbsp;<button class="btn btn-disbots" data-toggle="modal" data-target="#edit<%= userRate.id %>" id="editButton"><i class="fal fa-pencil"></i>&nbsp;Edit</button>
+                              &nbsp;<button class="btn btn-disbots" data-toggle="modal" data-target="#edit<%= userRate.id %>" id="editButton"><i class="fad fa-pencil"></i>&nbsp;Edit</button>
                               <% if(req.user.id != botdata.ownerID && !botdata.coowners.includes(req.user.id)) { %>
-                              &nbsp;<button onclick="clickOnDeletReview('<%= userRate.id %>')" id="reviewDeleteButton<%= userRate.id %>" class="btn btn-disbots"><i class="fal fa-trash"></i>&nbsp;Delete</button>
+                              &nbsp;<button onclick="clickOnDeletReview('<%= userRate.id %>')" id="reviewDeleteButton<%= userRate.id %>" class="btn btn-disbots"><i class="fad fa-trash"></i>&nbsp;Delete</button>
                               <% } %>
                                 <div class="modal fade" id="edit<%= userRate.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -435,7 +451,7 @@
                                       <div class="modal-header">
                                         <h5 class="modal-title" style="color: var(--body-text)!important;" id="exampleModalLongTitle">Editing review to <%= userRate ? userRate.tag : 'undefined#0000' %></h5>
                                         <button type="button" class="btn btn-disbots" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true"><i class="fal fa-times fa-lg"></i></span>
+                                          <span aria-hidden="true"><i class="fad fa-times fa-lg"></i></span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
@@ -492,8 +508,8 @@
                              <% if(req.user) { %>
                              <% if(req.user.id === botdata.ownerID || botdata.coowners.includes(req.user.id)) { %>
                              <div class="buttons mr-5" style="margin-right: 10px; float: right">
-                              <button onclick="replyTo('<%= userRate.id %>')" data-toggle="modal" data-target="#editReply<%= userRate.id %>" id="replyButton" class="btn btn-disbots"><i class="fal fa-pencil"></i>&nbsp;Edit</button>
-                              &nbsp;<button onclick="clickOnDeletReply('<%= userRate.id %>')" id="replyDeleteButton<%= userRate.id%>" class="btn btn-disbots"><i class="fal fa-trash"></i>&nbsp;Delete</button>
+                              <button onclick="replyTo('<%= userRate.id %>')" data-toggle="modal" data-target="#editReply<%= userRate.id %>" id="replyButton" class="btn btn-disbots"><i class="fad fa-pencil"></i>&nbsp;Edit</button>
+                              &nbsp;<button onclick="clickOnDeletReply('<%= userRate.id %>')" id="replyDeleteButton<%= userRate.id%>" class="btn btn-disbots"><i class="fad fa-trash"></i>&nbsp;Delete</button>
 
                                 <div class="modal fade" id="editReply<%= userRate.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -501,7 +517,7 @@
                                       <div class="modal-header">
                                         <h5 class="modal-title" style="color: var(--body-text)!important;" id="exampleModalLongTitle">Replying to <%= userRate ? userRate.tag : 'undefined#0000' %></h5>
                                         <button type="button" class="btn btn-disbots" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true"><i class="fal fa-times fa-lg"></i></span>
+                                          <span aria-hidden="true"><i class="fad fa-times fa-lg"></i></span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
@@ -686,7 +702,7 @@
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-      $("#replyDeleteButton" + userID).html('<i class="fal fa-trash"></i>&nbsp;Delete');
+      $("#replyDeleteButton" + userID).html('<i class="fad fa-trash"></i>&nbsp;Delete');
       $("#replyDeleteButton" + userID).attr("disabled", false);
       Swal.fire({
           icon: 'success',
@@ -702,7 +718,7 @@
          window.location.href = '/bot/<%= req.params.botID %>';
       });
       } else {
-      $("#replyDeleteButton" + userID).html('<i class="fal fa-trash"></i>&nbsp;Delete');
+      $("#replyDeleteButton" + userID).html('<i class="fad fa-trash"></i>&nbsp;Delete');
       $("#replyDeleteButton" + userID).attr("disabled", false);
         Swal.fire(
           'Canceled..',
@@ -728,7 +744,7 @@
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-      $("#reviewDeleteButton" + userID).html('<i class="fal fa-trash"></i>&nbsp;Delete');
+      $("#reviewDeleteButton" + userID).html('<i class="fad fa-trash"></i>&nbsp;Delete');
       $("#reviewDeleteButton" + userID).attr("disabled", false);
       Swal.fire({
           icon: 'success',
@@ -744,7 +760,7 @@
          window.location.href = '/bot/<%= req.params.botID %>';
       });
       } else {
-      $("#reviewDeleteButton" + userID).html('<i class="fal fa-trash"></i>&nbsp;Delete');
+      $("#reviewDeleteButton" + userID).html('<i class="fad fa-trash"></i>&nbsp;Delete');
       $("#reviewDeleteButton" + userID).attr("disabled", false);
         Swal.fire(
           'Canceled..',
@@ -763,11 +779,11 @@
 if (page != 1) {
 %>
 <a data-tooltip="Previous Page" data-tooltip-location="top" href="/bot/<%= req.params.botID %>?page=<%= page-1; %>" class="mr-1 btn btn-disbots p-2">
-    <i class="fal fa-arrow-left"></i>
+    <i class="fad fa-arrow-left"></i>
 </a>
   <% } else { %>
     <a disabled="" class="btn btn-disbots p-2 mr-1" style="opacity: 0.5;" style="color: #fff!important">
-        <i class="fal fa-arrow-left"></i>
+        <i class="fad fa-arrow-left"></i>
     </a>
   <% } %>
   <a data-tooltip="Current Page" data-tooltip-location="top" class="btn btn-disbots mr-1" style="color: #fff!important" disabled="">
@@ -777,7 +793,7 @@ if (page != 1) {
   if (page != Math.ceil(data.length / 6) && data.length > 0) {
   %>
   <a data-tooltip="Next Page" data-tooltip-location="top" href="/bot/<%= req.params.botID %>?page=<%= Number(page)+ Number(1); %>" class="btn btn-disbots p-2">
-    <i class="fal fa-arrow-right"></i>
+    <i class="fad fa-arrow-right"></i>
 </a>
   <% } %></div>
       

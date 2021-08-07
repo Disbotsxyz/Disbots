@@ -29,9 +29,13 @@
                                 <td><%= row.name %></td>
                                 <td><%= row.ownerID %></td>
                                 <td class="text-center">
+                                    <% if(row.premium === "None") { %>
                                         <button onclick="newtab('/admin/premium/give/<%= row.id %>')" class="btn btn-success btn-sm">Give Premium</button>
+                                    <% } %>
+                                    <% if(row.premium === "Premium") { %>
                                     <button onclick="newtab('/admin/premium/delete/<%= row.id %>')" class="btn btn-danger btn-sm">Remove Premium</button>
                                     </td>
+                                    <% } %>
                             </tr>
                             <% }) %>
                         </tbody>

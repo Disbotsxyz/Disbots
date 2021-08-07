@@ -9,7 +9,9 @@ const roles = global.config.server.roles;
 const channels = global.config.server.channels;
 const client = global.Client;
 
-console.log("[disbots.xyz]: Admin/Botlist/Decline Bot router loaded.");
+console.log("[Disbots.xyz]: Admin/Botlist/Decline Bot router loaded.");
+
+
 
 app.post("/admin/decline/:botID", global.checkAuth, async (req, res) => {
     let rBody = req.body;
