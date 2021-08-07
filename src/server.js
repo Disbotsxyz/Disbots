@@ -873,6 +873,7 @@ app.use("/", require('./routers/admin/botlist/certificate/rdelete.js'))
 app.use("/", require('./routers/admin/codeshare/index.js'))
 app.use("/", require('./routers/admin/codeshare/edit.js'))
 app.use("/", require('./routers/admin/codeshare/add.js'))
+app.use("/", require('./routers/admin/codeshare/delete.js'))
 app.use("/", require('./routers/admin/uptime/index.js'))
 
 
