@@ -33,7 +33,7 @@
                             
                                 <td class="text-center">
                                     <button onclick="window.location.href='/admin/editcode/<%= b.code %>'" class="btn btn-success btn-sm">Edit</button>
-                                    <button onclick="deletequest('<%= b.code %>')" class="btn btn-danger btn-sm">Delete</button>
+                                    <button onclick="window.location.href='/admin/deletecode/<%= b.code %>'" class="btn btn-danger btn-sm">Delete</button>
                                 </td>
                             </tr>
                             <% }) %>
@@ -51,7 +51,7 @@
             </div>
         </div>
         <script>
-            function deletequest(uptimecode) {
+            function deletequest(b.code) {
 Swal.fire({
   title: 'Are you sure?',
   text: "Are you sure you want to permanently delete the link you selected?",
@@ -62,7 +62,7 @@ Swal.fire({
   reverseButtons: true
 }).then((result) => {
   if (result.isConfirmed) {
-    window.location.href = '/admin/deletecode/'+uptimecode;
+    window.location.href = '/admin/deletecode/'+b.code;
   } else {
     Swal.fire(
       'Canceled..',
@@ -79,7 +79,7 @@ Swal.fire({
              title: 'Succesfull...',
              closeOnConfirm: false,
              text: urlParams.get('message'),
-             footer: 'Copyright 2021 &copy Disbots.xyz - All right reserved.'
+             footer: 'Copyright 2021 &copy DisBots.xyz - All right reserved.'
             }).then((result) => {
           if (result.isConfirmed) {
             window.location.href = '/admin/codes';
@@ -91,7 +91,7 @@ Swal.fire({
              icon: 'error',
              title: 'Oops...',
              text: urlParams.get('message'),
-             footer: 'Copyright 2021 &copy Disbots.xyz - All right reserved.'
+             footer: 'Copyright 2021 &copy DisBots.xyz - All right reserved.'
             }).then((result) => {
           if (result.isConfirmed) {
             window.location.href = '/admin/codes';
