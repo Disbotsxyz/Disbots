@@ -1,6 +1,4 @@
 const url = require("url");
-const { Canvas, resolveImage } = require("canvas-constructor");
-const { registerFont } = require("canvas");
 const path = require("path");
 const express = require("express");
 const passport = require("passport");
