@@ -8,7 +8,7 @@
 **NPM:** [npmjs.com/package/vcodes.js](https://www.npmjs.com/package/vcodes.js)<br>
 <br>
 
-<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="disbots" src="https://cdn.discordapp.com/icons/852825880271257611/a_d4d22519109d31cde5187b32c7835cec.webp?size=256"> 
+<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="disbots" src="https://cdn.discordapp.com/icons/852825880271257611/a_4b0b96f0b62fcddfb97e68d3a52bfafa.png?size="> 
 
 > # Modified by
 <a href="https://disbots.xyz/user/830819118265401354">👤 G∙MAX</a><br>
