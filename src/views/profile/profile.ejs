@@ -211,6 +211,12 @@
                   <span data-tooltip="Server Count" data-tooltip-location="left" class="badge badge-stats mt-1 w-100"><i class="fad fa-server"></i>&nbsp;<%= a.serverCount || "N/A" %></span>
                 </div>
               <h4 translate="no" class="card-title"><%= a.username %>
+	      <% if(a.promoted === "Promoted") { %>
+              <span data-tooltip="Promoted Bot" data-tooltip-location="top"><i class="fad fa-stars has-text-warning"></i></span>
+            <% } %>
+            <% if(a.boosted === "Boosted") { %>
+              <span data-tooltip="Boosted Bot" data-tooltip-location="top"><img draggable="false" src="https://discordapp.com/assets/9ba64f1fa91ccde0eba506c1c33f3d1a.svg" width="32px"></span>
+            <% } %>
               <% if(a.certificate === "Certified") { %>
                 <span data-tooltip="Verified Bot" data-tooltip-location="top"><i class="fad fa-badge-check has-text-success"></i></span>
               <% } %>
