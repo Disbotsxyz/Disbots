@@ -42,7 +42,10 @@ serverClient.on('message', async message => {
     if(!cmd) return;
   }
 })
-
+serverClient.on('guildCreate', (guild) => {
+    const channel = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
+    channel.send("Hey Thanks For Inviting Me To Your Server Make Sure To Use The Command `PREFIX` to find out more commands.")
+})
 
 serverClient.on('ready',async () => {
     console.log("[disbots.xyz/servers]: Bot successfully connected as "+serverClient.user.tag+".");
