@@ -334,7 +334,9 @@
    </header>
    <nav class="dashboard-nav-list">
       <a href="/server/<%= req.params.guildID %>/edit" class="dashboard-nav-item"><i class="fas fa-pencil"></i> Edit </a>
+            <% if(botdata.status === "Approved") { %>
       <a href="/server/<%= req.params.guildID %>/analytics" class="dashboard-nav-item"><i class="fas fa-chart-bar"></i> Analytics </a>
+      <% } %>
       <a href="/server/<%= req.params.guildID %>/announcement" class="dashboard-nav-item"><i class="fas fa-bullhorn"></i> Announcements </a>
       <div class="nav-item-divider"></div>
       <a style="color: red;cursor: pointer" onclick="return deleteReady();" class="dashboard-nav-item"><i class="fas fa-trash"></i> Delete </a>
